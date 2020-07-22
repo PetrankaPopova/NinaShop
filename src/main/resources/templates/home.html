@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="~{/fragments/head}"></th:block>
+</head>
+<body>
+<div class="" id="home">
+
+    <div class="row">
+        <div class="col-12">
+            <nav>
+                <th:block th:include="~{/fragments/nav}"></th:block>
+            </nav>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+
+        </div>
+        <div class="col-md-9">
+
+        </div>
+    </div>
+
+
+    <th:block th:each="product: ${allProducts}">
+        <div class="product">
+            <img th:src="${product.getImageUrls().get(0)}" class="card-img-top" alt="Image of product">
+            <div class="title"><span th:text="${product.name}"></span></div>
+            <div class="product-description"><span th:text="${product.description}"></span></div>
+            <div class="product-price"><span th:text="${product.price}"></span> &euro;</div>
+            <a th:href="@{/user/add-to-cart/{productId}(productId = ${product.getId()}) }"
+               class="btn btn-primary">Buy Product</a>
+            <a th:href="@{/product/delete/{productId}(productId = ${product.getId()})}"
+               class="myButton">Delete</a>
+            <a th:href="@{/product/edit/{productId}(productId = ${product.getId()})}"
+               class="myButton">Edit</a>
+        </div>
+    </th:block>
+    <!-- LIST PRODUCT HERE-->
+
+    <footer class="row">
+        <th:block th:include="~{/fragments/footer}"></th:block>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,21 @@
+body{
+    background-color:lightslategray;
+    color: black;
+}
+
+.btn{
+    background-color: lightcyan;
+    color: slateblue;
+    border-radius: 15px;
+    padding-bottom: 20px;
+}
+
+.btn:hover {
+    background-color: slateblue;
+    color: lightcyan;
+    border-radius: 15px;
+}
+
+.row{
+    padding: 5px;
+}
