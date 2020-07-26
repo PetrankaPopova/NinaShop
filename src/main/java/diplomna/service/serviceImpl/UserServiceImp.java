@@ -1,6 +1,8 @@
 package diplomna.service.serviceImpl;
 
 import diplomna.exception.AlreadyExistsException;
+import diplomna.model.entity.Bag;
+import diplomna.model.entity.Product;
 import diplomna.model.entity.User;
 import diplomna.model.service.UserServiceModel;
 import diplomna.repository.ProductRepository;
@@ -8,6 +10,7 @@ import diplomna.repository.RoleRepository;
 import diplomna.repository.UserRepository;
 import diplomna.service.RoleService;
 import diplomna.service.UserService;
+import diplomna.web.Tools;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -29,21 +32,23 @@ public class UserServiceImp implements UserService {
     private final ProductRepository productRepository;
     private final ModelMapper modelMapper;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final Tools tools;
 
     @Autowired
     public UserServiceImp(UserRepository userRepository, RoleRepository roleRepository,
-                          RoleService roleService, ProductRepository productRepository, ModelMapper modelMapper, BCryptPasswordEncoder bCryptPasswordEncoder) {
+                          RoleService roleService, ProductRepository productRepository, ModelMapper modelMapper, BCryptPasswordEncoder bCryptPasswordEncoder, Tools tools) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.roleService = roleService;
         this.productRepository = productRepository;
         this.modelMapper = modelMapper;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        this.tools = tools;
     }
 
     @Override
     public UserServiceModel registerUser(UserServiceModel userServiceModel) {
-        User user = this.modelMapper.map(userServiceModel,User.class);
+        User user = this.modelMapper.map(userServiceModel, User.class);
         User returnedUserFromDb = this.userRepository.findUserByUsername(userServiceModel.getUsername()).orElse(null);
         if (userRepository.existsByUsername(userServiceModel.getUsername())) {
             throw new AlreadyExistsException("username", USER_NAME_EXISTS_MESSAGE);
@@ -62,12 +67,12 @@ public class UserServiceImp implements UserService {
         }
         this.userRepository.saveAndFlush(user);
         return this.modelMapper.map(user, UserServiceModel.class);
-       // user.setAuthorities(new HashSet<>(Set.of(Objects.requireNonNull(this.roleRepository.findByAuthority("USER")
-           //     .orElse(null)))));
+        // user.setAuthorities(new HashSet<>(Set.of(Objects.requireNonNull(this.roleRepository.findByAuthority("USER")
+        //     .orElse(null)))));
 
 
-      //  return this.modelMapper.map(this.userRepository
-               // .saveAndFlush(user),UserServiceModel.class);
+        //  return this.modelMapper.map(this.userRepository
+        // .saveAndFlush(user),UserServiceModel.class);
 
         /*User saved = this.userRepository.findByUsername(userServiceModel.getUsername()).orElse(null);
         if (saved != null)
@@ -90,6 +95,7 @@ public class UserServiceImp implements UserService {
         User findedUser = this.userRepository.findUserByUsernameAndPassword(username, password).orElse(null);
         return findedUser == null ? null : this.modelMapper.map(findedUser, UserServiceModel.class);
     }
+
     @Override
     public UserServiceModel findByUsername(String username) {
         User findedUser = this.userRepository.findUserByUsername(username).orElse(null);
@@ -104,6 +110,19 @@ public class UserServiceImp implements UserService {
     @Override
     public void deleteAllProducts() {
         this.productRepository.deleteAll();
+    }
+
+    @Override
+    public void buyProduct(String productId) {
+        Product p = this.productRepository.findById(productId).orElse(null);
+        String userStr = this.tools.getLoggedUser();
+        //if ("anonymousUser".equals(userStr)) {//niakakva greshka}
+        User u = this.userRepository.findByUsername(userStr).orElse(null);
+        //if (u == null || u.getBag() == null) {niakakva greshka}
+        assert u != null;
+        u.setBag(new Bag());
+        u.getBag().getProducts().add(p);
+        this.userRepository.saveAndFlush(u);
     }
 
     @Override

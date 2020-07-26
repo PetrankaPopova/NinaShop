@@ -1,4 +1,5 @@
-package diplomna.model;
+/*
+package diplomna.model.entity;
 
 import diplomna.model.entity.BaseEntity;
 
@@ -36,3 +37,4 @@ public class Purchase extends BaseEntity {
         this.priceInUserCurrency = priceInUserCurrency;
     }
 }
+*/

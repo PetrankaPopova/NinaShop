@@ -5,8 +5,8 @@ import static diplomna.model.entity.CategoryName.PROM_DRESS;
 
 public enum DataForImport {
 
-    PRODUCT_1("Afaq", "New siluet", new BigDecimal("480"),
-            PROM_DRESS, "img/NinaPhotos/78324012_3251507081559296_9028638811668317052_o - Copy.jpg"),
+    PRODUCT_1("Afaq", "Gentle sky blue in combination with sparkling crystals", new BigDecimal("480"),
+            PROM_DRESS, "img/NinaPhotos/107285953_3251507451559259_44360780285492255_o.jpg"),
 
     PRODUCT_2("Afrodita","Black shine long dress", new BigDecimal(480),
             PROM_DRESS, "img/NinaPhotos/102718642_3251507878225883_6155634022027962878_o - Copy.jpg"),

@@ -1,69 +1,87 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <th:block th:include="~{/fragments/head}"></th:block>
-</head>
+<th:block th:include="~{/fragments/head}"></th:block>
+
 <body>
 
-    <div class="container">
-
-<form th:action="@{/register}" th:method="post">
-
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                  <label for="username">Username</label>
-                  <input type="text" class="form-control" name="username" id="" aria-describedby="helpId" placeholder="Put your username">
-                  <!-- <small id="helpId" class="form-text text-muted">Help text</small> -->
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                  <label for="email">Email</label>
-                  <input type="email" class="form-control" name="email" id="" aria-describedby="emailHelpId" placeholder="">
-                  <!-- <small id="emailHelpId" class="form-text text-muted">Help text</small> -->
-                </div>
-            </div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <th:block th:include="~{/fragments/navbar}"></th:block>
         </div>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                  <label for="password">Password</label>
-                  <input type="password" class="form-control" name="password" id="" placeholder="">
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="confirmPassword">Confirm Password</label>
-                    <input type="password" class="form-control" name="confirmPassword" id="" placeholder="">
-                  </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="userAddress">Address</label>
-                        <input type="userAddress" class="form-control" name="userAddress" id="" placeholder="">
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="userPhone">Phone</label>
-                                <input type="userPhone" class="form-control" name="userPhone" id="" placeholder="">
-                            </div>
-                          </div>
-
-        <div class="row">
-            <div class="col-md-12">
-                <button type="submit" class="btn btn-info">Register</button>
-            </div>
-        </div>
-
-    </form>
     </div>
+</div>
 
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
 
-<footer>
-    <th:block th:include="~{/fragments/footer}"></th:block>
-</footer>
+        </div>
+        <div class="col-md-8">
+
+            <form th:action="@{/register}" th:method="post">
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input type="text" class="form-control" name="username" id="" aria-describedby="helpId"
+                                   placeholder="Put your username">
+                            <!-- <small id="helpId" class="form-text text-muted">Help text</small> -->
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" name="email" id="" aria-describedby="emailHelpId"
+                                   placeholder="">
+                            <!-- <small id="emailHelpId" class="form-text text-muted">Help text</small> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" name="password" id="" placeholder="">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirm Password</label>
+                            <input type="password" class="form-control" name="confirmPassword" id="" placeholder="">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="userAddress">Address</label>
+                            <input type="userAddress" class="form-control" name="userAddress" id="" placeholder="">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="userPhone">Phone</label>
+                            <input width="100px" type="userPhone" class="form-control" name="userPhone" id="" placeholder="">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-info">Register</button>
+                    </div>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<th:block th:include="~{/fragments/footer}"></th:block>
 </body>
 </html>
+
+

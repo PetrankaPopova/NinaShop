@@ -1,9 +1,14 @@
-<th:block>
+<th:block xmlns:th="http://www.thymeleaf.org">
+
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Nina Todorova</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Fashion designer Nina Todorova</title>
+
 <!--    <link rel="stylesheet" href="/css/reset-css.css"/>-->
-    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="/css/style.css">
-    <script src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/jquery-3.3.1.slim.min.js}"></script>
+    <script th:src="@{/js/popper.min.js}"></script>
 </th:block>

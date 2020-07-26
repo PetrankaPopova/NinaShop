@@ -9,22 +9,42 @@
     <div class="row">
         <div class="col-12">
             <nav>
-                <th:block th:include="~{/fragments/nav}"></th:block>
+                <th:block th:include="~{/fragments/navbar}"></th:block>
             </nav>
         </div>
     </div>
 
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-4">
 
         </div>
-        <div class="col-md-9">
+        <div class="col-md-8">
+            <th:block th:each="product: ${allProducts}">
+                <div class="container">
+                    <div class="row">
 
+                        <div class="card" style="width: 18rem;">
+                            <img class="card-img-top" th:src="${product.getUrl()}" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title" th:text="${product.getName()}">Card title</h5>
+                                <p class="card-text" th:text="${product.getDescription()}"></p>
+                                <!--                    <p class="card-text" th:text="${product.getCategory().getCategoryName()}"></p>-->
+
+                                <p class="card-text" th:text="${product.getPrice()}"></p>
+                                <a th:href="@{/user/buy/{productId}(productId = ${product.getId()})}"
+                                class="btn btn-primary">Buy Me</a>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </th:block>
         </div>
     </div>
 
 
-    <th:block th:each="product: ${allProducts}">
+    <!--<th:block th:each="product: ${allProducts}">
         <div class="product">
             <img th:src="${product.getImageUrls().get(0)}" class="card-img-top" alt="Image of product">
             <div class="title"><span th:text="${product.name}"></span></div>
@@ -37,11 +57,12 @@
             <a th:href="@{/product/edit/{productId}(productId = ${product.getId()})}"
                class="myButton">Edit</a>
         </div>
-    </th:block>
+    </th:block>-->
     <!-- LIST PRODUCT HERE-->
 
     <footer class="row">
         <th:block th:include="~{/fragments/footer}"></th:block>
     </footer>
+</div>
 </body>
 </html>

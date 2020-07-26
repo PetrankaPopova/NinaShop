@@ -1,29 +1,21 @@
-package diplomna.model.entity;
+package diplomna.model.service;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Pattern;
 import java.time.LocalDateTime;
-import java.util.List;
-@Entity
-@Table(name = "orders")
-public class Orders extends BaseEntity {
 
+public class OrderServiceModel extends BaseEntityService {
     private LocalDateTime orderDate = LocalDateTime.now();
     private Integer orderNum;
     private Double amount;
     private String username;
     private String email;
+
+
     private String userAddress;
     private String userPhone;
 
-    public Orders() {
+    public OrderServiceModel() {
     }
 
-    @Column(name = "order_date")
     public LocalDateTime getOrderDate() {
         return orderDate;
     }
@@ -32,7 +24,6 @@ public class Orders extends BaseEntity {
         this.orderDate = orderDate;
     }
 
-    @Column(name = "order_num", nullable = false)
     public Integer getOrderNum() {
         return orderNum;
     }
@@ -41,8 +32,6 @@ public class Orders extends BaseEntity {
         this.orderNum = orderNum;
     }
 
-    @Column(name = "amount", nullable = false)
-    @DecimalMin("0")
     public Double getAmount() {
         return amount;
     }
@@ -51,7 +40,6 @@ public class Orders extends BaseEntity {
         this.amount = amount;
     }
 
-    @Column(name = "username",length = 255, nullable = false)
     public String getUsername() {
         return username;
     }
@@ -60,7 +48,6 @@ public class Orders extends BaseEntity {
         this.username = username;
     }
 
-    @Email
     public String getEmail() {
         return email;
     }
@@ -69,7 +56,6 @@ public class Orders extends BaseEntity {
         this.email = email;
     }
 
-    @Column(name = "user_address",nullable = false)
     public String getUserAddress() {
         return userAddress;
     }
@@ -78,8 +64,6 @@ public class Orders extends BaseEntity {
         this.userAddress = userAddress;
     }
 
-    @Column(name = "user_phone")
-    @Pattern(regexp = "/^[0-9\\+]{1,}[0-9\\-]{3,15}$/")
     public String getUserPhone() {
         return userPhone;
     }

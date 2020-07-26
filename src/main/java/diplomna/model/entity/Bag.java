@@ -1,17 +1,16 @@
 package diplomna.model.entity;
 
-import diplomna.model.Purchase;
-
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "bags")
 public class Bag extends BaseEntity {
 
-    private List<Product> products;
+    private List<Product> products = new ArrayList<>();
 
     public Bag() {
     }

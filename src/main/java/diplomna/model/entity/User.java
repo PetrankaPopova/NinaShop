@@ -15,9 +15,11 @@ import java.util.Set;
     private String userAddress;
     private String userPhone;
     private Set<UserRole> authorities;
+    private Bag bag;
 
     public User() {
     }
+
 
 
     @Override
@@ -78,6 +80,15 @@ import java.util.Set;
 
     public void setAuthorities(Set<UserRole> authorities) {
         this.authorities = authorities;
+    }
+
+    @OneToOne(cascade = {CascadeType.ALL})
+    public Bag getBag() {
+        return bag;
+    }
+
+    public void setBag(Bag bag) {
+        this.bag = bag;
     }
 
 

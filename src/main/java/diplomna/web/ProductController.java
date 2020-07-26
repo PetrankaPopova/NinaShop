@@ -101,15 +101,9 @@ public class ProductController {
 
     @GetMapping("")
     public String productsView(Model model){
-        List<ProductViewModel> allProducts = getAllProducts();
-        model.addAttribute("allProducts", allProducts);
+
         return "/product";
     }
 
-    private List<ProductViewModel> getAllProducts() {
-        return this.productService
-                .findAllProducts().stream()
-                .map(pr->this.mapper.map(pr, ProductViewModel.class))
-                .collect(Collectors.toList());
-    }
+
 }

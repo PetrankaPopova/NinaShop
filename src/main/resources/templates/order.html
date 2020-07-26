@@ -1,0 +1,96 @@
+
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:include="~{/fragments/head}"></th:block>
+
+<body>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <th:block th:include="~{/fragments/navbar}"></th:block>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+
+        </div>
+        <div class="col-md-8">
+
+            <form th:action="@{/orders}" th:method="post">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="orderDate">Order date</label>
+                            <!-- <small id="helpId" class="form-text text-muted">Help text</small> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="orderNum">OrderNum</label>
+                            <!-- <small id="emailHelpId" class="form-text text-muted">Help text</small> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="amount">Amount</label>
+                            <!-- <small id="emailHelpId" class="form-text text-muted">Help text</small> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="orderNum">OrderNum</label>
+                            <!-- <small id="emailHelpId" class="form-text text-muted">Help text</small> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <!-- <small id="emailHelpId" class="form-text text-muted">Help text</small> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="emails">Email</label>
+                            <!-- <small id="emailHelpId" class="form-text text-muted">Help text</small> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="userPhone">User Phone</label>
+                            <!-- <small id="emailHelpId" class="form-text text-muted">Help text</small> -->
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-info">Login</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<th:block th:include="~{/fragments/footer}"></th:block>
+</body>
+</html>

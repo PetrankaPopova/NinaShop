@@ -16,5 +16,5 @@ public interface UserService extends UserDetailsService {
 
     void deleteAllProducts();
 
-
+    void buyProduct(String productId);
 }

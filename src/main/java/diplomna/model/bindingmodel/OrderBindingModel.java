@@ -1,26 +1,24 @@
-package diplomna.model.entity;
+package diplomna.model.bindingmodel;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDateTime;
-import java.util.List;
-@Entity
-@Table(name = "orders")
-public class Orders extends BaseEntity {
+
+public class OrderBindingModel {
 
     private LocalDateTime orderDate = LocalDateTime.now();
     private Integer orderNum;
     private Double amount;
     private String username;
     private String email;
+
+
     private String userAddress;
     private String userPhone;
 
-    public Orders() {
+    public OrderBindingModel() {
     }
 
     @Column(name = "order_date")

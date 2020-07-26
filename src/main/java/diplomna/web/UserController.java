@@ -34,42 +34,21 @@ public class UserController {
 
 
     @GetMapping("/login")
-    public ModelAndView login(@Valid @ModelAttribute UserLoginBindingModel userLoginBindingModel,
-                              BindingResult bindingResult, RedirectAttributes redirectAttributes,
-                              ModelAndView modelAndView) {
-        return modelAndView;
+    public String login(){
+        return "login";
     }
+
 
     @PostMapping("/login")
-        public ModelAndView loginConfirm(@Valid @ModelAttribute UserLoginBindingModel userLoginBindingModel,
-                BindingResult bindingResult, RedirectAttributes redirectAttributes,
-                ModelAndView modelAndView, HttpSession httpSession) {
-
-        if (bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("userLoginBindingModel",userLoginBindingModel);
-            modelAndView.setViewName("redirect:/users/login");
-
-        } else {
-            UserServiceModel user = this.userService.findByUsername(userLoginBindingModel.getUsername());
-
-
-            if (user == null || !user.getPassword().equals(userLoginBindingModel.getPassword())) {
-                redirectAttributes.addFlashAttribute("notFound", true);
-                redirectAttributes.addFlashAttribute("userLoginBindingModel",userLoginBindingModel);
-                modelAndView.setViewName("redirect:/login");
-            } else {
-
-                httpSession.setAttribute("user", user);
-                httpSession.setAttribute("id", user.getId());
-                httpSession.setAttribute("role", user.getAuthorities());
-                modelAndView.setViewName("redirect:/");
-            }
-        }
+       public ModelAndView loginConfirm(@ModelAttribute ("userLoginBindingModel") UserLoginBindingModel userLoginBindingModel){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("username");
+        modelAndView.addObject("password");
+        modelAndView.setViewName("login");
 
         return modelAndView;
-
-
     }
+
 
     @GetMapping("/register")
     public String register(){
@@ -95,5 +74,10 @@ public class UserController {
         return "profile";
     }
 
+    @GetMapping("/user/buy/{productId}")
+    public String buyProduct(@PathVariable ("productId") String productId){
+        this.userService.buyProduct(productId);
+        return "/home";
+    }
 
 }

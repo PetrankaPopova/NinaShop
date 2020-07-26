@@ -1,6 +1,39 @@
 body{
-    background-color:lightslategray;
+    background-color:white;
     color: black;
+    font-family: "Open Sans", Helvetica, Arial, sans-serif;
+    overflow-x: hidden;
+    background-image: url("C:\Users\Pepi\Desktop\diplomna\src\main\resources\static\img\NinaPhotos\pic1.jpg");
+    /*background-image: linear-gradient(rgba(0, 0 , 0 ,0.3), rgba(0, 0 , 0 ,0.8)), url("../NinaPhotos/pic1.jpg");*/
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.tm-site-title {
+    display: inline-block;
+    text-transform: uppercase;
+    font-size: 2rem;
+    margin-left: 1rem;
+    color: #656565;
+    letter-spacing: 1px;
+}
+
+.navbar {
+    height: 100px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-top: 50px;
+}
+.nav-item {
+    margin-right: 30px;
+}
+
+.nav-item:last-child {
+    margin-right: 0;
 }
 
 .btn{
@@ -11,11 +44,12 @@ body{
 }
 
 .btn:hover {
-    background-color: slateblue;
-    color: lightcyan;
+    background-color: black;
+    color: white;
     border-radius: 15px;
 }
 
-.row{
-    padding: 5px;
+.image-cart{
+    margin: 10px;
+    border-radius: 10px;
 }
