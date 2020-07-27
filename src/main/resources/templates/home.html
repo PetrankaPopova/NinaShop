@@ -23,19 +23,22 @@
                 <div class="container">
                     <div class="row">
 
-                        <div class="card" style="width: 18rem;">
-                            <img class="card-img-top" th:src="${product.getUrl()}" alt="Card image cap">
-                            <div class="card-body">
-                                <h5 class="card-title" th:text="${product.getName()}">Card title</h5>
-                                <p class="card-text" th:text="${product.getDescription()}"></p>
-                                <!--                    <p class="card-text" th:text="${product.getCategory().getCategoryName()}"></p>-->
+                        <div class="col-md-12">
 
-                                <p class="card-text" th:text="${product.getPrice()}"></p>
-                                <a th:href="@{/user/buy/{productId}(productId = ${product.getId()})}"
-                                class="btn btn-primary">Buy Me</a>
+                            <div class ="one_product">
+                                <div></div>
+                                <img class="one_product_img" th:src="${product.getUrl()}" alt="Dress picture">
+                                <div class="one_product_title" th:text="${product.getName()}">Card title</div>
+                                <div class="one_product_description" th:text="${product.getDescription()}"></div>
+                                <div class="one_product_price" th:text="${product.getPrice()}"></div>
+                                <div>
+                                    <a th:href="@{/user/buy/{productId}(productId = ${product.getId()})}"
+                                       class="one_product_buy_link">Buy Me</a>
+                                </div>
+
                             </div>
-                        </div>
 
+                        </div>
 
                     </div>
                 </div>

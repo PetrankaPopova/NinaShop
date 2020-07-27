@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <th:block th:include="~{/fragments/head}"></th:block>
@@ -13,37 +12,58 @@
 </div>
 
 <div class="container">
-    <div class="row">
-        <div class="col-md-4">
-        </div>
-        <div class="col-md-8">
-            <form th:action="@{/login}" th:method="post">
 
+    <div class="row">
+        <div class="col-md-3">
+
+        </div>
+        <div class="col-md-6">
+                    <h4>Login page</h4>
+                    <hr>
+            <form th:action="@{/login}" th:method="post">
                 <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-12">
                         <div class="form-group">
                             <label for="username">Username</label>
-                            <input type="text" class="form-control" name="username" id="" aria-describedby="helpId" placeholder="Put your username">
+                            <input type="text" class="form-control" name="username" id="" aria-describedby="helpId"
+                                   placeholder="Put your username">
                             <!-- <small id="helpId" class="form-text text-muted">Help text</small> -->
                         </div>
                     </div>
-                    <div class="col-md-8">
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
                         <div class="form-group">
                             <label for="password">Password</label>
-                            <input type="password" class="form-control" name="password" id="" aria-describedby="passwordHelpId" placeholder="Put your password here">
+                            <input type="password" class="form-control" name="password" id=""
+                                   aria-describedby="passwordHelpId" placeholder="Put your password here">
                             <!-- <small id="emailHelpId" class="form-text text-muted">Help text</small> -->
                         </div>
                     </div>
                 </div>
-        <div class="row">
-            <div class="input-group mt-8">
-                <button type="submit" class="btn btn-primary d-inline-block mx-auto">Login</button>
-            </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </div>
+                </div>
+            </form>
         </div>
-    </form>
-            <footer class="row">
-                <th:block th:include="~{/fragments/footer}"></th:block>
-            </footer>
+        <div class="col-md-3">
+        </div>
+    </div>
+</div>
+<footer class="row">
+    <th:block th:include="~{/fragments/footer}"></th:block>
+</footer>
 </body>
 
 </html>
+
+
+<!--
+ORIGINAL
+
+
+
+
+-->

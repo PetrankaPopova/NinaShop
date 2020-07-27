@@ -31,4 +31,5 @@ public class Constants {
     public static final String PRODUCT_DESCRIPTION_LENGTH_MESSAGE = "Description min length must be minimum 5(inclusive) characters";
     public static final String PRODUCT_PRICE_MESSAGE = "Price must be a positive number";
     public static final String PRODUCT_CATEGORY_MESSAGE = "Category cannot be null.";
+    public static final String USER_ID_NOT_FOUND = "User with this id doesn't exist!";
 }

@@ -1,5 +1,6 @@
 package diplomna.service.serviceImpl;
 
+import diplomna.constant.Constants;
 import diplomna.exception.AlreadyExistsException;
 import diplomna.model.entity.Bag;
 import diplomna.model.entity.Product;
@@ -124,6 +125,25 @@ public class UserServiceImp implements UserService {
         u.getBag().getProducts().add(p);
         this.userRepository.saveAndFlush(u);
     }
+
+    @Override
+    public UserServiceModel editUserProfile(UserServiceModel userServiceModel, String oldPassword) {
+
+        User user = this.userRepository.findByUsername(userServiceModel.getUsername())
+                .orElseThrow(() -> new UsernameNotFoundException(Constants.USER_ID_NOT_FOUND));
+
+        if (!this.bCryptPasswordEncoder.matches(oldPassword, user.getPassword())) {
+            throw new IllegalArgumentException("NOT CORRECT");
+        }
+
+        user.setPassword(!"".equals(userServiceModel.getPassword()) ?
+                this.bCryptPasswordEncoder.encode(userServiceModel.getPassword()) :
+                user.getPassword());
+        user.setEmail(userServiceModel.getEmail());
+
+        return this.modelMapper.map(this.userRepository.saveAndFlush(user), UserServiceModel.class);
+    }
+
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
