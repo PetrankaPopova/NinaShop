@@ -2,6 +2,7 @@ package diplomna.service.serviceImpl;
 
 import diplomna.constant.Constants;
 import diplomna.exception.AlreadyExistsException;
+import diplomna.exception.UserNotFoundException;
 import diplomna.model.entity.Bag;
 import diplomna.model.entity.Product;
 import diplomna.model.entity.User;
@@ -142,6 +143,13 @@ public class UserServiceImp implements UserService {
         user.setEmail(userServiceModel.getEmail());
 
         return this.modelMapper.map(this.userRepository.saveAndFlush(user), UserServiceModel.class);
+    }
+
+    @Override
+    public void deleteUser(String username) {
+        User user = this.userRepository.findByUsername(username).orElseThrow(() -> new UserNotFoundException("User with given id was not found!"));
+
+        this.userRepository.delete(user);
     }
 
 

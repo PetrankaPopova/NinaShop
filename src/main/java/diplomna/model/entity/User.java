@@ -1,5 +1,6 @@
 package diplomna.model.entity;
 
+import org.hibernate.validator.constraints.Length;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
@@ -23,7 +24,8 @@ import java.util.Set;
 
 
     @Override
-    @Column(name = "username")
+    @Column(name = "username",nullable = false)
+    @Length(min = 3, max = 20, message = "Username length must be between 3 and 20 characters (inclusive 3 and 20).")
     public String getUsername() {
         return username;
     }
@@ -33,7 +35,8 @@ import java.util.Set;
     }
 
     @Override
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
+    @Length(min = 3, max = 20, message = "Password length must be between 3 and 20 characters (inclusive 3 and 20).")
     public String getPassword() {
         return password;
     }
@@ -42,7 +45,7 @@ import java.util.Set;
         this.password = password;
     }
 
-    @Column(name = "email")
+    @Column(name = "email",nullable = false)
     public String getEmail() {
         return email;
     }

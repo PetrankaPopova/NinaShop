@@ -20,4 +20,7 @@ public interface UserService extends UserDetailsService {
 
      UserServiceModel editUserProfile(UserServiceModel userServiceModel, String oldPassword);
 
+    void deleteUser(String username);
+
+
 }

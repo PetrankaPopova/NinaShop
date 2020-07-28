@@ -19,53 +19,54 @@
         </div>
         <div class="col-md-8">
 
-            <form th:action="@{/register}" th:method="post">
+            <form th:method="post" th:action="@{/register}" th:object="${userRegisterBindingModel}">
 
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="username">Username</label>
-                            <input type="text" class="form-control" name="username" id="" aria-describedby="helpId"
-                                   placeholder="Put your username">
-                            <!-- <small id="helpId" class="form-text text-muted">Help text</small> -->
+                        <div  class="label-holder textCol d-flex justify-content-center">
+                            <label for="username" class="h4 mb-2 text-white">Username</label>
                         </div>
+                        <input th:value="*{username}" type="text" th:errorclass="bg-danger" class="form-control" id="username" name="username"/>
+                        <small th:each="e : ${#fields.errors('username')}" th:text="${e}" class="text-danger">Username error message</small>
                     </div>
                     <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" class="form-control" name="email" id="" aria-describedby="emailHelpId"
-                                   placeholder="">
-                            <!-- <small id="emailHelpId" class="form-text text-muted">Help text</small> -->
+                        <div class="label-holder text-white textCol d-flex justify-content-center">
+                            <label for="email" class="h4 mb-2">Email</label>
                         </div>
+                        <input th:value="*{email}" th:errorclass="bg-danger" type="email" class="form-control" id="email" name="email" th:field="*{email}" />
+                        <small class="text-danger"  th:each="e : ${#fields.errors('email')}" th:text="${e}" ></small>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="password">Password</label>
-                            <input type="password" class="form-control" name="password" id="" placeholder="">
-                        </div>
+                    <div class="label-holder text-white textCol d-flex justify-content-center">
+                        <label  for="password" class="h4 mb-2" >Password</label>
                     </div>
+                    <input th:value="*{password}" th:errorclass="bg-danger" type="password" class="form-control" id="password" name="password" />
+                    <small th:each="e : ${#fields.errors('password')}" th:text="${e}" class="text-danger">Password error message</small>
+                </div>
+
                     <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="confirmPassword">Confirm Password</label>
-                            <input type="password" class="form-control" name="confirmPassword" id="" placeholder="">
+                        <div class="label-holder text-white textCol d-flex justify-content-center">
+                            <label for="confirmPassword" class="h4 mb-2">Confirm Password</label>
                         </div>
-                    </div>
+                        <input type="password" class="form-control" id="confirmPassword"
+                               name="confirmPassword" />
                 </div>
                 <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="userAddress">Address</label>
-                            <input type="userAddress" class="form-control" name="userAddress" id="" placeholder="">
-                        </div>
+                    <div class="label-holder text-white textCol d-flex justify-content-center">
+                        <label for="confirmPassword" class="h4 mb-2">Address</label>
+                    </div>
+                    <label for=" userAddress"></label><input type="text" class="form-control" id=" userAddress"
+                                                             name=" userAddress" />
+
                     </div>
                     <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="userPhone">Phone</label>
-                            <input width="100px" type="userPhone" class="form-control" name="userPhone" id="" placeholder="">
+                        <div class="label-holder text-white textCol d-flex justify-content-center">
+                            <label for="confirmPassword" class="h4 mb-2">Phone</label>
                         </div>
-                    </div>
+                        <label for="userPhone"></label><input type="number" class="form-control" id="userPhone"
+                                                              name="userPhone" />
+
                 </div>
 
                 <div class="row">

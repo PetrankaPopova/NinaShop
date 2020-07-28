@@ -9,6 +9,7 @@ import diplomna.model.service.UserServiceModel;
 import diplomna.service.UserService;
 import diplomna.view.UserView;
 import diplomna.web.Tools;
+import diplomna.web.anotations.PageTitle;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -65,14 +66,15 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public String registerUser(@ModelAttribute("userRegisterBindingModel")
+    public String registerUser(@Valid @ModelAttribute("userRegisterBindingModel")
                                        UserRegisterBindingModel userRegisterBindingModel,
                                BindingResult bindingResult,RedirectAttributes redirectAttributes) {
 
-        if (bindingResult.hasErrors()){
-            return "redirect:/register";
+        if (bindingResult.hasErrors()) {
+            if (!userRegisterBindingModel.getPassword().equals(userRegisterBindingModel.getConfirmPassword())) {
+                return "redirect:/register";
+            }
         }
-
         this.userService.registerUser(this.modelMapper.map(userRegisterBindingModel, UserServiceModel.class));
 
         return "redirect:login";
@@ -80,7 +82,7 @@ public class UserController {
     }
 
     @GetMapping("/profile")
-    //  @PreAuthorize("isAuthenticated()")
+    @PreAuthorize("isAuthenticated()")
     public String profile(Model model) {
         UserServiceModel user = this.userService.findByUsername(this.tools.getLoggedUser());
         UserView userView = this.modelMapper.map(user, UserView.class);
@@ -125,6 +127,27 @@ public class UserController {
         this.userService.editUserProfile(this.modelMapper.map(userEditBindingModel, UserServiceModel.class), userEditBindingModel.getOldPassword());
 
         return "redirect:/profile";
+
+    }
+    @GetMapping("/delete/{username}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PageTitle("Delete User")
+    public ModelAndView deleteUser(@PathVariable String username, ModelAndView modelAndView) {
+        UserServiceModel userServiceModel = this.userService.findByUsername(username);
+
+        modelAndView.addObject("user", userServiceModel);
+        modelAndView.addObject("userN", username);
+        modelAndView.setViewName("/delete-user");
+
+        return modelAndView;
+    }
+
+    @PostMapping("/delete/{username}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ModelAndView deleteUserConfirm(@PathVariable String username, ModelAndView modelAndView) {
+        this.userService.deleteUser(username);
+        modelAndView.setViewName("redirect:/all");
+        return modelAndView;
 
     }
 }
