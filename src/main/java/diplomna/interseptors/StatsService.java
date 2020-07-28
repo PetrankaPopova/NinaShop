@@ -1,4 +1,4 @@
-package diplomna.web.interseptors;
+package diplomna.interseptors;
 
 import org.springframework.stereotype.Service;
 
@@ -9,6 +9,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class StatsService {
     private AtomicInteger requestCount = new AtomicInteger(0);
     private Instant startedOn = Instant.now();
+
+    public StatsService() {
+    }
 
     public void incRequestCount() {
         requestCount.incrementAndGet();

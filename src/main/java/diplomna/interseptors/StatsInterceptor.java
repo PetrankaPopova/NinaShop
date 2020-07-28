@@ -1,4 +1,4 @@
-package diplomna.web.interseptors;
+package diplomna.interseptors;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;

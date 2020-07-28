@@ -1,4 +1,4 @@
-package diplomna.web.interseptors;
+package diplomna.interseptors;
 
 import diplomna.web.anotations.PageTitle;
 import org.springframework.stereotype.Component;
@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 
 @Component
 public class TitleInterceptor extends HandlerInterceptorAdapter {
+
+
+
     @Override
     public void postHandle(HttpServletRequest request,
                            HttpServletResponse response, Object handler, ModelAndView modelAndView) {
