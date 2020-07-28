@@ -20,6 +20,7 @@ import static diplomna.constant.Constants.PRODUCT_NAME_EXISTS_MESSAGE;
 @Service
 public class ProductServiceImpl implements ProductService {
 
+    @Autowired
     private final ProductRepository productRepository;
     private final ModelMapper modelMapper;
 

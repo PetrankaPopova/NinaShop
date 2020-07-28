@@ -3,13 +3,16 @@ package diplomna.service.serviceImpl;
 import diplomna.model.entity.UserRole;
 import diplomna.repository.RoleRepository;
 import diplomna.service.RoleService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class RoleServiceImpl implements RoleService {
 
+
     private final RoleRepository roleRepository;
 
+    @Autowired
     public RoleServiceImpl(RoleRepository roleRepository) {
         this.roleRepository = roleRepository;
     }
