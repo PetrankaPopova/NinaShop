@@ -2,6 +2,7 @@ package diplomna.service.serviceImpl;
 
 import diplomna.model.entity.Category;
 import diplomna.model.entity.CategoryName;
+import diplomna.model.service.CategoryServiceModel;
 import diplomna.repository.CategoryRepository;
 import diplomna.service.CategoryService;
 import org.modelmapper.ModelMapper;
@@ -9,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
@@ -43,5 +46,13 @@ public class CategoryServiceImpl implements CategoryService {
                                     String.format("Description for %s", categoryName.name()))));
 
         }
+    }
+
+    @Override
+   public List<CategoryServiceModel> findAllCategories() {
+        return this.categoryRepository.findAll()
+                .stream()
+               .map(c -> this.modelMapper.map(c, CategoryServiceModel.class))
+                .collect(Collectors.toList());
     }
 }
