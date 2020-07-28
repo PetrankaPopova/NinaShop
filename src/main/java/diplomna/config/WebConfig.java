@@ -1,6 +1,6 @@
 package diplomna.config;
 
-import diplomna.web.stats.StatsInterceptor;
+import diplomna.web.interseptors.StatsInterceptor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;

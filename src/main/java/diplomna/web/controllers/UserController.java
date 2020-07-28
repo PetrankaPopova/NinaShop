@@ -1,4 +1,4 @@
-package diplomna.web;
+package diplomna.web.controllers;
 
 
 import diplomna.model.bindingmodel.UserEditBindingModel;
@@ -8,6 +8,7 @@ import diplomna.model.service.RoleServiceModel;
 import diplomna.model.service.UserServiceModel;
 import diplomna.service.UserService;
 import diplomna.view.UserView;
+import diplomna.web.Tools;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;

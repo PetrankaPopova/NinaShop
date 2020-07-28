@@ -1,5 +1,6 @@
-package diplomna.web;
+package diplomna.web.controllers;
 
+import diplomna.web.HelloException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;

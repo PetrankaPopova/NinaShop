@@ -1,6 +1,6 @@
-package diplomna.web.stats;
+package diplomna.web.interseptors;
 
-import diplomna.web.PageTitle;
+import diplomna.web.anotations.PageTitle;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;

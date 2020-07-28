@@ -1,4 +1,4 @@
-package diplomna.web;
+package diplomna.web.controllers;
 
 import diplomna.model.entity.CategoryName;
 import diplomna.model.service.CategoryServiceModel;

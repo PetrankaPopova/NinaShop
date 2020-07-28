@@ -1,4 +1,4 @@
-package diplomna.web;
+package diplomna.web.controllers;
 
 import diplomna.exception.AlreadyExistsException;
 import diplomna.model.bindingmodel.ProductAddBindingModel;

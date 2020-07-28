@@ -1,4 +1,4 @@
-package diplomna.web;
+package diplomna.web.controllers;
 
 
 
