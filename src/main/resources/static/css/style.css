@@ -107,5 +107,7 @@ navbar{
     display: inline;
 }
 
+.important {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.8)), url("../img/NinaPhotos/pic1.jpg");
 
-
+}
