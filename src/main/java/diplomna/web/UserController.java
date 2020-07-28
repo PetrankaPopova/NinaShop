@@ -49,13 +49,12 @@ public class UserController {
 
 
     @PostMapping("/login")
-    public ModelAndView loginConfirm(@ModelAttribute("userLoginBindingModel") UserLoginBindingModel userLoginBindingModel) {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("username");
-        modelAndView.addObject("password");
-        modelAndView.setViewName("login");
-
-        return modelAndView;
+    public String loginConfirm(@ModelAttribute("userLoginBindingModel") UserLoginBindingModel userLoginBindingModel,
+                                     BindingResult bindingResult,RedirectAttributes redirectAttributes) {
+        if (bindingResult.hasErrors()){
+            return "redirect:/login";
+        }
+        return "redirect:home";
     }
 
 
@@ -66,7 +65,12 @@ public class UserController {
 
     @PostMapping("/register")
     public String registerUser(@ModelAttribute("userRegisterBindingModel")
-                                       UserRegisterBindingModel userRegisterBindingModel) {
+                                       UserRegisterBindingModel userRegisterBindingModel,
+                               BindingResult bindingResult,RedirectAttributes redirectAttributes) {
+
+        if (bindingResult.hasErrors()){
+            return "redirect:/register";
+        }
 
         this.userService.registerUser(this.modelMapper.map(userRegisterBindingModel, UserServiceModel.class));
 

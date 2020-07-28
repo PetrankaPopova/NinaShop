@@ -1,4 +1,4 @@
-package diplomna.stats;
+package diplomna.web.stats;
 
 import diplomna.web.PageTitle;
 import org.springframework.stereotype.Component;

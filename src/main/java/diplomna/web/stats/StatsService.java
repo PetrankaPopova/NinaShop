@@ -1,4 +1,4 @@
-package diplomna.stats;
+package diplomna.web.stats;
 
 import org.springframework.stereotype.Service;
 

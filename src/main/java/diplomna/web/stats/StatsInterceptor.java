@@ -1,4 +1,4 @@
-package diplomna.stats;
+package diplomna.web.stats;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
