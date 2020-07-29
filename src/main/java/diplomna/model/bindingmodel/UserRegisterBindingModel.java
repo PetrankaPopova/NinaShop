@@ -4,6 +4,8 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.Column;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 public class UserRegisterBindingModel {
     private String username;
@@ -12,7 +14,6 @@ public class UserRegisterBindingModel {
     private String confirmPassword;
     private String userAddress;
     private String userPhone;
-
 
     public UserRegisterBindingModel() {
     }
@@ -25,6 +26,7 @@ public class UserRegisterBindingModel {
     public void setUsername(String username) {
         this.username = username;
     }
+
     //@NotNull(message = "Cannot be null.")
     @Email
     public String getEmail() {
@@ -52,7 +54,7 @@ public class UserRegisterBindingModel {
         this.confirmPassword = confirmPassword;
     }
 
-    @Column(name = "userAddress", nullable = false)
+    @Length(min = 2, max = 10, message = "Address length must be between 2 and 10 characters")
     public String getUserAddress() {
         return userAddress;
     }
@@ -61,7 +63,8 @@ public class UserRegisterBindingModel {
         this.userAddress = userAddress;
     }
 
-    @Column(name = "userPhone",nullable = false)
+    @Length(min = 2, max = 10, message = "Phone length must be between 2 and 10 characters")
+    @Pattern(regexp = "^\\d{10}$")
     public String getUserPhone() {
         return userPhone;
     }

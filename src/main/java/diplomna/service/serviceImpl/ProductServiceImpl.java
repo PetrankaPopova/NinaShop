@@ -1,7 +1,6 @@
 package diplomna.service.serviceImpl;
 
-import diplomna.exception.AlreadyExistsException;
-import diplomna.model.entity.Category;
+import diplomna.error.AlreadyExistsException;
 import diplomna.model.entity.Product;
 import diplomna.model.service.ProductServiceModel;
 import diplomna.repository.ProductRepository;

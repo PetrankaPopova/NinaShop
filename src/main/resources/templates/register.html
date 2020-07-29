@@ -66,7 +66,8 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="userAddress">Address</label>
-                            <input th:value="${userRegisterBindingModel.userAddress}" type="text" th:errorclass="bg-danger" class="form-control" name="userAddress"
+                            <input th:value="${userRegisterBindingModel.userAddress}" type="text"
+                                    class="form-control" name="userAddress"
                                    id="userAddress" placeholder="Put here your address">
                             <th:block th:each="e : ${#fields.errors('userAddress')}">
                                 <small th:text="${e}" class="text-danger"></small>
@@ -75,7 +76,8 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="userPhone">Phone</label>
-                            <input th:value="${userRegisterBindingModel.userPhone}" width="100px" type="number" th:errorclass="bg-danger" class="form-control"
+                            <input th:value="${userRegisterBindingModel.userPhone}" width="100px" type="text"
+                                    class="form-control"
                                    name="userPhone" id="userPhone" placeholder="Put here your phone number">
                             <th:block th:each="e : ${#fields.errors('userPhone')}">
                                 <small th:text="${e}" class="text-danger"></small>

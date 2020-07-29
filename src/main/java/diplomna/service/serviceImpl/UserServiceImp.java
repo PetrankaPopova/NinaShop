@@ -1,8 +1,8 @@
 package diplomna.service.serviceImpl;
 
 import diplomna.constant.Constants;
-import diplomna.exception.AlreadyExistsException;
-import diplomna.exception.UserNotFoundException;
+import diplomna.error.AlreadyExistsException;
+import diplomna.error.UserNotFoundException;
 import diplomna.model.entity.Bag;
 import diplomna.model.entity.Product;
 import diplomna.model.entity.User;

@@ -60,14 +60,12 @@ public class UserController {
     @GetMapping("/register")
     //@PreAuthorize("isAnonymous()")
     @PageTitle("Register")
-    public ModelAndView register(@Valid @ModelAttribute("userRegisterBindingModel") UserRegisterBindingModel userRegisterBindingModel,
-                                 ModelAndView modelAndView) {
-       // modelAndView.addObject("user", new User());
-        modelAndView.addObject("userRegisterBindingModel",new UserRegisterBindingModel());
-
-        modelAndView.setViewName("/register");
-
-        return modelAndView;
+    public String register(@Valid @ModelAttribute("userRegisterBindingModel") UserRegisterBindingModel userRegisterBindingModel,
+                                 Model model) {
+        if (!model.containsAttribute("userRegisterBindingModel")) {
+            model.addAttribute("userRegisterBindingModel", new UserRegisterBindingModel());
+        }
+        return "register";
     }
 
     @PostMapping("/register")
@@ -76,6 +74,7 @@ public class UserController {
                                         RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("userRegisterBindingModel", userRegisterBindingModel);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegisterBindingModel", bindingResult);
             modelAndView.setViewName("register");
 
         } else {
