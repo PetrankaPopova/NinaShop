@@ -24,8 +24,7 @@ import java.util.Set;
 
 
     @Override
-    @Column(name = "username",nullable = false)
-    @Length(min = 3, max = 20, message = "Username length must be between 3 and 20 characters (inclusive 3 and 20).")
+    @Column(name = "username", unique = true,nullable = false)
     public String getUsername() {
         return username;
     }
@@ -35,8 +34,7 @@ import java.util.Set;
     }
 
     @Override
-    @Column(name = "password", nullable = false)
-    @Length(min = 3, max = 20, message = "Password length must be between 3 and 20 characters (inclusive 3 and 20).")
+    @Column(name = "password" ,nullable = false)
     public String getPassword() {
         return password;
     }
@@ -45,7 +43,7 @@ import java.util.Set;
         this.password = password;
     }
 
-    @Column(name = "email",nullable = false)
+    @Column(name = "email" ,unique = true,nullable = false)
     public String getEmail() {
         return email;
     }
@@ -54,7 +52,7 @@ import java.util.Set;
         this.email = email;
     }
 
-    @Column(name = "userAddress", nullable = false)
+    @Column(name = "userAddress")
     public String getUserAddress() {
         return userAddress;
     }
@@ -63,7 +61,7 @@ import java.util.Set;
         this.userAddress = userAddress;
     }
 
-    @Column(name = "userPhone",nullable = false)
+    @Column(name = "userPhone")
     @Pattern(regexp = "^\\d{10}$")
     public String getUserPhone() {
         return userPhone;

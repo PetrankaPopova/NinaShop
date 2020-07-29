@@ -4,7 +4,6 @@ package diplomna.web.controllers;
 import diplomna.model.bindingmodel.UserEditBindingModel;
 import diplomna.model.bindingmodel.UserLoginBindingModel;
 import diplomna.model.bindingmodel.UserRegisterBindingModel;
-import diplomna.model.service.RoleServiceModel;
 import diplomna.model.service.UserServiceModel;
 import diplomna.service.UserService;
 import diplomna.view.UserView;
@@ -19,14 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.security.Principal;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Controller
 
@@ -45,44 +37,65 @@ public class UserController {
 
 
     @GetMapping("/login")
-    public String login() {
-        return "login";
-    }
+    public ModelAndView login(@Valid @ModelAttribute(name = "userLoginBindingModel")
+                                      UserLoginBindingModel userLoginBindingModel,
+                              BindingResult bindingResult, ModelAndView modelAndView) {
+        modelAndView.addObject("userLoginBindingModel", userLoginBindingModel);
+        modelAndView.setViewName("login");
+        return modelAndView;
 
+    }
 
     @PostMapping("/login")
-    public String loginConfirm(@ModelAttribute("userLoginBindingModel") UserLoginBindingModel userLoginBindingModel,
-                                     BindingResult bindingResult,RedirectAttributes redirectAttributes) {
-        if (bindingResult.hasErrors()){
-            return "redirect:/login";
-        }
-        return "redirect:home";
+    public ModelAndView loginConfirm(@ModelAttribute ("userLoginBindingModel") UserLoginBindingModel userLoginBindingModel){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("username");
+        modelAndView.addObject("password");
+        modelAndView.setViewName("login");
+
+        return modelAndView;
+
     }
 
-
     @GetMapping("/register")
-    public String register() {
-        return "register";
+    //@PreAuthorize("isAnonymous()")
+    @PageTitle("Register")
+    public ModelAndView register(@Valid @ModelAttribute("userRegisterBindingModel") UserRegisterBindingModel userRegisterBindingModel,
+                                 ModelAndView modelAndView) {
+       // modelAndView.addObject("user", new User());
+        modelAndView.addObject("userRegisterBindingModel",new UserRegisterBindingModel());
+
+        modelAndView.setViewName("/register");
+
+        return modelAndView;
     }
 
     @PostMapping("/register")
-    public String registerUser(@Valid @ModelAttribute("userRegisterBindingModel")
-                                       UserRegisterBindingModel userRegisterBindingModel,
-                               BindingResult bindingResult,RedirectAttributes redirectAttributes) {
-
+    public ModelAndView registerConfirm(@Valid @ModelAttribute("userRegisterBindingModel") UserRegisterBindingModel userRegisterBindingModel,
+                                        ModelAndView modelAndView, BindingResult bindingResult,
+                                        RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
-            if (!userRegisterBindingModel.getPassword().equals(userRegisterBindingModel.getConfirmPassword())) {
-                return "redirect:/register";
-            }
+            redirectAttributes.addFlashAttribute("userRegisterBindingModel", userRegisterBindingModel);
+            modelAndView.setViewName("register");
+
+        } else {
+            UserServiceModel userServiceModel = this.userService
+                    .registerUser(this.modelMapper.map(userRegisterBindingModel, UserServiceModel.class));
+
+           // modelAndView.addObject("username", userRegisterBindingModel.getUsername());
+           // modelAndView.addObject("email", userRegisterBindingModel.getEmail());
+            //modelAndView.addObject("password", userRegisterBindingModel.getPassword());
+           // modelAndView.addObject("confirmPassword", userRegisterBindingModel.getConfirmPassword());
+           // modelAndView.addObject("userAddress", userRegisterBindingModel.getUserAddress());
+           // modelAndView.addObject("userPhone", userRegisterBindingModel.getUserPhone());
+
+            modelAndView.setViewName("login");
         }
-        this.userService.registerUser(this.modelMapper.map(userRegisterBindingModel, UserServiceModel.class));
-
-        return "redirect:login";
-
+        return modelAndView;
     }
 
     @GetMapping("/profile")
-    @PreAuthorize("isAuthenticated()")
+    //@PreAuthorize("isAuthenticated()")
     public String profile(Model model) {
         UserServiceModel user = this.userService.findByUsername(this.tools.getLoggedUser());
         UserView userView = this.modelMapper.map(user, UserView.class);

@@ -7,13 +7,13 @@ import java.util.Set;
 public class UserServiceModel extends BaseEntityService{
 
     private String username;
-    private String password;
     private String email;
+    private String password;
+    private String confirmPassword;
     private String userAddress;
     private String userPhone;
-
-
     private Set<RoleServiceModel> authorities;
+
 
     public UserServiceModel() {
     }
@@ -32,6 +32,14 @@ public class UserServiceModel extends BaseEntityService{
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 
     public String getEmail() {

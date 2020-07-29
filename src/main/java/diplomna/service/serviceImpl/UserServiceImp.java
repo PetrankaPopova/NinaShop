@@ -51,7 +51,7 @@ public class UserServiceImp implements UserService {
     @Override
     public UserServiceModel registerUser(UserServiceModel userServiceModel) {
         User user = this.modelMapper.map(userServiceModel, User.class);
-        User returnedUserFromDb = this.userRepository.findUserByUsername(userServiceModel.getUsername()).orElse(null);
+       // User returnedUserFromDb = this.userRepository.findUserByUsername(userServiceModel.getUsername()).orElse(null);
         if (userRepository.existsByUsername(userServiceModel.getUsername())) {
             throw new AlreadyExistsException("username", USER_NAME_EXISTS_MESSAGE);
         }

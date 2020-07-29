@@ -15,74 +15,82 @@
 <div class="container">
     <div class="row">
         <div class="col-md-4">
-
         </div>
         <div class="col-md-8">
 
-            <form th:method="post" th:action="@{/register}" th:object="${userRegisterBindingModel}">
+            <form th:action="@{/register}" th:method="post" th:object="${userRegisterBindingModel}">
 
                 <div class="row">
                     <div class="col-md-6">
-                        <div  class="label-holder textCol d-flex justify-content-center">
-                            <label for="username" class="h4 mb-2 text-white">Username</label>
+                        <div class="form-group">
+                            <label for="username" class>Username</label>
+                            <input th:value="${userRegisterBindingModel.username}" type="text" th:errorclass="bg-danger" class="form-control" name="username" id="username" aria-describedby="helpId"
+                                   placeholder="Put your username">
+                            <small th:each="e : ${#fields.errors('username')}"
+                                   th:text="${e}" id="helpId" class="form-text text-muted">Help text</small>
                         </div>
-                        <input th:value="*{username}" type="text" th:errorclass="bg-danger" class="form-control" id="username" name="username"/>
-                        <small th:each="e : ${#fields.errors('username')}" th:text="${e}" class="text-danger">Username error message</small>
                     </div>
                     <div class="col-md-6">
-                        <div class="label-holder text-white textCol d-flex justify-content-center">
-                            <label for="email" class="h4 mb-2">Email</label>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input th:value="${userRegisterBindingModel.email}" type="email" th:errorclass="bg-danger" class="form-control" name="email" id="email" aria-describedby="emailHelpId"
+                                   placeholder="Put your email here">
+                            <th:block th:each="e : ${#fields.errors('username')}">
+                            <small th:text="${e}" class="text-danger"></small>
+                            </th:block>
                         </div>
-                        <input th:value="*{email}" th:errorclass="bg-danger" type="email" class="form-control" id="email" name="email" th:field="*{email}" />
-                        <small class="text-danger"  th:each="e : ${#fields.errors('email')}" th:text="${e}" ></small>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="label-holder text-white textCol d-flex justify-content-center">
-                        <label  for="password" class="h4 mb-2" >Password</label>
-                    </div>
-                    <input th:value="*{password}" th:errorclass="bg-danger" type="password" class="form-control" id="password" name="password" />
-                    <small th:each="e : ${#fields.errors('password')}" th:text="${e}" class="text-danger">Password error message</small>
-                </div>
-
                     <div class="col-md-6">
-                        <div class="label-holder text-white textCol d-flex justify-content-center">
-                            <label for="confirmPassword" class="h4 mb-2">Confirm Password</label>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input th:value="${userRegisterBindingModel.password}" type="password" th:errorclass="bg-danger" class="form-control" name="password" id="password"
+                                   placeholder="Pu your password here">
+                            <th:block th:each="e : ${#fields.errors('password')}">
+                                <small th:text="${e}" class="text-danger"></small>
+                            </th:block>
                         </div>
-                        <input type="password" class="form-control" id="confirmPassword"
-                               name="confirmPassword" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirm Password</label>
+                            <input type="password" class="form-control" name="confirmPassword" id="confirmPassword"
+                                   placeholder="">
+                        </div>
+                    </div>
+            </form>
                 </div>
                 <div class="row">
-                    <div class="label-holder text-white textCol d-flex justify-content-center">
-                        <label for="confirmPassword" class="h4 mb-2">Address</label>
-                    </div>
-                    <label for=" userAddress"></label><input type="text" class="form-control" id=" userAddress"
-                                                             name=" userAddress" />
-
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="userAddress">Address</label>
+                            <input th:value="${userRegisterBindingModel.userAddress}" type="text" th:errorclass="bg-danger" class="form-control" name="userAddress"
+                                   id="userAddress" placeholder="Put here your address">
+                            <th:block th:each="e : ${#fields.errors('userAddress')}">
+                                <small th:text="${e}" class="text-danger"></small>
+                            </th:block>
                     </div>
                     <div class="col-md-6">
-                        <div class="label-holder text-white textCol d-flex justify-content-center">
-                            <label for="confirmPassword" class="h4 mb-2">Phone</label>
-                        </div>
-                        <label for="userPhone"></label><input type="number" class="form-control" id="userPhone"
-                                                              name="userPhone" />
-
+                        <div class="form-group">
+                            <label for="userPhone">Phone</label>
+                            <input th:value="${userRegisterBindingModel.userPhone}" width="100px" type="number" th:errorclass="bg-danger" class="form-control"
+                                   name="userPhone" id="userPhone" placeholder="Put here your phone number">
+                            <th:block th:each="e : ${#fields.errors('userPhone')}">
+                                <small th:text="${e}" class="text-danger"></small>
+                            </th:block>
+                    </div>
                 </div>
-
                 <div class="row">
                     <div class="col-md-12">
                         <button type="submit" class="btn btn-info">Register</button>
                     </div>
                 </div>
-
-            </form>
-
         </div>
     </div>
 </div>
-
 <th:block th:include="~{/fragments/footer}"></th:block>
+</div>
 </body>
 </html>
-
-
