@@ -17,5 +17,6 @@ public interface ProductService {
 
     void buyAll();
 
+
     //double getAllPrices();
 }

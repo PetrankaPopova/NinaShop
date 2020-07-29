@@ -1,5 +1,9 @@
 package diplomna.view;
 
+import diplomna.model.entity.Bag;
+import diplomna.model.entity.UserRole;
+
+import java.util.Set;
 
 public class UserEditViewModel {
 
