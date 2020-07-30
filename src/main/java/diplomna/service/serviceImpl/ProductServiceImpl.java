@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static diplomna.constant.Constants.PRODUCT_NAME_EXISTS_MESSAGE;
+import static diplomna.constant.GlobalConstants.PRODUCT_NAME_EXISTS_MESSAGE;
 
 @Service
 public class ProductServiceImpl implements ProductService {

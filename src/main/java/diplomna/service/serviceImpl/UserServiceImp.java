@@ -1,6 +1,6 @@
 package diplomna.service.serviceImpl;
 
-import diplomna.constant.Constants;
+import diplomna.constant.GlobalConstants;
 import diplomna.exception.AlreadyExistsException;
 import diplomna.exception.UserNotFoundException;
 import diplomna.model.entity.Bag;
@@ -22,8 +22,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 
-import static diplomna.constant.Constants.USER_EMAIL_EXISTS_MASSAGE;
-import static diplomna.constant.Constants.USER_NAME_EXISTS_MESSAGE;
+import static diplomna.constant.GlobalConstants.USER_EMAIL_EXISTS_MASSAGE;
+import static diplomna.constant.GlobalConstants.USER_NAME_EXISTS_MESSAGE;
 
 @Service
 public class UserServiceImp implements UserService {
@@ -131,7 +131,7 @@ public class UserServiceImp implements UserService {
     public UserServiceModel editUserProfile(UserServiceModel userServiceModel, String oldPassword) {
 
         User user = this.userRepository.findByUsername(userServiceModel.getUsername())
-                .orElseThrow(() -> new UsernameNotFoundException(Constants.USER_ID_NOT_FOUND));
+                .orElseThrow(() -> new UsernameNotFoundException(GlobalConstants.USER_ID_NOT_FOUND));
 
         if (!this.bCryptPasswordEncoder.matches(oldPassword, user.getPassword())) {
             throw new IllegalArgumentException("NOT CORRECT");

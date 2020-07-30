@@ -1,10 +1,7 @@
 package diplomna.constant;
 
-public class Constants {
-    // date
-    public static final String DATE_CANNOT_BE_IN_FUTURE = "The date cannot be in the future";
-    public static final String DATETIME_CANNOT_BE_IN_PAST = "Date and Time cannot be in the past";
-    public static final String DATE_TIME_FORMAT = "yyyy-MM-dd'T'HH:mm";
+public class GlobalConstants {
+
 
     // login
     public static final String USER_UNAUTHORIZED = "Unauthorized user";
@@ -32,4 +29,9 @@ public class Constants {
     public static final String PRODUCT_PRICE_MESSAGE = "Price must be a positive number";
     public static final String PRODUCT_CATEGORY_MESSAGE = "Category cannot be null.";
     public static final String USER_ID_NOT_FOUND = "User with this id doesn't exist!";
+
+    //error handler
+    public static final String GLOBAL_EXCEPTION_VIEW_NAME = "/error/error";
+    public static final String ERROR_PAGE_STATUS_CODE_ATTRIBUTE_NAME = "statusCode";
+    public static final String ERROR_PAGE_MESSAGE_ATTRIBUTE_NAME = "message";
 }
