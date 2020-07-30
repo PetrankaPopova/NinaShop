@@ -12,8 +12,8 @@ public class UserRegisterBindingModel {
     private String email;
     private String password;
     private String confirmPassword;
-    private String userAddress;
-    private String userPhone;
+   // private String userAddress;
+  //  private String userPhone;
 
     public UserRegisterBindingModel() {
     }
@@ -54,24 +54,24 @@ public class UserRegisterBindingModel {
         this.confirmPassword = confirmPassword;
     }
 
-    @Length(min = 2, max = 10, message = "Address length must be between 2 and 10 characters")
-    public String getUserAddress() {
-        return userAddress;
-    }
+  //  @Length(min = 2, max = 10, message = "Address length must be between 2 and 10 characters")
+  //  public String getUserAddress() {
+     //   return userAddress;
+   // }
 
-    public void setUserAddress(String userAddress) {
-        this.userAddress = userAddress;
-    }
+//    public void setUserAddress(String userAddress) {
+ //       this.userAddress = userAddress;
+  //  }
 
-    @Length(min = 2, max = 10, message = "Phone length must be between 2 and 10 characters")
-    @Pattern(regexp = "^\\d{10}$")
-    public String getUserPhone() {
-        return userPhone;
-    }
+  //  @Length(min = 2, max = 10, message = "Phone length must be between 2 and 10 characters")
+  //  @Pattern(regexp = "^\\d{10}$")
+   // public String getUserPhone() {
+       // return userPhone;
+  //  }
 
-    public void setUserPhone(String userPhone) {
-        this.userPhone = userPhone;
-    }
+  //  public void setUserPhone(String userPhone) {
+     //   this.userPhone = userPhone;
+   // }
 
 
 }
