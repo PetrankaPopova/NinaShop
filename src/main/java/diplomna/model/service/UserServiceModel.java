@@ -10,8 +10,8 @@ public class UserServiceModel extends BaseEntityService{
     private String email;
     private String password;
     private String confirmPassword;
- //   private String userAddress;
-  //  private String userPhone;
+    private String userAddress;
+    private String userPhone;
     private Set<RoleServiceModel> authorities;
 
 
@@ -49,22 +49,21 @@ public class UserServiceModel extends BaseEntityService{
     public void setEmail(String email) {
         this.email = email;
     }
+    public String getUserAddress() {
+        return userAddress;
+    }
 
-   // public String getUserAddress() {
-     //   return userAddress;
-   // }
+    public void setUserAddress(String userAddress) {
+        this.userAddress = userAddress;
+    }
 
-   // public void setUserAddress(String userAddress) {
-   //     this.userAddress = userAddress;
-    //}
+    public String getUserPhone() {
+        return userPhone;
+    }
 
-  //  public String getUserPhone() {
-    //    return userPhone;
-    //}
-
-  //  public void setUserPhone(String userPhone) {
-      //  this.userPhone = userPhone;
-   // }
+    public void setUserPhone(String userPhone) {
+        this.userPhone = userPhone;
+    }
 
     public Set<RoleServiceModel> getAuthorities() {
         return authorities;

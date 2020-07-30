@@ -13,8 +13,8 @@ import java.util.Set;
     private String username;
     private String password;
     private String email;
-   // private String userAddress;
-  //  private String userPhone;
+    private String userAddress;
+    private String userPhone;
     private Set<UserRole> authorities;
     private Bag bag;
 
@@ -52,24 +52,24 @@ import java.util.Set;
         this.email = email;
     }
 
- //   @Column(name = "userAddress")
-   // public String getUserAddress() {
-   //     return userAddress;
-  //  }
+    @Column(name = "userAddress")
+    public String getUserAddress() {
+        return userAddress;
+    }
 
- //   public void setUserAddress(String userAddress) {
-   //     this.userAddress = userAddress;
-  //  }
+    public void setUserAddress(String userAddress) {
+        this.userAddress = userAddress;
+    }
 
-    //@Column(name = "userPhone")
-   // @Pattern(regexp = "^\\d{10}$")
-   // public String getUserPhone() {
-    //    return userPhone;
-   // }
+    @Column(name = "userPhone")
+    @Pattern(regexp = "^\\d{10}$")
+    public String getUserPhone() {
+        return userPhone;
+    }
 
- //   public void setUserPhone(String userPhone) {
-  //      this.userPhone = userPhone;
-  //  }
+    public void setUserPhone(String userPhone) {
+        this.userPhone = userPhone;
+    }
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "users_roles",
