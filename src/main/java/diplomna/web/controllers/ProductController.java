@@ -5,7 +5,6 @@ import diplomna.model.bindingmodel.ProductAddBindingModel;
 import diplomna.model.service.ProductServiceModel;
 import diplomna.service.CategoryService;
 import diplomna.service.ProductService;
-import diplomna.view.ProductViewModel;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,9 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.io.IOException;
 
 @Controller
 @RequestMapping("/products")
@@ -49,25 +46,18 @@ public class ProductController {
     @PostMapping("/add")
     public String addProduct(@Valid @ModelAttribute("productAddBindModel") ProductAddBindingModel bindingModel,
                              BindingResult bindingResult,
-                             RedirectAttributes attributes) {
+                             RedirectAttributes attributes) throws IOException {
 
-        if (!bindingResult.hasErrors()) {
-            try {
-                ProductServiceModel productServiceModel = mapper.map(bindingModel, ProductServiceModel.class);
-                productServiceModel.setCategory(categoryService.getByName(bindingModel.getCategory()));
-                productService.addProduct(productServiceModel);
-
-            } catch (AlreadyExistsException ex) {
-                // service error
-                bindingResult.rejectValue(ex.getField(), "error.productAddBindModel", ex.getMessage());
-            }
-        }
-
+        System.out.println();
         if (bindingResult.hasErrors()) {
             attributes.addFlashAttribute("productAddBindModel", bindingModel);
             attributes.addFlashAttribute("org.springframework.validation.BindingResult.productAddBindModel", bindingResult);
             return "redirect:/products/add";
         }
+
+        ProductServiceModel productServiceModel = mapper.map(bindingModel, ProductServiceModel.class);
+        productServiceModel.setCategory(categoryService.getByName(bindingModel.getCategory()));
+        productService.addProduct(productServiceModel);
         return "redirect:/";
     }
 
@@ -88,8 +78,7 @@ public class ProductController {
 
 
     @GetMapping("/buyAll")
-    public String buyAll(Model model,
-                         HttpSession session) {
+    public String buyAll(Model model, HttpSession session) {
 
         //   if(!isAuthorizedUser(session)) {
         //     return "redirect:/";
@@ -100,7 +89,7 @@ public class ProductController {
     }
 
     @GetMapping("")
-    public String productsView(Model model){
+    public String productsView(Model model) {
 
         return "/product";
     }

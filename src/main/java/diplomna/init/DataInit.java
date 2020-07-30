@@ -24,7 +24,7 @@ public class DataInit implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         this.categoryService.initCategories();
-        if (productRepository.count() == 0) {
+        if (false) {
             for (DataForImport oneProduct : DataForImport.values()) {
                 Category fCategory = this.categoryRepository
                         .findByCategoryName(oneProduct.getCategoryName()).orElse(null);

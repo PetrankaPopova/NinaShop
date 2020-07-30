@@ -1,7 +1,6 @@
-package diplomna.view;
+package diplomna.model.view;
 
 import diplomna.model.entity.Category;
-import diplomna.model.entity.CategoryName;
 
 public class ProductViewModel {
     private String id;

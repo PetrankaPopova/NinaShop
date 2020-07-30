@@ -1,15 +1,17 @@
 package diplomna.service;
 
 import diplomna.model.service.ProductServiceModel;
-import diplomna.view.ProductViewModel;
+import diplomna.model.view.ProductViewModel;
 
+
+import java.io.IOException;
 import java.util.List;
 
 public interface ProductService {
 
     ProductServiceModel findByProductName(String name);
 
-    ProductServiceModel addProduct(ProductServiceModel productServiceModel);
+    ProductServiceModel addProduct(ProductServiceModel productServiceModel) throws IOException;
 
     List<ProductViewModel> findAllProducts();
 

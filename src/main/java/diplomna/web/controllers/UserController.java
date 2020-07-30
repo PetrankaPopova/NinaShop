@@ -4,11 +4,8 @@ package diplomna.web.controllers;
 import diplomna.model.bindingmodel.UserEditBindingModel;
 import diplomna.model.bindingmodel.UserLoginBindingModel;
 import diplomna.model.bindingmodel.UserRegisterBindingModel;
-import diplomna.model.service.RoleServiceModel;
 import diplomna.model.service.UserServiceModel;
 import diplomna.service.UserService;
-import diplomna.view.UserProfileViewModel;
-import diplomna.view.UserView;
 import diplomna.web.Tools;
 import diplomna.web.anotations.PageTitle;
 import org.modelmapper.ModelMapper;
@@ -20,14 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.security.Principal;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Controller
 
@@ -54,19 +44,16 @@ public class UserController extends BaseController {
     }
 
     @PostMapping("/login")
-    public String loginConfirm(@Valid @ModelAttribute("userLoginBindingModel") UserLoginBindingModel userLoginBindingModel,
-                               Model model, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String loginConfirm(/*@Valid @ModelAttribute("userLoginBindingModel") UserLoginBindingModel userLoginBindingModel,
+                               BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes*/) {
 
-        if (bindingResult.hasErrors()) {
-
+        /*if (bindingResult.hasErrors()) {
             return "redirect:login";
         }
-
-
         redirectAttributes.addFlashAttribute(" userLoginBindingModel", userLoginBindingModel);
         model.addAttribute("username");
         model.addAttribute("password");
-        model.addAttribute("login");
+        model.addAttribute("login");*/
 
         return "redirect:home";
 
@@ -108,7 +95,7 @@ public class UserController extends BaseController {
     //@PreAuthorize("isAuthenticated()")
     public String profile(Model model) {
         UserServiceModel user = this.userService.findByUsername(this.tools.getLoggedUser());
-        UserView userView = this.modelMapper.map(user, UserView.class);
+        //UserView userView = this.modelMapper.map(user, UserView.class);
         model.addAttribute("user", user);
 
         return "profile";

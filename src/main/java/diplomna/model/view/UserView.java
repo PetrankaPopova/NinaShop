@@ -1,10 +1,10 @@
-package diplomna.view;
+package diplomna.model.view;
 
-public class UserProfileViewModel {
+public class UserView {
     private String username;
     private String email;
 
-    public UserProfileViewModel() {
+    public UserView() {
     }
 
     public String getUsername() {

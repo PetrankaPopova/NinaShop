@@ -2,6 +2,7 @@ package diplomna.model.bindingmodel;
 
 import diplomna.model.entity.CategoryName;
 import org.hibernate.validator.constraints.Length;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -13,6 +14,7 @@ public class ProductAddBindingModel {
     private String description;
     private double price;
     private CategoryName category;
+    private MultipartFile[] photo;
 
     public ProductAddBindingModel() {
     }
@@ -52,5 +54,13 @@ public class ProductAddBindingModel {
 
     public void setCategory(CategoryName category) {
         this.category = category;
+    }
+
+    public MultipartFile[] getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(MultipartFile[] photo) {
+        this.photo = photo;
     }
 }
