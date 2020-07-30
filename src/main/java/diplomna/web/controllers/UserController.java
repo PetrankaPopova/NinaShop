@@ -58,35 +58,18 @@ public class UserController {
     }
 
     @GetMapping("/register")
-    //@PreAuthorize("isAnonymous()")
-    // @PageTitle("Register")
-    public String register(Model model) {
-        if (!model.containsAttribute("userRegisterBindingModel")) {
-            model.addAttribute("userRegisterBindingModel", new UserRegisterBindingModel());
-              }
-            return "register";
-        }
+    public String register(){
+        return "register";
+    }
 
-        @PostMapping("/register")
-        public String registerConfirm (@Valid @ModelAttribute("userRegisterBindingModel") UserRegisterBindingModel
-        userRegisterBindingModel, Model modelAndView, BindingResult bindingResult, RedirectAttributes redirectAttributes){
+    @PostMapping("/register")
+    public String registerUser(@ModelAttribute("userRegisterBindingModel")
+                                       UserRegisterBindingModel userRegisterBindingModel) {
 
-            if (bindingResult.hasErrors()) {
-                userRegisterBindingModel.setPassword("null");
-                userRegisterBindingModel.setConfirmPassword("null");
-                redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegisterBindingModel", bindingResult);
-                redirectAttributes.addFlashAttribute("userRegisterBindingModel", userRegisterBindingModel);
+        this.userService.registerUser(this.modelMapper.map(userRegisterBindingModel, UserServiceModel.class));
 
-                return "redirect:register";
-            }
-            if (!userRegisterBindingModel.getPassword().equals(userRegisterBindingModel.getConfirmPassword())){
-                redirectAttributes.addFlashAttribute("passwordNotMatch", true);
-                redirectAttributes.addFlashAttribute(" userRegisterBindingModel", userRegisterBindingModel);
-            }
-            this.userService.registerUser(this.modelMapper.map(userRegisterBindingModel, UserServiceModel.class));
-
-            return "login";
-        }
+        return "redirect:login";
+    }
 
         @GetMapping("/profile")
         //@PreAuthorize("isAuthenticated()")
