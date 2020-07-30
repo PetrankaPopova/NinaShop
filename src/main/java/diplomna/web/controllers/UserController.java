@@ -46,23 +46,29 @@ public class UserController extends BaseController {
 
 
     @GetMapping("/login")
-    public ModelAndView login(@Valid @ModelAttribute(name = "userLoginBindingModel")
-                                      UserLoginBindingModel userLoginBindingModel,
-                              BindingResult bindingResult, ModelAndView modelAndView) {
-        modelAndView.addObject("userLoginBindingModel", userLoginBindingModel);
-        modelAndView.setViewName("login");
-        return modelAndView;
-
+    public String login(Model model) {
+        if (!model.containsAttribute("userLoginBindingModel")) {
+            model.addAttribute("userLoginBindingModel", new UserLoginBindingModel());
+        }
+        return "login";
     }
 
     @PostMapping("/login")
-    public ModelAndView loginConfirm(@ModelAttribute ("userLoginBindingModel") UserLoginBindingModel userLoginBindingModel){
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("username");
-        modelAndView.addObject("password");
-        modelAndView.setViewName("login");
+    public String loginConfirm(@Valid @ModelAttribute("userLoginBindingModel") UserLoginBindingModel userLoginBindingModel,
+                               Model model, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 
-        return modelAndView;
+        if (bindingResult.hasErrors()) {
+
+            return "redirect:login";
+        }
+
+
+        redirectAttributes.addFlashAttribute(" userLoginBindingModel", userLoginBindingModel);
+        model.addAttribute("username");
+        model.addAttribute("password");
+        model.addAttribute("login");
+
+        return "redirect:home";
 
     }
 
@@ -78,8 +84,8 @@ public class UserController extends BaseController {
     }
 
     @PostMapping("/register")
-    public String registerConfirm (@Valid @ModelAttribute("userRegisterBindingModel") UserRegisterBindingModel
-                                           userRegisterBindingModel, Model model, BindingResult bindingResult, RedirectAttributes redirectAttributes){
+    public String registerConfirm(@Valid @ModelAttribute("userRegisterBindingModel") UserRegisterBindingModel
+                                          userRegisterBindingModel, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
 
         if (bindingResult.hasErrors()) {
             userRegisterBindingModel.setPassword("null");
@@ -89,7 +95,7 @@ public class UserController extends BaseController {
 
             return "redirect:register";
         }
-        if (!userRegisterBindingModel.getPassword().equals(userRegisterBindingModel.getConfirmPassword())){
+        if (!userRegisterBindingModel.getPassword().equals(userRegisterBindingModel.getConfirmPassword())) {
             redirectAttributes.addFlashAttribute("passwordNotMatch", true);
             redirectAttributes.addFlashAttribute(" userRegisterBindingModel", userRegisterBindingModel);
         }
@@ -97,6 +103,7 @@ public class UserController extends BaseController {
 
         return "login";
     }
+
     @GetMapping("/profile")
     //@PreAuthorize("isAuthenticated()")
     public String profile(Model model) {
@@ -115,11 +122,11 @@ public class UserController extends BaseController {
 
 
     @GetMapping("/edit")
-   // @PreAuthorize("isAuthenticated()")
+    // @PreAuthorize("isAuthenticated()")
     //  @PageTitle("Edit User")
-    public String editProfile(@Valid @ModelAttribute(name ="userEditBindingModel") UserEditBindingModel userEditBindingModel,
-                                    Model model,
-                                    BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String editProfile(@Valid @ModelAttribute(name = "userEditBindingModel") UserEditBindingModel userEditBindingModel,
+                              Model model,
+                              BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         if (!model.containsAttribute("userEditBindingModel")) {
             model.addAttribute("UserEditBindingModel", new UserEditBindingModel());
 
@@ -129,22 +136,23 @@ public class UserController extends BaseController {
     }
 
     @PostMapping("/edit")
-  //  @PreAuthorize("isAuthenticated()")
+    //  @PreAuthorize("isAuthenticated()")
     public String editProfileConfirm(@Valid @ModelAttribute(name = "userEditBindingModel") UserEditBindingModel userEditBindingModel,
-                                           BindingResult bindingResult, RedirectAttributes redirectAttributes,
-                                           Model model) {
+                                     BindingResult bindingResult, RedirectAttributes redirectAttributes,
+                                     Model model) {
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userEditBindingModel", bindingResult);
             redirectAttributes.addFlashAttribute("userEditBindingModel", userEditBindingModel);
         }
-            if (!userEditBindingModel.getPassword().equals (userEditBindingModel.getConfirmPassword())){
-                return "edit-profile";
+        if (!userEditBindingModel.getPassword().equals(userEditBindingModel.getConfirmPassword())) {
+            return "edit-profile";
         }
         this.userService.editUserProfile(this.modelMapper.map(userEditBindingModel, UserServiceModel.class), userEditBindingModel.getOldPassword());
 
         return "redirect:/profile";
 
     }
+
     @GetMapping("/delete/{username}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PageTitle("Delete User")
@@ -201,8 +209,6 @@ public class UserController extends BaseController {
     }
 
      */
-
-
 
 
 //    @GetMapping("/all")
