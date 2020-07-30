@@ -8,10 +8,11 @@
     <nav class="navbar bg-dark navbar-expand-lg navbar-background bg-dark ">
         <th:block th:include="~{/fragments/navbar}"></th:block>
     </nav>
+</header>
     <main>
         <h1 class="text-center mt-2"><span class="badge badge-pill badge-dark">Login</span></h1>
         <hr class="hr-3"/>
-</header>
+
 <div class="container-fluid">
 
 </div>
@@ -21,22 +22,22 @@
         <div class="col-md-4">
         </div>
         <div class="col-md-8">
-            <form th:action="@{/login}" th:method="post" th:object="${userLoginBindingModel}">
+            <form th:action="@{/login}" th:method="post">
 
                 <div class="row">
                     <div class="col-md-8">
                         <div class="form-group">
                             <label for="username">Username</label>
-                            <input th:value="${username}" th:errorclass="bg-danger" type="text" class="form-control" name="username" id="username" aria-describedby="helpId" placeholder="Put your username">
-                            <small th:each="error : ${#fields.errors('username')}"
-                                   th:text="${error}"></small>
+                            <input   type="text" class="form-control" name="username" id="username" aria-describedby="helpId" placeholder="Put your username">
+<!--                            <small th:each="error : ${#fields.errors('username')}"-->
+<!--                                   th:text="${error}"></small>-->
                         </div>
                     </div>
                     <div class="col-md-8">
                         <div class="form-group">
                             <label for="password">Password</label>
-                            <input th:value="${password}" th:errorclass="bg-danger" type="password" class="form-control" name="password" id="password" aria-describedby="passwordHelpId" placeholder="Put your password here">
-                            <small  th:each="error : ${#fields.errors('password')}" th:text="${error}" class="form-text text-muted">Help text</small>
+                            <input type="password" class="form-control" name="password" id="password" aria-describedby="passwordHelpId" placeholder="Put your password here">
+<!--                            <small  th:each="error : ${#fields.errors('password')}" th:text="${error}" class="form-text text-muted">Help text</small>-->
                         </div>
                     </div>
                 </div>

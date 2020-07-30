@@ -20,9 +20,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.validation.Valid;
 
 @Controller
-
 //@RequestMapping("/users")
-public class UserController extends BaseController {
+public class UserController {
 
     private final UserService userService;
     private final Tools tools;
@@ -36,29 +35,10 @@ public class UserController extends BaseController {
 
 
     @GetMapping("/login")
-    public String login(Model model) {
-        if (!model.containsAttribute("userLoginBindingModel")) {
-            model.addAttribute("userLoginBindingModel", new UserLoginBindingModel());
-        }
+    //@PreAuthorize("isAnonymous()")
+    public String login() {
         return "login";
     }
-
-    @PostMapping("/login")
-    public String loginConfirm(/*@Valid @ModelAttribute("userLoginBindingModel") UserLoginBindingModel userLoginBindingModel,
-                               BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes*/) {
-
-        /*if (bindingResult.hasErrors()) {
-            return "redirect:login";
-        }
-        redirectAttributes.addFlashAttribute(" userLoginBindingModel", userLoginBindingModel);
-        model.addAttribute("username");
-        model.addAttribute("password");
-        model.addAttribute("login");*/
-
-        return "redirect:home";
-
-    }
-
 
     @GetMapping("/register")
     //@PreAuthorize("isAnonymous()")
