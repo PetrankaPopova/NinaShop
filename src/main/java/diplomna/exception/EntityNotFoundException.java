@@ -1,4 +1,4 @@
-package diplomna.error;
+package diplomna.exception;
 
 public class EntityNotFoundException extends RuntimeException{
 

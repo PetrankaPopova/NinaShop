@@ -1,32 +1,63 @@
 package diplomna.config;
 
+import diplomna.service.UserService;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.csrf.CsrfTokenRepository;
+import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    private final UserService userService;
+
+    public SecurityConfig(UserService userService) {
+        this.userService = userService;
+    }
+
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .csrf().disable()
+                .cors()
+                .disable()
+                .csrf()
+//                    .csrfTokenRepository(this.csrfTokenRepository())
+                .disable()
+//                .and()
                 .authorizeRequests()
-                    .antMatchers("/", "/register", "/login", "/home").permitAll()
-                    .antMatchers("/static/**", "/css/**", "/js/**", "/img/**").permitAll()
-                    .anyRequest().authenticated()
+                .antMatchers("/**").permitAll()
+                .anyRequest().permitAll()
                 .and()
-                    .formLogin().loginPage("/login").permitAll()
-                    .usernameParameter("username")
-                    .passwordParameter("password")
-                    .defaultSuccessUrl("/home")
+                .formLogin()
+                .loginPage("/users/login")
+                .usernameParameter("email")
+                .passwordParameter("password")
+                .defaultSuccessUrl("/")
                 .and()
-                    .logout().logoutSuccessUrl("/?logout").permitAll()
-                    .and()
-                    .exceptionHandling().accessDeniedPage("/unauthorized");
+                .logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/")
+                .and()
+//                .rememberMe()
+//                    .rememberMeParameter("rememberMe")
+//                    .key("rmmbrm")
+//                    .userDetailsService(this.userService)
+//                    .rememberMeCookieName("RMMBRM")
+//                    .tokenValiditySeconds(1200)
+//                .and()
+                .exceptionHandling()
+                .accessDeniedPage("/error/unauthorized")
+        ;
+    }
 
-        //http.headers().disable();
+    private CsrfTokenRepository csrfTokenRepository() {
+        HttpSessionCsrfTokenRepository repository = new HttpSessionCsrfTokenRepository();
+        repository.setSessionAttributeName("_csrf");
+
+        return repository;
     }
 }

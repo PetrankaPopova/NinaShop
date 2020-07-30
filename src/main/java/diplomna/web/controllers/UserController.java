@@ -4,8 +4,10 @@ package diplomna.web.controllers;
 import diplomna.model.bindingmodel.UserEditBindingModel;
 import diplomna.model.bindingmodel.UserLoginBindingModel;
 import diplomna.model.bindingmodel.UserRegisterBindingModel;
+import diplomna.model.service.RoleServiceModel;
 import diplomna.model.service.UserServiceModel;
 import diplomna.service.UserService;
+import diplomna.view.UserProfileViewModel;
 import diplomna.view.UserView;
 import diplomna.web.Tools;
 import diplomna.web.anotations.PageTitle;
@@ -18,12 +20,19 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.security.Principal;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Controller
 
 //@RequestMapping("/users")
-public class UserController {
+public class UserController extends BaseController {
 
     private final UserService userService;
     private final Tools tools;
@@ -47,7 +56,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ModelAndView loginConfirm(@ModelAttribute("userLoginBindingModel") UserLoginBindingModel userLoginBindingModel) {
+    public ModelAndView loginConfirm(@ModelAttribute ("userLoginBindingModel") UserLoginBindingModel userLoginBindingModel){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("username");
         modelAndView.addObject("password");
@@ -57,92 +66,107 @@ public class UserController {
 
     }
 
+
     @GetMapping("/register")
-    public String register(){
+    //@PreAuthorize("isAnonymous()")
+    // @PageTitle("Register")
+    public String register(Model model) {
+        if (!model.containsAttribute("userRegisterBindingModel")) {
+            model.addAttribute("userRegisterBindingModel", new UserRegisterBindingModel());
+        }
         return "register";
     }
 
     @PostMapping("/register")
-    public String registerUser(@ModelAttribute("userRegisterBindingModel")
-                                       UserRegisterBindingModel userRegisterBindingModel) {
+    public String registerConfirm (@Valid @ModelAttribute("userRegisterBindingModel") UserRegisterBindingModel
+                                           userRegisterBindingModel, Model model, BindingResult bindingResult, RedirectAttributes redirectAttributes){
 
+        if (bindingResult.hasErrors()) {
+            userRegisterBindingModel.setPassword("null");
+            userRegisterBindingModel.setConfirmPassword("null");
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegisterBindingModel", bindingResult);
+            redirectAttributes.addFlashAttribute("userRegisterBindingModel", userRegisterBindingModel);
+
+            return "redirect:register";
+        }
+        if (!userRegisterBindingModel.getPassword().equals(userRegisterBindingModel.getConfirmPassword())){
+            redirectAttributes.addFlashAttribute("passwordNotMatch", true);
+            redirectAttributes.addFlashAttribute(" userRegisterBindingModel", userRegisterBindingModel);
+        }
         this.userService.registerUser(this.modelMapper.map(userRegisterBindingModel, UserServiceModel.class));
 
-        return "redirect:login";
+        return "login";
+    }
+    @GetMapping("/profile")
+    //@PreAuthorize("isAuthenticated()")
+    public String profile(Model model) {
+        UserServiceModel user = this.userService.findByUsername(this.tools.getLoggedUser());
+        UserView userView = this.modelMapper.map(user, UserView.class);
+        model.addAttribute("user", user);
+
+        return "profile";
     }
 
-        @GetMapping("/profile")
-        //@PreAuthorize("isAuthenticated()")
-        public String profile (Model model){
-            UserServiceModel user = this.userService.findByUsername(this.tools.getLoggedUser());
-            UserView userView = this.modelMapper.map(user, UserView.class);
-            model.addAttribute("user", user);
+    @GetMapping("/user/buy/{productId}")
+    public String buyProduct(@PathVariable("productId") String productId) {
+        this.userService.buyProduct(productId);
+        return "/home";
+    }
 
-            return "profile";
+
+    @GetMapping("/edit")
+   // @PreAuthorize("isAuthenticated()")
+    //  @PageTitle("Edit User")
+    public String editProfile(@Valid @ModelAttribute(name ="userEditBindingModel") UserEditBindingModel userEditBindingModel,
+                                    Model model,
+                                    BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        if (!model.containsAttribute("userEditBindingModel")) {
+            model.addAttribute("UserEditBindingModel", new UserEditBindingModel());
+
+            model.addAttribute("userEditBindingModel");
         }
+        return "edit-profile";
+    }
 
-        @GetMapping("/user/buy/{productId}")
-        public String buyProduct (@PathVariable("productId") String productId){
-            this.userService.buyProduct(productId);
-            return "/home";
+    @PostMapping("/edit")
+  //  @PreAuthorize("isAuthenticated()")
+    public String editProfileConfirm(@Valid @ModelAttribute(name = "userEditBindingModel") UserEditBindingModel userEditBindingModel,
+                                           BindingResult bindingResult, RedirectAttributes redirectAttributes,
+                                           Model model) {
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userEditBindingModel", bindingResult);
+            redirectAttributes.addFlashAttribute("userEditBindingModel", userEditBindingModel);
         }
-
-
-        @GetMapping("/edit")
-        // @PreAuthorize("isAuthenticated()")
-        //  @PageTitle("Edit User")
-        public String editProfile (@Valid @ModelAttribute(name = "userEditBindingModel") UserEditBindingModel
-        userEditBindingModel,
-                Model model,
-                BindingResult bindingResult, RedirectAttributes redirectAttributes){
-            if (!model.containsAttribute("userEditBindingModel")) {
-                model.addAttribute("UserEditBindingModel", new UserEditBindingModel());
-
-                model.addAttribute("userEditBindingModel");
-            }
-            return "edit-profile";
-        }
-
-        @PostMapping("/edit")
-        //  @PreAuthorize("isAuthenticated()")
-        public String editProfileConfirm (@Valid @ModelAttribute(name = "userEditBindingModel") UserEditBindingModel
-        userEditBindingModel,
-                BindingResult bindingResult, RedirectAttributes redirectAttributes,
-                Model model){
-            if (bindingResult.hasErrors()) {
-                redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userEditBindingModel", bindingResult);
-                redirectAttributes.addFlashAttribute("userEditBindingModel", userEditBindingModel);
-            }
-            if (!userEditBindingModel.getPassword().equals(userEditBindingModel.getConfirmPassword())) {
+            if (!userEditBindingModel.getPassword().equals (userEditBindingModel.getConfirmPassword())){
                 return "edit-profile";
-            }
-            this.userService.editUserProfile(this.modelMapper.map(userEditBindingModel, UserServiceModel.class), userEditBindingModel.getOldPassword());
-
-            return "redirect:/profile";
-
         }
-        @GetMapping("/delete/{username}")
-        @PreAuthorize("hasRole('ROLE_ADMIN')")
-        @PageTitle("Delete User")
-        public ModelAndView deleteUser (@PathVariable String username, ModelAndView modelAndView){
-            UserServiceModel userServiceModel = this.userService.findByUsername(username);
+        this.userService.editUserProfile(this.modelMapper.map(userEditBindingModel, UserServiceModel.class), userEditBindingModel.getOldPassword());
 
-            modelAndView.addObject("user", userServiceModel);
-            modelAndView.addObject("userN", username);
-            modelAndView.setViewName("/delete-user");
+        return "redirect:/profile";
 
-            return modelAndView;
-        }
-
-        @PostMapping("/delete/{username}")
-        @PreAuthorize("hasRole('ROLE_ADMIN')")
-        public ModelAndView deleteUserConfirm (@PathVariable String username, ModelAndView modelAndView){
-            this.userService.deleteUser(username);
-            modelAndView.setViewName("redirect:/all");
-            return modelAndView;
-
-        }
     }
+    @GetMapping("/delete/{username}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PageTitle("Delete User")
+    public ModelAndView deleteUser(@PathVariable String username, ModelAndView modelAndView) {
+        UserServiceModel userServiceModel = this.userService.findByUsername(username);
+
+        modelAndView.addObject("user", userServiceModel);
+        modelAndView.addObject("userN", username);
+        modelAndView.setViewName("/delete-user");
+
+        return modelAndView;
+    }
+
+    @PostMapping("/delete/{username}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ModelAndView deleteUserConfirm(@PathVariable String username, ModelAndView modelAndView) {
+        this.userService.deleteUser(username);
+        modelAndView.setViewName("redirect:/all");
+        return modelAndView;
+
+    }
+}
     /*
 
     @PageTitle(name = "User register")
@@ -177,6 +201,8 @@ public class UserController {
     }
 
      */
+
+
 
 
 //    @GetMapping("/all")

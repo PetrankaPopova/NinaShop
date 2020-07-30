@@ -1,10 +1,11 @@
 package diplomna.web.controllers;
 
-import diplomna.error.AlreadyExistsException;
+import diplomna.exception.AlreadyExistsException;
 import diplomna.model.bindingmodel.ProductAddBindingModel;
 import diplomna.model.service.ProductServiceModel;
 import diplomna.service.CategoryService;
 import diplomna.service.ProductService;
+import diplomna.view.ProductViewModel;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/products")

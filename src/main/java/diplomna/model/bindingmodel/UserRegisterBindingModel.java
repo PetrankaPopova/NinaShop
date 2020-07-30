@@ -4,16 +4,14 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.Column;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 
 public class UserRegisterBindingModel {
     private String username;
-    private String email;
     private String password;
     private String confirmPassword;
     private String userAddress;
     private String userPhone;
+    private String email;
 
     public UserRegisterBindingModel() {
     }
@@ -25,16 +23,6 @@ public class UserRegisterBindingModel {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    //@NotNull(message = "Cannot be null.")
-    @Email
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     @Length(min = 3, max = 20, message = "Password length must be between 3 and 20 characters (inclusive 3 and 20).")
@@ -54,7 +42,7 @@ public class UserRegisterBindingModel {
         this.confirmPassword = confirmPassword;
     }
 
-    @Length(min = 2, max = 10, message = "Address length must be between 2 and 10 characters")
+    @Column(name = "userAddress", nullable = false)
     public String getUserAddress() {
         return userAddress;
     }
@@ -63,8 +51,7 @@ public class UserRegisterBindingModel {
         this.userAddress = userAddress;
     }
 
-    @Length(min = 2, max = 10, message = "Phone length must be between 2 and 10 characters")
-    @Pattern(regexp = "^\\d{10}$")
+    @Column(name = "userPhone",nullable = false)
     public String getUserPhone() {
         return userPhone;
     }
@@ -73,7 +60,15 @@ public class UserRegisterBindingModel {
         this.userPhone = userPhone;
     }
 
+    //@NotNull(message = "Cannot be null.")
+    @Email
+    public String getEmail() {
+        return email;
+    }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }
 
 

@@ -1,8 +1,8 @@
 package diplomna.service.serviceImpl;
 
 import diplomna.constant.Constants;
-import diplomna.error.AlreadyExistsException;
-import diplomna.error.UserNotFoundException;
+import diplomna.exception.AlreadyExistsException;
+import diplomna.exception.UserNotFoundException;
 import diplomna.model.entity.Bag;
 import diplomna.model.entity.Product;
 import diplomna.model.entity.User;
@@ -51,7 +51,7 @@ public class UserServiceImp implements UserService {
     @Override
     public UserServiceModel registerUser(UserServiceModel userServiceModel) {
         User user = this.modelMapper.map(userServiceModel, User.class);
-       // User returnedUserFromDb = this.userRepository.findUserByUsername(userServiceModel.getUsername()).orElse(null);
+        User returnedUserFromDb = this.userRepository.findUserByUsername(userServiceModel.getUsername()).orElse(null);
         if (userRepository.existsByUsername(userServiceModel.getUsername())) {
             throw new AlreadyExistsException("username", USER_NAME_EXISTS_MESSAGE);
         }

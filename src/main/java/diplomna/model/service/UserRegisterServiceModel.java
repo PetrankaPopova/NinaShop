@@ -1,21 +1,20 @@
 package diplomna.model.service;
 
-import diplomna.model.bindingmodel.ProductAddBindingModel;
+import diplomna.model.entity.Bag;
+import diplomna.model.entity.UserRole;
 
 import java.util.Set;
 
-public class UserServiceModel extends BaseEntityService{
-
+public class UserRegisterServiceModel {
     private String username;
     private String password;
     private String email;
     private String userAddress;
     private String userPhone;
+    private Set<UserRole> authorities;
+    private Bag bag;
 
-
-    private Set<RoleServiceModel> authorities;
-
-    public UserServiceModel() {
+    public UserRegisterServiceModel() {
     }
 
     public String getUsername() {
@@ -41,6 +40,7 @@ public class UserServiceModel extends BaseEntityService{
     public void setEmail(String email) {
         this.email = email;
     }
+
     public String getUserAddress() {
         return userAddress;
     }
@@ -57,14 +57,19 @@ public class UserServiceModel extends BaseEntityService{
         this.userPhone = userPhone;
     }
 
-    public Set<RoleServiceModel> getAuthorities() {
+    public Set<UserRole> getAuthorities() {
         return authorities;
     }
 
-    public void setAuthorities(Set<RoleServiceModel> authorities) {
+    public void setAuthorities(Set<UserRole> authorities) {
         this.authorities = authorities;
     }
 
+    public Bag getBag() {
+        return bag;
+    }
 
-
+    public void setBag(Bag bag) {
+        this.bag = bag;
+    }
 }

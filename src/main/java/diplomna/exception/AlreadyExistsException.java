@@ -1,4 +1,4 @@
-package diplomna.error;
+package diplomna.exception;
 
 public class AlreadyExistsException extends RuntimeException {
     private String fieldName;
