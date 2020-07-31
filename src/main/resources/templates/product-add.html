@@ -37,32 +37,26 @@
             <input th:field="${productAddBindModel.price}" th:errorclass="bg-danger" type="number" step="0.1" class="form-control" id="price" name="price"/>
             <small th:each="e : ${#fields.errors('price')}" th:text="${e}" class="text-danger">Price error message</small>
         </div>
-            <div class="form-group">
-                <div class="text-white label-holder d-flex justify-content-center">
-                    <label for="category" class="h4 mb-2">Category</label>
-                </div>
-                <select class="browser-default custom-select" id="category" name="category">
-                    <option value="">Select category</option>
-                    <option th:each="o : ${T(diplomna.model.entity.CategoryName).values()}"
-                            th:text="${o}" th:value="${o}">Shirt</option>
-                    <div>
-                        <label>
-                            <input th:field="${productAddBindModel.category}" th:errorclass="bg-danger" type="text" class="form-control" name="category">
-                        </label>
-                        <small th:each="e : ${#fields.errors('category')}" th:text="${e}" class="text-danger">Category error message</small>
-                    </div>
-                </select>
-
         <div class="form-group">
-          <label for="">Upload photo</label>
-          <input th:field="${productAddBindModel.photo}" th:errorclass="bg-danger"  type="file" class="form-control-file" name="photo" id="" placeholder="" aria-describedby="fileHelpId">
-          <small th:each="e : ${#fields.errors('photo')}" th:text="${e}" id="fileHelpId" class="form-text text-muted">Help text</small>
-        </div>
-
-        <div class="button-holder d-flex justify-content-center">
-            <button type="submit" class="btn btn-warning  mb-3" value="Register">Add product</button>
-        </div>
+            <div class="text-white label-holder d-flex justify-content-center">
+                <label for="category" class="h4 mb-2">Category</label>
             </div>
+            <select class="browser-default custom-select" id="category" name="category">
+                <option value="">Select category</option>
+                <option th:each="o : ${T(diplomna.model.entity.CategoryName).values()}"
+                        th:text="${o}" th:value="${o}">Shirt</option>
+            </select>
+
+            <div class="form-group">
+                <label for="">Upload photo</label>
+                <input th:field="${productAddBindModel.photo}" th:errorclass="bg-danger"  type="file" class="form-control-file" name="photo" id="" placeholder="" aria-describedby="fileHelpId">
+                <small th:each="e : ${#fields.errors('photo')}" th:text="${e}" id="fileHelpId" class="form-text text-muted">Help text</small>
+            </div>
+
+            <div class="button-holder d-flex justify-content-center">
+                <button type="submit" class="btn btn-warning  mb-3" value="Register">Add product</button>
+            </div>
+        </div>
     </form>
 </main>
 
