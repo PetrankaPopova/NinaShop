@@ -9,6 +9,8 @@ public class ProductViewModel {
     private double price;
     private String url;
     private Category category;
+    private Double discount;
+
 
     public ProductViewModel() {
     }
@@ -62,4 +64,11 @@ public class ProductViewModel {
         this.price = price;
     }
 
+    public void setDiscount(Double discount) {
+        this.discount = discount;
+    }
+
+    public Double getDiscount() {
+        return this.discount;
+    }
 }

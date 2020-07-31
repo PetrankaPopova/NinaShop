@@ -7,6 +7,7 @@ import diplomna.model.entity.Bag;
 import diplomna.model.entity.Product;
 import diplomna.model.entity.User;
 import diplomna.model.service.UserServiceModel;
+import diplomna.model.view.ProductViewModel;
 import diplomna.repository.ProductRepository;
 import diplomna.repository.RoleRepository;
 import diplomna.repository.UserRepository;
@@ -21,6 +22,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static diplomna.constant.GlobalConstants.USER_EMAIL_EXISTS_MASSAGE;
 import static diplomna.constant.GlobalConstants.USER_NAME_EXISTS_MESSAGE;
@@ -150,6 +152,16 @@ public class UserServiceImp implements UserService {
         User user = this.userRepository.findByUsername(username).orElseThrow(() -> new UserNotFoundException("User with given id was not found!"));
 
         this.userRepository.delete(user);
+    }
+
+    @Override
+    public List<ProductViewModel> getAllBoughtProducts() {
+        String userStr = this.tools.getLoggedUser();
+        User user = this.userRepository.findByUsername(userStr)
+                .orElseThrow(() -> new UserNotFoundException("User with given id was not found!"));
+        return user.getBag().getProducts().stream()
+                .map(pr -> this.modelMapper.map(pr, ProductViewModel.class))
+                .collect(Collectors.toList());
     }
 
 

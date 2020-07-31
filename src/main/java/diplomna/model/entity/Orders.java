@@ -1,90 +1,70 @@
+/*
 package diplomna.model.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Pattern;
+import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
+
 @Entity
 @Table(name = "orders")
 public class Orders extends BaseEntity {
 
-    private LocalDateTime orderDate = LocalDateTime.now();
-    private Integer orderNum;
-    private Double amount;
-    private String username;
-    private String email;
-    private String userAddress;
-    private String userPhone;
+    private List<OrderProduct> products;
+    private User customer;
+    private BigDecimal totalPrice;
+    private LocalDateTime finishedOn;
 
-    public Orders() {
+
+    @ManyToMany(targetEntity = OrderProduct.class, cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "orders_products",
+            joinColumns = @JoinColumn(
+                    name = "order_id",
+                    referencedColumnName = "id"
+            ),
+            inverseJoinColumns = @JoinColumn(
+                    name = "product_id",
+                    referencedColumnName = "id"
+            )
+    )
+    public List<OrderProduct> getProducts() {
+        return products;
     }
 
-    @Column(name = "order_date")
-    public LocalDateTime getOrderDate() {
-        return orderDate;
+    public void setProducts(List<OrderProduct> products) {
+        this.products = products;
     }
 
-    public void setOrderDate(LocalDateTime orderDate) {
-        this.orderDate = orderDate;
+    @ManyToOne(targetEntity = User.class)
+    @JoinColumn(
+            name = "customer_id",
+            referencedColumnName = "id"
+    )
+    public User getCustomer() {
+        return customer;
     }
 
-    @Column(name = "order_num", nullable = false)
-    public Integer getOrderNum() {
-        return orderNum;
+    public void setCustomer(User customer) {
+        this.customer = customer;
     }
 
-    public void setOrderNum(Integer orderNum) {
-        this.orderNum = orderNum;
+    @Column(name = "total_price")
+    public BigDecimal getTotalPrice() {
+        return totalPrice;
     }
 
-    @Column(name = "amount", nullable = false)
-    @DecimalMin("0")
-    public Double getAmount() {
-        return amount;
+    public void setTotalPrice(BigDecimal totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
-    public void setAmount(Double amount) {
-        this.amount = amount;
+    @Column(name = "finished_on")
+    public LocalDateTime getFinishedOn() {
+        return finishedOn;
     }
 
-    @Column(name = "username",length = 255, nullable = false)
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    @Email
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    @Column(name = "user_address",nullable = false)
-    public String getUserAddress() {
-        return userAddress;
-    }
-
-    public void setUserAddress(String userAddress) {
-        this.userAddress = userAddress;
-    }
-
-    @Column(name = "user_phone")
-    @Pattern(regexp = "/^[0-9\\+]{1,}[0-9\\-]{3,15}$/")
-    public String getUserPhone() {
-        return userPhone;
-    }
-
-    public void setUserPhone(String userPhone) {
-        this.userPhone = userPhone;
+    public void setFinishedOn(LocalDateTime finishedOn) {
+        this.finishedOn = finishedOn;
     }
 }
+*/

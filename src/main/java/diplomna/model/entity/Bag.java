@@ -1,6 +1,7 @@
 package diplomna.model.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ public class Bag extends BaseEntity {
     public Bag() {
     }
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     public List<Product> getProducts() {
         return products;
     }
