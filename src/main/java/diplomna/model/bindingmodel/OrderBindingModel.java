@@ -1,8 +1,12 @@
 package diplomna.model.bindingmodel;
 
+import org.hibernate.validator.constraints.Length;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.Column;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDateTime;
 
@@ -21,7 +25,7 @@ public class OrderBindingModel {
     public OrderBindingModel() {
     }
 
-    @Column(name = "order_date")
+    @DateTimeFormat()
     public LocalDateTime getOrderDate() {
         return orderDate;
     }
@@ -30,7 +34,7 @@ public class OrderBindingModel {
         this.orderDate = orderDate;
     }
 
-    @Column(name = "order_num", nullable = false)
+    @DecimalMin(value = "0", message = "Order Num must be a positive number")
     public Integer getOrderNum() {
         return orderNum;
     }
@@ -39,8 +43,7 @@ public class OrderBindingModel {
         this.orderNum = orderNum;
     }
 
-    @Column(name = "amount", nullable = false)
-    @DecimalMin("0")
+    @DecimalMin(value = "0", message = "Amount must be a positive number")
     public Double getAmount() {
         return amount;
     }
@@ -49,7 +52,7 @@ public class OrderBindingModel {
         this.amount = amount;
     }
 
-    @Column(name = "username",length = 255, nullable = false)
+    @Length(min = 3, max = 20, message = "Username length must be between 3 and 20 characters (inclusive 3 and 20).")
     public String getUsername() {
         return username;
     }
@@ -67,7 +70,7 @@ public class OrderBindingModel {
         this.email = email;
     }
 
-    @Column(name = "user_address",nullable = false)
+    @Length(min = 3, max = 20, message = "Address length must be between 3 and 20 characters (inclusive 3 and 20).")
     public String getUserAddress() {
         return userAddress;
     }
@@ -76,7 +79,7 @@ public class OrderBindingModel {
         this.userAddress = userAddress;
     }
 
-    @Column(name = "user_phone")
+
     @Pattern(regexp = "/^[0-9\\+]{1,}[0-9\\-]{3,15}$/")
     public String getUserPhone() {
         return userPhone;

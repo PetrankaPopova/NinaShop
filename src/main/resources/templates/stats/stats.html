@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="~{/fragments/head}"></th:block>
+</head>
+<body>
+<div class="" id="home">
+    <div class="row">
+        <div class="col-12">
+            <nav>
+                <th:block th:include="~{/fragments/navbar}"></th:block>
+            </nav>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-8">
+            <th:block th:each="product: ${allProducts}">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class ="one_product">
+                                <div></div>
+                                <img class="one_product_img" th:src="${product.getUrl()}" alt="Dress picture">
+                                <div class="one_product_title" th:text="${product.getName()}">Card title</div>
+                                <div class="one_product_description" th:text="${product.getDescription()}"></div>
+                                <div class="one_product_price" th:text="${product.getPrice()}"></div>
+                                <div>
+                                    <a th:href="@{/user/buy/{productId}(productId = ${product.getId()})}"
+                                       class="one_product_buy_link">Buy Me</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </th:block>
+        </div>
+    </div>
+    <footer class="row">
+        <th:block th:include="~{/fragments/footer}"></th:block>
+    </footer>
+</div>
+</body>
+</html>

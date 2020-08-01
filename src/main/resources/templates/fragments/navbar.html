@@ -1,40 +1,81 @@
+<th:block xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+    <th:block sec:authorize="isAnonymous()">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+            <div class="container">
+                <a class="navbar-brand" th:href="@{/home}">Nina's Shop</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#guestNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="guestNav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" th:href="@{/home}">Home
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " th:href="@{/login}">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " th:href="@{/register}">Register</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </th:block>
+    <th:block sec:authorize="isAuthenticated()">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+            <div class="container">
+                <a class="navbar-brand" th:href="@{/home}">Nina's Shop</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#userNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                            <li class="nav-item active">
+                                <a class="nav-link" th:href="@{/products/add}">Add Product</a>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link" th:href="@{/about}">About Nina</a>
+                            </li>
 
-<a xmlns:th="http://www.thymeleaf.org" th:if="${!session.isEmpty()}" class="nav-link text-white active h5"
-    th:href="@{/home}">Nina Todorova Fashion disigner</a>
-<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-</button>
-<div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
-    <ul class="navbar-nav row">
+                        <li class="nav-item active">
+                            <a class="nav-link" th:href="@{/advice}"> Good Advice</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" th:href="@{/bag}">Bag</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" th:href="@{/comments/all}">Delete</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" th:href="@{/edit}">Edit Profile</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" th:href="@{/recipes/all}">Recipes</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" th:href="@{/categories/all}">Categories</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" th:href="@{/users/profile}">Profile</a>
+                        </li>
+                        <li class="nav-item-active">
+                            <form action="/logout?login" method="post">
+                                <input type="hidden" name="_csrf" value="80417983-fe8b-45c7-963e-31f6915a1560">
+                                <a class="nav-link" th:href="@{/logout}">Logout</a>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </th:block>
+</th:block>
 
-        <li  xmlns:th="http://www.thymeleaf.org" th:if="${session.isEmpty()}" class="nav-item col-md-4">
-            <th:block>
-                    <nav class="navbar navbar-expand-md bg-dark navbar-dark sticky-top">
-                        <a class="navbar-brand" th:href="@{/}">
-                            <!-- Logo Image -->
-                            <img src="/img/company-logo.png" style="border-radius: 50%;width: 40px; height: 40px"
-                                 class="d-inline-block align-middle mr-2">
-                            <!-- Logo Text -->
-                            <span class="text-uppercase font-weight-bold">Nina's Shop</span>
-                        </a>
-                        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navb"
-                                aria-expanded="true">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <ul id="navb" class="collapse navbar-collapse collapse hide">
-                            <ul class="nav navbar-nav ml-auto">
-                                <li class="nav-item">
-                                    <a class="nav-link" th:href="@{/}">Home</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" th:href="@{/register}"><span class="fas fa-user"></span> Register</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" th:href="@{/login}"><span class="fas fa-sign-in-alt"></span> Login</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </nav>
-                </th:block>
+
+
+
+
 
