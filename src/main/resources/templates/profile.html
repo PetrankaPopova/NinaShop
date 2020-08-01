@@ -8,39 +8,31 @@
 <body>
 <div class="container">
     <div class="row rounded">
-        <div class="col-12">
-            <nav class="navbar navbar-expand-xl navbar-light bg-light rounded" >
-                <th:block th:include="~{/fragments/navbar}"></th:block>
-            </nav>
-        </div>
-    </div>
-    <!-- row -->
-    <div class="container">
-        <!-- left menu -->
-                            </div>
-                            <div class="col-md-10">
-                                <table>
-                                    <tr>
-                                        <th>Usrname</th>
-                                        <th>Email</th>
-                                        <th>Address</th>
-                                        <th>Phone</th>
-                                    </tr>
-                                    <th:block th:action="@{/profile}" method="POST" th:each="pr : ${user}">
-                                        <tr>
-                                            <th th:text="${user.getUsername()}"></th>
-                                            <th th:text="${user.getEmail()}"></th>
-                                            <th th:text="${user.userAddress}"></th>
-                                            <th th:text="${user.userPhone}"></th>
-                                        </tr>
-                                    </th:block>
-                                </table>
-                            </div>
-                            <div class="col-md-2">
-                                <!-- right menu -->
-                            </div>
+        <header>
+            <th:block th:include="~{fragments/navbar}"></th:block>
+        </header>
+            <main class="mt-3" th:action="@{/profile}" th:method="post">
+                <div class="bg-image-profile">
+                    <div class="text-center">
+                        <img src="https://res.cloudinary.com/dgfiguhlk/image/upload/v1596301246/Female-Side-comb-O-neck-512_r54suc.png" alt="profileImg">
+                    </div>
+                    <div class="row">
+                        <div class="col col-md-12 text-center textForm">
+                            <h1 th:text="${user.username}"></h1>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col col-md-12 text-center textForm">
+                            <h4 th:text="${user.email}"></h4>
+                        </div>
+                    </div>
+                    <hr class="hr-2 bg-white w-25">
+                    <div class="button-holder d-flex justify-content-center">
+                        <a th:href="@{/edit}" class="btn" style="font-size:40px">Edit Profile</a>
+                    </div>
+                </div>
+            </main>
+        </main>
     <footer class="row">
         <th:block th:include="~{/fragments/footer}"></th:block>
     </footer>

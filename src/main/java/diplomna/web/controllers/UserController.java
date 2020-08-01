@@ -5,6 +5,7 @@ import diplomna.model.bindingmodel.UserEditBindingModel;
 import diplomna.model.bindingmodel.UserLoginBindingModel;
 import diplomna.model.bindingmodel.UserRegisterBindingModel;
 import diplomna.model.service.UserServiceModel;
+import diplomna.model.view.UserView;
 import diplomna.service.UserService;
 import diplomna.web.Tools;
 import diplomna.web.anotations.PageTitle;
@@ -75,9 +76,8 @@ public class UserController {
     //@PreAuthorize("isAuthenticated()")
     public String profile(Model model) {
         UserServiceModel user = this.userService.findByUsername(this.tools.getLoggedUser());
-        //UserView userView = this.modelMapper.map(user, UserView.class);
+        UserView userView = this.modelMapper.map(user, UserView.class);
         model.addAttribute("user", user);
-
         return "profile";
     }
 
