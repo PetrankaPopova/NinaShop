@@ -33,9 +33,27 @@
                         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/home}">Home</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/profile}">Profile</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/edit}">Edit Profile</a>
+                </li>
                             <li class="nav-item active">
                                 <a class="nav-link" th:href="@{/products/add}">Add Product</a>
                             </li>
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/category}">Category</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/order}">Orders</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/bag}">Bag</a>
+                </li>
                             <li class="nav-item active">
                                 <a class="nav-link" th:href="@{/about}">About Nina</a>
                             </li>
@@ -43,21 +61,10 @@
                         <li class="nav-item active">
                             <a class="nav-link" th:href="@{/advice}"> Good Advice</a>
                         </li>
-                        <li class="nav-item active">
-                            <a class="nav-link" th:href="@{/bag}">Bag</a>
-                        </li>
-                        <li class="nav-item active">
-                            <a class="nav-link" th:href="@{/category}">Category</a>
-                        </li>
-                        <li class="nav-item active">
-                            <a class="nav-link" th:href="@{/edit}">Edit Profile</a>
-                        </li>
-                        <li class="nav-item active">
-                            <a class="nav-link" th:href="@{/profile}">Profile</a>
-                        </li>
-                        <li class="nav-item active">
-                            <a class="nav-link" th:href="@{/categories/all}">Categories</a>
-                        </li>
+
+
+
+
                         <li class="nav-item active">
                             <a class="nav-link" th:href="@{/users/profile}">Profile</a>
                         </li>

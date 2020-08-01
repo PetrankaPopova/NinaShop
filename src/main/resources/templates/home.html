@@ -5,26 +5,23 @@
 </head>
 <body>
 <div class="" id="home">
-
     <div class="row">
         <div class="col-12">
+            <header>
             <nav>
                 <th:block th:include="~{/fragments/navbar}"></th:block>
             </nav>
+            </header>
         </div>
     </div>
-
-    <div class="row">
+    <div class="row" th:action="@{/home}" th:method="post">
         <div class="col-md-4">
-
         </div>
         <div class="col-md-8">
             <th:block th:each="product: ${allProducts}">
                 <div class="container">
                     <div class="row">
-
                         <div class="col-md-12">
-
                             <div class ="one_product">
                                 <div></div>
                                 <img class="one_product_img" th:src="${product.getUrl()}" alt="Dress picture">
@@ -35,14 +32,14 @@
                                     <a th:href="@{/user/buy/{productId}(productId = ${product.getId()})}"
                                        class="one_product_buy_link">Buy Me</a>
                                 </div>
-
                             </div>
-
                         </div>
-
                     </div>
                 </div>
             </th:block>
+            <footer class="row">
+                <th:block th:include="~{/fragments/footer}"></th:block>
+            </footer>
         </div>
     </div>
 
