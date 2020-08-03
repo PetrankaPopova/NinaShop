@@ -9,11 +9,6 @@ body {
     background-size: cover;
     margin-bottom: 5rem;
 }
-.footer {
-    position: static;
-    bottom: 0;
-    width: 100%;
-}
 
 .container {
     padding: 0;
@@ -97,7 +92,7 @@ navbar{
     list-style-type: none;
     margin: 0;
     padding: 0;
-    width: 60px
+    width: 40px
 }
 
 
@@ -121,7 +116,7 @@ navbar{
 .nav-item {
     text-transform: uppercase;
     cursor: pointer;
-    color: #ebebeb;
+   color: #ebebeb;
 }
 
 .nav-item:hover {
@@ -167,8 +162,9 @@ textarea {
     resize: none;
 }
 
-footer {
-    position: fixed;
+
+.footer {
+    position: static;
     bottom: 0;
     width: 100%;
 }
