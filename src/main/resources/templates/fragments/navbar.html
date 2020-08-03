@@ -1,40 +1,40 @@
-
-
 <th:block xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
     <th:block>
         <th:block sec:authorize="isAnonymous()">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-        <div class="container">
-            <a class="navbar-brand" th:href="@{/home}">Nina's Shop</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#guestNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="guestNav">
-                <ul class="navbar-nav ml-auto">
-                    <div id="navb" class="collapse navbar-collapse collapse hide">
-                        <ul class="nav navbar-nav ml-auto">
-                            <li class="nav-item">
-                                <a class="nav-link" th:href="@{/}">Home</a>
-                            </li>
-                    <li class="nav-item">
-                        <a class="nav-link " th:href="@{/login}">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link " th:href="@{/register}">Register</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+                <div class="container">
+                    <a class="navbar-brand" th:href="@{/home}">Nina's Shop</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#guestNav"
+                            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="guestNav">
+                        <ul class="navbar-nav ml-auto">
+                            <ul id="navb" class="collapse navbar-collapse collapse hide">
+                                <ul class="nav navbar-nav ml-auto">
+                                    <li class="nav-item">
+                                        <a class="nav-link" th:href="@{/}">Home</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " th:href="@{/login}">Login</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " th:href="@{/register}">Register</a>
+                                    </li>
+                                </ul>
+                            </ul>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
         </th:block>
 
-                            <th:block sec:authorize="isAuthenticated()">
-                                <nav>nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-                                    <ul class="nav navbar-nav ml-auto">
-                                        <li class="nav-item">
-                                            <a class="nav-link" th:href="@{/home}">Home</a>
-                                        </li>
+        <th:block sec:authorize="isAuthenticated()">
+            <nav>nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/home}">Home</a>
+                    </li>
                     <li sec:authorize="!isAuthenticated()" class="nav-item active">
                         <a class="nav-link" th:href="@{/profile}">Profile</a>
                     </li>
@@ -59,6 +59,9 @@
                     <li class="nav-item active">
                         <a sec:authorize="!isAuthenticated()" class="nav-link" th:href="@{/bag}">Bag</a>
                     </li>
+                    <li class="nav-item active">
+                        <a sec:authorize="!isAuthenticated()" class="nav-link" th:href="@{/all}">All Users</a>
+                    </li>
                     <li sec:authorize="isAnonymous()" class="nav-item active">
                         <a class="nav-link" th:href="@{/about}">About Nina</a>
                     </li>
@@ -78,11 +81,11 @@
                     </li>
                 </ul>
 
-            </div>
-        </div>
+                </div>
+                </div>
 
-    </nav>
-</th:block>
+            </nav>
+        </th:block>
 
 
 

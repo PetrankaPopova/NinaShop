@@ -5,6 +5,7 @@ import diplomna.model.service.UserServiceModel;
 import diplomna.model.view.ProductViewModel;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
+import java.util.Arrays;
 import java.util.List;
 
 public interface UserService extends UserDetailsService {
@@ -28,4 +29,5 @@ public interface UserService extends UserDetailsService {
     List<ProductViewModel> getAllBoughtProducts ();
 
 
+    List<UserServiceModel> findAllUsers();
 }

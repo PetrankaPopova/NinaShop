@@ -164,6 +164,13 @@ public class UserServiceImp implements UserService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<UserServiceModel> findAllUsers() {
+        return this.userRepository.findAll().
+                stream()
+                .map(u -> this.modelMapper.map(u, UserServiceModel.class)).collect(Collectors.toList());
+    }
+
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

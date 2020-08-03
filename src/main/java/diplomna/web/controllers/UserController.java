@@ -2,9 +2,9 @@ package diplomna.web.controllers;
 
 
 import diplomna.model.bindingmodel.UserEditBindingModel;
-import diplomna.model.bindingmodel.UserLoginBindingModel;
 import diplomna.model.bindingmodel.UserRegisterBindingModel;
 import diplomna.model.service.UserServiceModel;
+import diplomna.model.view.UserAllViewModel;
 import diplomna.model.view.UserView;
 import diplomna.service.UserService;
 import diplomna.web.Tools;
@@ -19,6 +19,9 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Controller
 //@RequestMapping("/users")
@@ -141,6 +144,28 @@ public class UserController {
         return modelAndView;
 
     }
+
+    @GetMapping("/all")
+   // @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PageTitle("All Users")
+    public ModelAndView allUsers(ModelAndView modelAndView) {
+        List<UserAllViewModel> users = this.userService.findAllUsers()
+                .stream()
+                .map(u -> {
+                    UserAllViewModel user = this.modelMapper.map(u, UserAllViewModel.class);
+                    Set<String> authorities = u.getAuthorities().stream().map(a -> a.getAuthority()).collect(Collectors.toSet());
+                    user.setAuthorities(authorities);
+
+                    return user;
+                })
+                .collect(Collectors.toList());
+
+        modelAndView.addObject("users", users);
+        modelAndView.setViewName("all-users");
+
+        return modelAndView;
+    }
+
 }
     /*
 

@@ -48,7 +48,6 @@ public class ProductController {
                              BindingResult bindingResult,
                              RedirectAttributes attributes) throws IOException {
 
-        System.out.println();
         if (bindingResult.hasErrors()) {
             attributes.addFlashAttribute("productAddBindModel", bindingModel);
             attributes.addFlashAttribute("org.springframework.validation.BindingResult.productAddBindModel", bindingResult);
@@ -58,7 +57,7 @@ public class ProductController {
         ProductServiceModel productServiceModel = mapper.map(bindingModel, ProductServiceModel.class);
         productServiceModel.setCategory(categoryService.getByName(bindingModel.getCategory()));
         productService.addProduct(productServiceModel);
-        return "redirect:/";
+        return "redirect:/home";
     }
 
 
