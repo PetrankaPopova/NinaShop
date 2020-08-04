@@ -1,7 +1,5 @@
 package diplomna.model.service;
 
-import diplomna.model.bindingmodel.ProductAddBindingModel;
-
 import java.util.Set;
 
 public class UserServiceModel extends BaseEntityService{
@@ -13,7 +11,7 @@ public class UserServiceModel extends BaseEntityService{
     private String userPhone;
 
 
-    private Set<RoleServiceModel> authorities;
+    private Set<UserRoleServiceModel> authorities;
 
     public UserServiceModel() {
     }
@@ -57,11 +55,11 @@ public class UserServiceModel extends BaseEntityService{
         this.userPhone = userPhone;
     }
 
-    public Set<RoleServiceModel> getAuthorities() {
+    public Set<UserRoleServiceModel> getAuthorities() {
         return authorities;
     }
 
-    public void setAuthorities(Set<RoleServiceModel> authorities) {
+    public void setAuthorities(Set<UserRoleServiceModel> authorities) {
         this.authorities = authorities;
     }
 

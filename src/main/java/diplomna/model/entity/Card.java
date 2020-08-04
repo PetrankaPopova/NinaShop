@@ -8,12 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "bags")
-public class Bag extends BaseEntity {
+@Table(name = "cards")
+public class Card extends BaseEntity {
 
     private List<Product> products = new ArrayList<>();
 
-    public Bag() {
+    public Card() {
     }
 
     @OneToMany(fetch = FetchType.EAGER)

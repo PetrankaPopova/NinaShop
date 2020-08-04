@@ -1,6 +1,6 @@
 package diplomna.model.service;
 
-import diplomna.model.entity.Bag;
+import diplomna.model.entity.Card;
 import diplomna.model.entity.UserRole;
 
 import java.util.Set;
@@ -12,7 +12,7 @@ public class UserRegisterServiceModel {
     private String userAddress;
     private String userPhone;
     private Set<UserRole> authorities;
-    private Bag bag;
+    private Card card;
 
     public UserRegisterServiceModel() {
     }
@@ -65,11 +65,11 @@ public class UserRegisterServiceModel {
         this.authorities = authorities;
     }
 
-    public Bag getBag() {
-        return bag;
+    public Card getCard() {
+        return card;
     }
 
-    public void setBag(Bag bag) {
-        this.bag = bag;
+    public void setCard(Card card) {
+        this.card = card;
     }
 }

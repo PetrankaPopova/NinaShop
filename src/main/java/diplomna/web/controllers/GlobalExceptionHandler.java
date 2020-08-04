@@ -1,6 +1,6 @@
 package diplomna.web.controllers;
 
-import diplomna.constant.GlobalConstants;
+import diplomna.error.constant.GlobalConstants;
 import diplomna.error.BaseException;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.http.HttpStatus;

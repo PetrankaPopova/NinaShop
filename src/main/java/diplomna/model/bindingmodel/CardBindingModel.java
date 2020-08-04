@@ -1,15 +1,14 @@
-package diplomna.model.service;
+package diplomna.model.bindingmodel;
 
 import diplomna.model.entity.Product;
 
 import javax.persistence.OneToMany;
 import java.util.List;
 
-public class BagServiceModel extends BaseEntityService {
-
+public class CardBindingModel {
     private List<Product> products;
 
-    public BagServiceModel() {
+    public CardBindingModel() {
     }
 
     @OneToMany

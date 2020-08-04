@@ -1,9 +1,9 @@
 package diplomna.service.serviceImpl;
 
-import diplomna.constant.GlobalConstants;
-import diplomna.exception.AlreadyExistsException;
-import diplomna.exception.UserNotFoundException;
-import diplomna.model.entity.Bag;
+import diplomna.error.constant.GlobalConstants;
+import diplomna.error.exception.AlreadyExistsException;
+import diplomna.error.exception.UserNotFoundException;
+import diplomna.model.entity.Card;
 import diplomna.model.entity.Product;
 import diplomna.model.entity.User;
 import diplomna.model.service.UserServiceModel;
@@ -24,12 +24,11 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static diplomna.constant.GlobalConstants.USER_EMAIL_EXISTS_MASSAGE;
-import static diplomna.constant.GlobalConstants.USER_NAME_EXISTS_MESSAGE;
+import static diplomna.error.constant.GlobalConstants.USER_EMAIL_EXISTS_MASSAGE;
+import static diplomna.error.constant.GlobalConstants.USER_NAME_EXISTS_MESSAGE;
 
 @Service
 public class UserServiceImp implements UserService {
-
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final RoleService roleService;
@@ -81,7 +80,6 @@ public class UserServiceImp implements UserService {
         /*User saved = this.userRepository.findByUsername(userServiceModel.getUsername()).orElse(null);
         if (saved != null)
             throw new UsernameAlreadyExistException("User with username " + saved.getUsername() + " already exists!");
-
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         User u = this.userRepository.saveAndFlush(user);
         return this.modelMapper.map(u, UserServiceModel.class);*/
@@ -124,8 +122,8 @@ public class UserServiceImp implements UserService {
         User u = this.userRepository.findByUsername(userStr).orElse(null);
         //if (u == null || u.getBag() == null) {niakakva greshka}
         assert u != null;
-        u.setBag(new Bag());
-        u.getBag().getProducts().add(p);
+        u.setCard(new Card());
+        u.getCard().getProducts().add(p);
         this.userRepository.saveAndFlush(u);
     }
 
@@ -159,7 +157,7 @@ public class UserServiceImp implements UserService {
         String userStr = this.tools.getLoggedUser();
         User user = this.userRepository.findByUsername(userStr)
                 .orElseThrow(() -> new UserNotFoundException("User with given id was not found!"));
-        return user.getBag().getProducts().stream()
+        return user.getCard().getProducts().stream()
                 .map(pr -> this.modelMapper.map(pr, ProductViewModel.class))
                 .collect(Collectors.toList());
     }
@@ -181,3 +179,4 @@ public class UserServiceImp implements UserService {
         return findUser;
     }
 }
+

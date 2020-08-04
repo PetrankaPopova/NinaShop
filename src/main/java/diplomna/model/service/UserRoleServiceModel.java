@@ -1,10 +1,10 @@
 package diplomna.model.service;
 
-public class RoleServiceModel extends BaseEntityService{
+public class UserRoleServiceModel extends BaseEntityService{
 
     private String authority;
 
-    public RoleServiceModel() {
+    public UserRoleServiceModel() {
     }
 
     public String getAuthority() {

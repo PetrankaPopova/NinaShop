@@ -1,6 +1,5 @@
 package diplomna.model.entity;
 
-import org.hibernate.validator.constraints.Length;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
@@ -16,7 +15,7 @@ import java.util.Set;
     private String userAddress;
     private String userPhone;
     private Set<UserRole> authorities;
-    private Bag bag;
+    private Card card;
 
     public User() {
     }
@@ -84,12 +83,12 @@ import java.util.Set;
     }
 
     @OneToOne(cascade = {CascadeType.ALL})
-    public Bag getBag() {
-        return bag;
+    public Card getCard() {
+        return card;
     }
 
-    public void setBag(Bag bag) {
-        this.bag = bag;
+    public void setCard(Card card) {
+        this.card = card;
     }
 
 

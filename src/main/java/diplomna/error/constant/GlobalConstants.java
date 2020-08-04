@@ -1,4 +1,4 @@
-package diplomna.constant;
+package diplomna.error.constant;
 
 public class GlobalConstants {
 

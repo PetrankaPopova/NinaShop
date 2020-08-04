@@ -1,6 +1,5 @@
 package diplomna.web.controllers;
 
-import diplomna.exception.AlreadyExistsException;
 import diplomna.model.bindingmodel.ProductAddBindingModel;
 import diplomna.model.service.ProductServiceModel;
 import diplomna.service.CategoryService;

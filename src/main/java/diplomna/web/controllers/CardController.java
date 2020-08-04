@@ -1,50 +1,37 @@
 package diplomna.web.controllers;
 
-import diplomna.exception.AlreadyExistsException;
-import diplomna.model.bindingmodel.BagBindingModel;
-import diplomna.model.bindingmodel.ProductAddBindingModel;
-import diplomna.model.service.OrderServiceModel;
-import diplomna.model.service.ProductServiceModel;
-import diplomna.model.view.CartItemViewModel;
-import diplomna.web.anotations.PageTitle;
-import org.springframework.security.access.prepost.PreAuthorize;
+import diplomna.model.bindingmodel.CardBindingModel;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 //@RequestMapping("/bag")
-public class BagController {
+public class CardController {
 
-    @GetMapping("/bag")
+    @GetMapping("/card")
     public String showBag(Model model) {
         model.addAttribute("title", "User Bag");
         model.addAttribute("userClickShowBag", true);
         model.addAttribute("bagLines", null);
-        return "bag";
+        return "card";
     }
 
     @PostMapping("/bag")
-    public String addToBag(@Valid @ModelAttribute("bagBindingModel") BagBindingModel bagBindingModel,
+    public String addToBag(@Valid @ModelAttribute("bagBindingModel") CardBindingModel cardBindingModel,
                            BindingResult bindingResult, RedirectAttributes attributes) {
 
         if (bindingResult.hasErrors()) {
-            return "redirect:/bag";
+            return "redirect:/card";
         }
 
-        return "bag";
+        return "all";
     }
 
   //  @GetMapping("/details")

@@ -1,4 +1,4 @@
-package diplomna.exception;
+package diplomna.error.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

@@ -1,7 +1,5 @@
 package diplomna.web.controllers;
 
-
-
 import diplomna.service.ProductService;
 import diplomna.model.view.ProductViewModel;
 import org.modelmapper.ModelMapper;
@@ -10,6 +8,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -48,5 +47,4 @@ public class HomeController {
                 .map(pr->this.modelMapper.map(pr, ProductViewModel.class))
                 .collect(Collectors.toList());
     }
-
 }

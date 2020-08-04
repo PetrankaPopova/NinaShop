@@ -1,6 +1,6 @@
 package diplomna.service.serviceImpl;
 
-import diplomna.exception.AlreadyExistsException;
+import diplomna.error.exception.AlreadyExistsException;
 import diplomna.model.entity.Product;
 import diplomna.model.service.ProductServiceModel;
 import diplomna.model.view.ProductViewModel;
@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static diplomna.constant.GlobalConstants.PRODUCT_NAME_EXISTS_MESSAGE;
+import static diplomna.error.constant.GlobalConstants.PRODUCT_NAME_EXISTS_MESSAGE;
 
 @Service
 public class ProductServiceImpl implements ProductService {
