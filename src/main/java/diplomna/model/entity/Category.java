@@ -21,8 +21,6 @@ public class Category extends BaseEntity{
     }
 
 
-
-
     @Column(name = "category_name", nullable = false,unique = true)
     public CategoryName getCategoryName() {
         return categoryName;
