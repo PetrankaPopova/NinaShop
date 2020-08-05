@@ -49,6 +49,7 @@ public class UserServiceImp implements UserService {
         this.tools = tools;
     }
 
+
     @Override
     public UserServiceModel registerUser(UserServiceModel userServiceModel) {
         User user = this.modelMapper.map(userServiceModel, User.class);
