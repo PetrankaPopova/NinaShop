@@ -1,6 +1,8 @@
 package diplomna.service;
 
 
+import diplomna.error.exception.ProductIsNotExistException;
+import diplomna.error.exception.UserCannotSaveException;
 import diplomna.model.service.UserServiceModel;
 import diplomna.model.view.ProductViewModel;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -33,4 +35,10 @@ public interface UserService extends UserDetailsService {
 
 
     UserServiceModel findById(String userId);
+
+    void buyProduct(String productId, String loggedUserStr) throws UserCannotSaveException;
+
+    void removeAllProductCart(String loggedUserStr);
+
+    void removeOneProductCart(String productId, String loggedUser) throws ProductIsNotExistException;
 }

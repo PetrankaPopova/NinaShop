@@ -1,11 +1,7 @@
 package diplomna.service.serviceImpl;
 
 import diplomna.error.constant.GlobalConstants;
-import diplomna.error.exception.AlreadyExistsException;
-import diplomna.error.exception.UserIsNullOrCartIsNullException;
-import diplomna.error.exception.UserNotFoundException;
-import diplomna.error.exception.UserWithThisNameIsNotLogged;
-import diplomna.model.entity.Card;
+import diplomna.error.exception.*;
 import diplomna.model.entity.Product;
 import diplomna.model.entity.User;
 import diplomna.model.service.UserServiceModel;
@@ -125,12 +121,10 @@ public class UserServiceImp implements UserService {
                 throw new UserWithThisNameIsNotLogged("User with this name is not logged!");
         }
         User u = this.userRepository.findByUsername(userStr).orElse(null);
-        if (u == null || u.getCard() == null) {
+        if (u == null) {
             throw new UserIsNullOrCartIsNullException("User is null or car is null exception!");
         }
-        assert u != null;
-        u.setCard(new Card());
-        u.getCard().getProducts().add(p);
+        u.getBoughtProducts().add(p);
         this.userRepository.saveAndFlush(u);
     }
 
@@ -164,7 +158,7 @@ public class UserServiceImp implements UserService {
         String userStr = this.tools.getLoggedUser();
         User user = this.userRepository.findByUsername(userStr)
                 .orElseThrow(() -> new UserNotFoundException("User with given id was not found!"));
-        return user.getCard().getProducts().stream()
+        return user.getBoughtProducts().stream()
                 .map(pr -> this.modelMapper.map(pr, ProductViewModel.class))
                 .collect(Collectors.toList());
     }
@@ -186,6 +180,45 @@ public class UserServiceImp implements UserService {
         return userServiceModel;
     }
 
+    @Override
+    public void buyProduct(String productId, String loggedUserStr) throws UserCannotSaveException {
+        Product productForBye = this.productRepository.findById(productId).orElse(null);
+        User loggedUser = this.userRepository.findByUsername(loggedUserStr).orElse(null);
+        if (this.isInputDataCorrect(loggedUser, productForBye)
+                && !loggedUser.getBoughtProducts().contains(productForBye)) {
+            loggedUser.getBoughtProducts().add(productForBye);
+            this.userRepository.saveAndFlush(loggedUser);
+        } else {
+            throw new UserCannotSaveException("User cannot be save!");
+        }
+
+    }
+
+    @Override
+    public void removeAllProductCart(String loggedUserStr) {
+        User loggedUser = this.userRepository.findByUsername(loggedUserStr).orElse(null);
+        if (loggedUser != null) {
+            loggedUser.getBoughtProducts().clear();
+            this.userRepository.saveAndFlush(loggedUser);
+        }
+    }
+
+    @Override
+    public void removeOneProductCart(String productId, String loggedUser) throws ProductIsNotExistException {
+        User userFromDb = this.userRepository.findByUsername(loggedUser).orElse(null);
+        if (userFromDb == null){
+            throw new UserIsNotExistException("Pser with name " + loggedUser + " is not exist!");
+        }
+        Product product = this.productRepository.findById(productId).orElse(null);
+        if (product == null){
+            throw new ProductIsNotExistException("Product is not exist!");
+        }
+        List<Product> products = userFromDb.getBoughtProducts();
+        products.remove(product);
+        this.userRepository.saveAndFlush(userFromDb);
+
+    }
+
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -194,6 +227,11 @@ public class UserServiceImp implements UserService {
             throw new UsernameNotFoundException("User does not exists!");
         }
         return findUser;
+    }
+
+
+    private boolean isInputDataCorrect(User loggedUser, Product productForBuy) {
+        return loggedUser != null && productForBuy != null;
     }
 }
 

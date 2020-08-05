@@ -63,7 +63,7 @@
                         <a sec:authorize="!isAnonymous()" class="nav-link" th:href="@{/size}">Size</a>
                     </li>
                     <li class="nav-item active">
-                        <a sec:authorize="!isAuthenticated()" class="nav-link" th:href="@{/card}">Bag</a>
+                        <a sec:authorize="!isAuthenticated()" class="nav-link" th:href="@{/cart}">Bag</a>
                     </li>
                     <li class="nav-item active">
                         <a sec:authorize="!isAuthenticated()" class="nav-link" th:href="@{/all}">All Users</a>
@@ -80,7 +80,6 @@
                         <a class="nav-link" th:href="@{/users/profile}">Profile</a>
                     </li>
 
-                </ul>
             </nav>
         </th:block>
 

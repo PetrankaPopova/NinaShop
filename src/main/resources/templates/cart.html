@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:include="~{/fragments/head}"></th:block>
+
+<body>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <th:block th:include="~{/fragments/navbar}"></th:block>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+
+        </div>
+        <div class="col-md-8">
+
+            <div class="container">
+                <th:block sec:authorize="isAuthenticated()">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Product Image</th>
+                                    <th>Product Name</th>
+                                    <th>Price</th>
+                                    <th>Option</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <th:block th:each="product: ${boughtProducts}">
+                                    <tr>
+                                        <td><img class="media-object"
+                                                 th:src="${product.getUrl()}"></td>
+                                        <td><span th:text="${product.name}"></span></td>
+                                        <td><span th:text="${product.price}"></span></td>
+                                        <td>
+                                            <a th:href="@{/remove-from-cart/{productId}(productId = ${product.getId()})}"
+                                               class="">Remove</a></td>
+                                    </tr>
+                                </th:block>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <table class="table table-bordered">
+                                <tr>
+                                    <td></td>
+                                    <td>Deliver:</td>
+                                    <td><span>10</span><span>&euro;</span></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td>Total price:</td>
+                                    <td><span class="total_price"
+                                              th:text="${totalPrice}+10"></span><span>&euro;</span></td>
+                                    <td><a th:href="@{/remove-all-from-cart}" class="">Remove All
+                                        Products</a></td>
+                                    <td><a th:href="@{/user/finish}" class="">Finish</a></td>
+                                </tr>
+                            </table>
+
+                        </div>
+                    </div>
+
+                </th:block>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<th:block th:include="~{/fragments/footer}"></th:block>
+</body>
+</html>
+

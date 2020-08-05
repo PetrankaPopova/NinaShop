@@ -5,7 +5,7 @@ import diplomna.model.service.OrderServiceModel;
 import java.util.List;
 
 public interface OrderService {
-    void createOrder(OrderServiceModel orderServiceModel);
+    void createOrder();
 
     List<OrderServiceModel> findAllOrders();
 

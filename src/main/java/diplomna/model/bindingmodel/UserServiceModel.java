@@ -1,18 +1,21 @@
-package diplomna.model.service;
+package diplomna.model.bindingmodel;
 
+import diplomna.model.entity.Product;
 import diplomna.model.entity.UserRole;
 
+import java.util.List;
 import java.util.Set;
 
-public class UserRegisterServiceModel {
+public class UserServiceModel extends BaseServiceModel {
     private String username;
     private String password;
     private String email;
     private String userAddress;
     private String userPhone;
     private Set<UserRole> authorities;
+    private List<Product> boughtProducts;
 
-    public UserRegisterServiceModel() {
+    public UserServiceModel() {
     }
 
     public String getUsername() {
@@ -63,4 +66,11 @@ public class UserRegisterServiceModel {
         this.authorities = authorities;
     }
 
+    public List<Product> getBoughtProducts() {
+        return boughtProducts;
+    }
+
+    public void setBoughtProducts(List<Product> boughtProducts) {
+        this.boughtProducts = boughtProducts;
+    }
 }

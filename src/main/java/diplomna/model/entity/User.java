@@ -4,6 +4,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -15,7 +16,7 @@ import java.util.Set;
     private String userAddress;
     private String userPhone;
     private Set<UserRole> authorities;
-    private Card card;
+    private List<Product> boughtProducts;
 
     public User() {
     }
@@ -82,15 +83,14 @@ import java.util.Set;
         this.authorities = authorities;
     }
 
-    @OneToOne(cascade = {CascadeType.ALL})
-    public Card getCard() {
-        return card;
+    @OneToMany(fetch = FetchType.EAGER)
+    public List<Product> getBoughtProducts() {
+        return boughtProducts;
     }
 
-    public void setCard(Card card) {
-        this.card = card;
+    public void setBoughtProducts(List<Product> boughtProducts) {
+        this.boughtProducts = boughtProducts;
     }
-
 
     @Override
     @Transient

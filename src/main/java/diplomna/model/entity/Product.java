@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ser.Serializers;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "products")
@@ -15,7 +16,6 @@ public class Product extends BaseEntity {
     private BigDecimal price;
     private Category category;
     private String url;
-
 
     public Product() {
     }

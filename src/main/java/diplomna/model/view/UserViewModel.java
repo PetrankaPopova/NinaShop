@@ -1,5 +1,8 @@
 package diplomna.model.view;
 
+import diplomna.model.entity.Product;
+
+import java.util.List;
 import java.util.Set;
 
 public class UserViewModel {
@@ -7,6 +10,7 @@ public class UserViewModel {
     private String username;
     private String password;
     private String email;
+    private List<Product> boughtProducts;
 
     private Set<String> authorities;
 
@@ -51,5 +55,13 @@ public class UserViewModel {
 
     public void setAuthorities(Set<String> authorities) {
         this.authorities = authorities;
+    }
+
+    public List<Product> getBoughtProducts() {
+        return boughtProducts;
+    }
+
+    public void setBoughtProducts(List<Product> boughtProducts) {
+        this.boughtProducts = boughtProducts;
     }
 }

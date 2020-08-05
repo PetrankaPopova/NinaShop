@@ -1,5 +1,8 @@
 package diplomna.model.service;
 
+import diplomna.model.entity.Product;
+
+import java.util.List;
 import java.util.Set;
 
 public class UserServiceModel extends BaseEntityService{
@@ -9,7 +12,7 @@ public class UserServiceModel extends BaseEntityService{
     private String email;
     private String userAddress;
     private String userPhone;
-
+    private List<Product> boughtProducts;
 
     private Set<UserRoleServiceModel> authorities;
 
@@ -63,6 +66,11 @@ public class UserServiceModel extends BaseEntityService{
         this.authorities = authorities;
     }
 
+    public List<Product> getBoughtProducts() {
+        return boughtProducts;
+    }
 
-
+    public void setBoughtProducts(List<Product> boughtProducts) {
+        this.boughtProducts = boughtProducts;
+    }
 }

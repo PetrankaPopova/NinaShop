@@ -1,19 +1,18 @@
 package diplomna.web.controllers;
 
 
-import diplomna.error.exception.BaseException;
-import diplomna.error.exception.UserIsNullOrCartIsNullException;
-import diplomna.error.exception.UserNotFoundException;
-import diplomna.error.exception.UserWithThisNameIsNotLogged;
 import diplomna.model.bindingmodel.UserEditBindingModel;
 import diplomna.model.bindingmodel.UserRegisterBindingModel;
 import diplomna.model.service.UserServiceModel;
+import diplomna.model.view.ProductViewModel;
 import diplomna.model.view.UserViewModel;
 import diplomna.model.view.UserView;
+import diplomna.service.OrderService;
 import diplomna.service.UserService;
 import diplomna.web.Tools;
 import diplomna.web.anotations.PageTitle;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,11 +33,14 @@ public class UserController {
     private final UserService userService;
     private final Tools tools;
     private final ModelMapper modelMapper;
+    private final OrderService orderService;
 
-    public UserController(UserService userService, Tools tools, ModelMapper modelMapper) {
+    @Autowired
+    public UserController(UserService userService, Tools tools, ModelMapper modelMapper, OrderService orderService) {
         this.userService = userService;
         this.tools = tools;
         this.modelMapper = modelMapper;
+        this.orderService = orderService;
     }
 
 
@@ -91,7 +93,7 @@ public class UserController {
     @GetMapping("/user/buy/{productId}")
     public String buyProduct(@PathVariable("productId") String productId) {
         this.userService.buyProduct(productId);
-        return "/home";
+        return "redirect:/home";
     }
 
 
@@ -150,7 +152,7 @@ public class UserController {
     }
 
     @GetMapping("/all")
-   // @PreAuthorize("hasRole('ROLE_ADMIN')")
+    // @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PageTitle("All Users")
     public ModelAndView allUsers(ModelAndView modelAndView) {
         List<UserViewModel> users = this.userService.findAllUsers()
@@ -170,47 +172,86 @@ public class UserController {
         return modelAndView;
     }
 
-    @ExceptionHandler({UserNotFoundException.class, UserIsNullOrCartIsNullException.class,
-            UserWithThisNameIsNotLogged.class})
-    public ModelAndView handleUserException(BaseException e) {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("error", e.getMessage());
-        modelAndView.setViewName("error");
-        return modelAndView;
+    @PageTitle("User Cart")
+    //@PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
+    @GetMapping("/cart")
+    public String userCart(Model model) {
+        List<ProductViewModel> boughtProducts
+                = this.userService.findByUsername(this.tools.getLoggedUser())
+                .getBoughtProducts()
+                .stream().map(pr -> this.modelMapper.map(pr, ProductViewModel.class))
+                .collect(Collectors.toList());
+        double totalPrice = getTotalPrice(boughtProducts);
+        model.addAttribute("boughtProducts", boughtProducts);
+        model.addAttribute("totalPrice", totalPrice);
+        return "cart";
     }
+
+    /*@PreAuthorize("hasAnyAuthority('ADMIN', 'MANAGER', 'WORKER', 'USER')")
+    @GetMapping(path = GET_MAPPING_PRODUCT_ADD_TO_CART)
+    public String addToCart(@PathVariable("productId") String productId) throws UserCannotSaveException {
+        if (!"anonymousUser".equals(this.tools.getLoggedUser())) {
+            this.userService.buyProduct(productId, this.tools.getLoggedUser());
+            return REDIRECT_TO_USER_CART;
+        } else {
+            //niakakva greshka...
+            return REDIRECT_TO_HOME;
+        }
+    }*/
+
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'MANAGER', 'WORKER', 'USER')")
+    @GetMapping("/remove-all-from-cart")
+    public String removeAllFromCart() {
+        System.out.println();
+        if (!"anonymousUser".equals(this.tools.getLoggedUser())) {
+            this.userService.removeAllProductCart(this.tools.getLoggedUser());
+            return "redirect:/cart";
+        }
+        return "redirect:/home";
+    }
+
+
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
+    @GetMapping("/user/finish")
+    public String finishCart () {
+        this.orderService.createOrder();
+        return "redirect:/home";
+    }
+
+    /*
+    //http://localhost:8000/product/remove-from-cart/0b5e6d87-cc02-4fc7-aaa2-79e7630966f8
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'MANAGER', 'WORKER', 'USER')")
+    @GetMapping(GET_MAPPING_PRODUCT_REMOVE_FROM_CART)
+    public String removeFromCart(@PathVariable("productId") String productId) {
+        if (!"anonymousUser".equals(this.tools.getLoggedUser())) {
+            this.userService.removeOneProductCart(productId, this.tools.getLoggedUser());
+        }
+        return CART_VIEW;
+
+
+
+
+        @ExceptionHandler({UserNotFoundException.class, UserIsNullOrCartIsNullException.class,
+                UserWithThisNameIsNotLogged.class})
+        public ModelAndView handleUserException (BaseException e){
+            ModelAndView modelAndView = new ModelAndView();
+            modelAndView.addObject("error", e.getMessage());
+            modelAndView.setViewName("error");
+            return modelAndView;
+        }*/
+    private double getTotalPrice(List<ProductViewModel> boughtProducts) {
+        double totalPrice = 0.00;
+        for (ProductViewModel boughtProduct : boughtProducts) {
+            totalPrice += boughtProduct.getPrice();
+        }
+        return totalPrice;
+
+    }
+
 }
     /*
 
-    @PageTitle(name = "User register")
-    @GetMapping(GET_MAPPING_USER_REGISTER)
-    public String register(Model model) {
-        if (!model.containsAttribute("urbm")) {
-            model.addAttribute("urbm", new UserRegisterBindingModel());
-        }
-        //List<ProductViewModel> allProducts = this.listShop.getAllProducts();
-        List<CategoryViewModel> allCategories = this.listShop.getAllCategories();
-        model.addAttribute("allCategories", allCategories);
-        return REGISTER_VIEW;
-    }
 
-    @PostMapping(POST_MAPPING_USER_REGISTER)
-    public String registerConfirm(@Valid @ModelAttribute("urbm") UserRegisterBindingModel urbm,
-                                  BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
-        if (bindingResult.hasErrors()) {
-            //urbm.setPassword("");
-            //urbm.setConfirmPassword("");
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.urbm", bindingResult);
-            redirectAttributes.addFlashAttribute("urbm", urbm);
-            return REDIRECT_TO_REGISTER;
-        }
-        if (!urbm.getPassword().equals(urbm.getConfirmPassword())) {
-            redirectAttributes.addFlashAttribute("passwordsNotMatch", true);
-            redirectAttributes.addFlashAttribute("urbm", urbm);
-        }
-
-        this.userService.register(this.modelMapper.map(urbm, UserServiceModel.class));
-        return REDIRECT_TO_LOGIN;
-    }
 
      */
 

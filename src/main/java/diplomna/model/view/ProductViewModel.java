@@ -1,6 +1,9 @@
 package diplomna.model.view;
 
 import diplomna.model.entity.Category;
+import diplomna.model.entity.Product;
+
+import java.util.List;
 
 public class ProductViewModel {
     private String id;
@@ -10,6 +13,7 @@ public class ProductViewModel {
     private String url;
     private Category category;
     private Double discount;
+    private List<Product> boughtProducts;
 
 
     public ProductViewModel() {
@@ -70,5 +74,13 @@ public class ProductViewModel {
 
     public Double getDiscount() {
         return this.discount;
+    }
+
+    public List<Product> getBoughtProducts() {
+        return boughtProducts;
+    }
+
+    public void setBoughtProducts(List<Product> boughtProducts) {
+        this.boughtProducts = boughtProducts;
     }
 }
