@@ -203,9 +203,20 @@ btn-primary{
     color: palevioletred;
     background-color: black;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.col-md-3 {
+    color: white;
 
 }
 
+.col-md-2{
+    color: white;
+}
+
+.head{
+    text-align: center;
+}
 
 
 
