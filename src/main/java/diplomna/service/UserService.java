@@ -32,4 +32,5 @@ public interface UserService extends UserDetailsService {
     List<UserServiceModel> findAllUsers();
 
 
+    UserServiceModel findById(String userId);
 }

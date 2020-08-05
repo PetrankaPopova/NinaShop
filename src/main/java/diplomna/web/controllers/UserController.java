@@ -1,10 +1,14 @@
 package diplomna.web.controllers;
 
 
+import diplomna.error.exception.BaseException;
+import diplomna.error.exception.UserIsNullOrCartIsNullException;
+import diplomna.error.exception.UserNotFoundException;
+import diplomna.error.exception.UserWithThisNameIsNotLogged;
 import diplomna.model.bindingmodel.UserEditBindingModel;
 import diplomna.model.bindingmodel.UserRegisterBindingModel;
 import diplomna.model.service.UserServiceModel;
-import diplomna.model.view.UserAllViewModel;
+import diplomna.model.view.UserViewModel;
 import diplomna.model.view.UserView;
 import diplomna.service.UserService;
 import diplomna.web.Tools;
@@ -149,10 +153,10 @@ public class UserController {
    // @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PageTitle("All Users")
     public ModelAndView allUsers(ModelAndView modelAndView) {
-        List<UserAllViewModel> users = this.userService.findAllUsers()
+        List<UserViewModel> users = this.userService.findAllUsers()
                 .stream()
                 .map(u -> {
-                    UserAllViewModel user = this.modelMapper.map(u, UserAllViewModel.class);
+                    UserViewModel user = this.modelMapper.map(u, UserViewModel.class);
                     Set<String> authorities = u.getAuthorities().stream().map(a -> a.getAuthority()).collect(Collectors.toSet());
                     user.setAuthorities(authorities);
 
@@ -161,11 +165,19 @@ public class UserController {
                 .collect(Collectors.toList());
 
         modelAndView.addObject("users", users);
-        modelAndView.setViewName("all-users");
+        modelAndView.setViewName("users");
 
         return modelAndView;
     }
 
+    @ExceptionHandler({UserNotFoundException.class, UserIsNullOrCartIsNullException.class,
+            UserWithThisNameIsNotLogged.class})
+    public ModelAndView handleUserException(BaseException e) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("error", e.getMessage());
+        modelAndView.setViewName("error");
+        return modelAndView;
+    }
 }
     /*
 

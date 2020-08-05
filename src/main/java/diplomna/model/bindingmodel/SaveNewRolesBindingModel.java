@@ -1,13 +1,13 @@
-package diplomna.model.service;
+package diplomna.model.bindingmodel;
 
 import javax.validation.constraints.Pattern;
 
-public class SaveNewRolesServiceModel {
+public class SaveNewRolesBindingModel {
 
     private String userId;
     private String newRole;
 
-    public SaveNewRolesServiceModel() {
+    public SaveNewRolesBindingModel() {
     }
 
     public String getUserId() {

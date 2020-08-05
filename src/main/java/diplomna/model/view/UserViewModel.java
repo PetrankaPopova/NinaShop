@@ -2,7 +2,7 @@ package diplomna.model.view;
 
 import java.util.Set;
 
-public class UserAllViewModel {
+public class UserViewModel {
     private String id;
     private String username;
     private String password;
@@ -10,7 +10,7 @@ public class UserAllViewModel {
 
     private Set<String> authorities;
 
-    public UserAllViewModel() {
+    public UserViewModel() {
     }
 
     public String getId() {

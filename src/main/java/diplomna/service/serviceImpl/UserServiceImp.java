@@ -2,7 +2,9 @@ package diplomna.service.serviceImpl;
 
 import diplomna.error.constant.GlobalConstants;
 import diplomna.error.exception.AlreadyExistsException;
+import diplomna.error.exception.UserIsNullOrCartIsNullException;
 import diplomna.error.exception.UserNotFoundException;
+import diplomna.error.exception.UserWithThisNameIsNotLogged;
 import diplomna.model.entity.Card;
 import diplomna.model.entity.Product;
 import diplomna.model.entity.User;
@@ -119,9 +121,13 @@ public class UserServiceImp implements UserService {
     public void buyProduct(String productId) {
         Product p = this.productRepository.findById(productId).orElse(null);
         String userStr = this.tools.getLoggedUser();
-        //if ("anonymousUser".equals(userStr)) {//niakakva greshka}
+        if ("anonymousUser".equals(userStr)) {
+                throw new UserWithThisNameIsNotLogged("User with this name is not logged!");
+        }
         User u = this.userRepository.findByUsername(userStr).orElse(null);
-        //if (u == null || u.getBag() == null) {niakakva greshka}
+        if (u == null || u.getCard() == null) {
+            throw new UserIsNullOrCartIsNullException("User is null or car is null exception!");
+        }
         assert u != null;
         u.setCard(new Card());
         u.getCard().getProducts().add(p);
@@ -168,6 +174,16 @@ public class UserServiceImp implements UserService {
         return this.userRepository.findAll().
                 stream()
                 .map(u -> this.modelMapper.map(u, UserServiceModel.class)).collect(Collectors.toList());
+    }
+
+    @Override
+    public UserServiceModel findById(String userId) {
+        User u = this.userRepository.findById(userId).orElse(null);
+        if (u == null){
+            throw new IllegalArgumentException(); //my error
+        }
+        UserServiceModel userServiceModel = this.modelMapper.map(u, UserServiceModel.class);
+        return userServiceModel;
     }
 
 

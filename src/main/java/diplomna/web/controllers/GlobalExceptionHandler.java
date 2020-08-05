@@ -1,3 +1,4 @@
+/*
 package diplomna.web.controllers;
 
 import diplomna.error.constant.GlobalConstants;
@@ -52,3 +53,4 @@ public class GlobalExceptionHandler implements ErrorController {
         return GlobalConstants.GLOBAL_EXCEPTION_VIEW_NAME;
     }
 }
+*/
