@@ -1,4 +1,4 @@
-package diplomna.interseptors;
+package diplomna.web.interseptors;
 
 import diplomna.web.anotations.PageTitle;
 import org.springframework.stereotype.Component;

@@ -1,7 +1,7 @@
 package diplomna.config;
 
-import diplomna.interseptors.StatsInterceptor;
-import diplomna.interseptors.TitleInterceptor;
+import diplomna.web.interseptors.StatsInterceptor;
+import diplomna.web.interseptors.TitleInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;

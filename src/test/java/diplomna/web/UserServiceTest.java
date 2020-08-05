@@ -34,7 +34,7 @@ public class UserServiceTest {
         Mockito.when(this.mockedUserRepository.findByUsername("Pesho"))
                 .thenReturn(java.util.Optional.ofNullable(this.testUser));
 
-        UserService userService = new UserServiceImp(this.mockedUserRepository);
+        //UserService userService = new UserServiceImp(this.mockedUserRepository);
         User expected = this.testUser;
 
         Assert.assertEquals("Broken", expected.getId(), actual.getId());

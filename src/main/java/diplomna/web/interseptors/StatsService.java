@@ -1,4 +1,4 @@
-package diplomna.interseptors;
+package diplomna.web.interseptors;
 
 import org.springframework.stereotype.Service;
 
