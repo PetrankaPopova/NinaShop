@@ -26,19 +26,19 @@
                             <table class="table table-bordered">
                                 <thead>
                                 <tr>
-                                    <th>Product Image</th>
-                                    <th>Product Name</th>
-                                    <th>Price</th>
-                                    <th>Option</th>
+                                    <th th:class="rowColor">Product Image</th>
+                                    <th th:class="rowColor">Product Name</th>
+                                    <th th:class="rowColor">Price</th>
+                                    <th th:class="rowColor">Option</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <th:block th:each="product: ${boughtProducts}">
                                     <tr>
                                         <td><img class="media-object"
-                                                 th:src="${product.getUrl()}"></td>
-                                        <td><span th:text="${product.name}"></span></td>
-                                        <td><span th:text="${product.price}"></span></td>
+                                                 th:src="${product.getUrl()}" alt="Picture of dress"></td>
+                                        <td><span th:class="rowColor" th:text="${product.name}"></span></td>
+                                        <td><span th:class="rowColor" th:text="${product.price}"></span></td>
                                         <td>
                                             <a th:href="@{/remove-from-cart/{productId}(productId = ${product.getId()})}"
                                                class="">Remove</a></td>
@@ -54,15 +54,15 @@
                             <table class="table table-bordered">
                                 <tr>
                                     <td></td>
-                                    <td>Deliver:</td>
-                                    <td><span>10</span><span>&euro;</span></td>
+                                    <td th:class="rowColor">Deliver:</td>
+                                    <td th:class="rowColor"><span>10</span><span>&euro;</span></td>
                                     <td></td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td></td>
-                                    <td>Total price:</td>
-                                    <td><span class="total_price"
+                                    <td th:class="rowColor">Total price:</td>
+                                    <td><span class="total_price" th:class="rowColor"
                                               th:text="${totalPrice}+10"></span><span>&euro;</span></td>
                                     <td><a th:href="@{/remove-all-from-cart}" class="">Remove All
                                         Products</a></td>

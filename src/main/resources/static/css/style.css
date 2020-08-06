@@ -218,5 +218,24 @@ btn-primary{
     text-align: center;
 }
 
+.col-md-12{
+    color: white;
+}
+
+.table table-bordered{
+    color: white;
+}
+.th{
+    color: white;
+}
+.rowColor{
+    color: white;
+}
+
+.colour{
+    color: white;
+}
+
+
 
 
