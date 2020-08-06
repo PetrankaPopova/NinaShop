@@ -114,9 +114,7 @@ navbar{
     margin: auto;
 }
 .nav-item {
-    text-transform: uppercase;
-    cursor: pointer;
-   color: #ebebeb;
+
 }
 
 .nav-item:hover {
@@ -234,6 +232,20 @@ btn-primary{
 
 .colour{
     color: white;
+}
+.nav-link {
+    text-transform: uppercase;
+    cursor: pointer;
+    color: #ebebeb;
+}
+
+.nav-link:hover {
+    background-image: url('http://scottyzen.com/cp/button.png');
+    background-size: 100% 100%;
+    color: #27262c;
+    animation: spring 300ms ease-out;
+    text-shadow: 0 -1px 0 #ef816c;
+    font-weight: bold;
 }
 
 
