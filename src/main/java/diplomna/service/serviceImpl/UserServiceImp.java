@@ -27,13 +27,26 @@ import static diplomna.error.constant.GlobalConstants.USER_NAME_EXISTS_MESSAGE;
 
 @Service
 public class UserServiceImp implements UserService {
-    private final UserRepository userRepository;
-    private final RoleRepository roleRepository;
-    private final RoleService roleService;
-    private final ProductRepository productRepository;
-    private final ModelMapper modelMapper;
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
-    private final Tools tools;
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private RoleRepository roleRepository;
+
+    @Autowired
+    private RoleService roleService;
+
+    @Autowired
+    private ProductRepository productRepository;
+
+    @Autowired
+    private ModelMapper modelMapper;
+
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @Autowired
+    private  Tools tools;
 
     @Autowired
     public UserServiceImp(UserRepository userRepository, RoleRepository roleRepository,
@@ -47,6 +60,19 @@ public class UserServiceImp implements UserService {
         this.tools = tools;
     }
 
+    public UserServiceImp(UserRepository mockedUserRepository, UserRepository userRepository, RoleRepository roleRepository, RoleService roleService, ProductRepository productRepository, ModelMapper modelMapper, BCryptPasswordEncoder bCryptPasswordEncoder, Tools tools) {
+        this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
+        this.roleService = roleService;
+        this.productRepository = productRepository;
+        this.modelMapper = modelMapper;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        this.tools = tools;
+    }
+
+    public UserServiceImp(UserRepository mockedUserRepository) {
+        this.userRepository = mockedUserRepository;
+    }
 
     @Override
     public UserServiceModel registerUser(UserServiceModel userServiceModel) {
@@ -173,9 +199,9 @@ public class UserServiceImp implements UserService {
     @Override
     public UserServiceModel findById(String userId) {
         User u = this.userRepository.findById(userId).orElse(null);
-        if (u == null){
-            throw new IllegalArgumentException(); //my error
-        }
+       // if (u == null){
+        //    throw new IllegalArgumentException(); //my error
+       // }
         UserServiceModel userServiceModel = this.modelMapper.map(u, UserServiceModel.class);
         return userServiceModel;
     }

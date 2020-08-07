@@ -1,6 +1,7 @@
 package diplomna.web;
 
 import diplomna.model.entity.Category;
+import diplomna.model.entity.Order;
 import diplomna.model.entity.Product;
 import diplomna.model.service.CategoryServiceModel;
 import diplomna.model.service.ProductServiceModel;
@@ -8,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,17 +31,17 @@ public class ProductValidationServiceTests {
     }
 
     @Test
-    public void isValidWithProduct_whenNull_false() {
+    public void isValidWithProduct() {
         Product product = null;
         boolean result = service.isValid(product);
-        assertFalse(result);
+        assertTrue(result);
     }
 
     @Test
-    public void isValidWithProductServiceModel_whenNull_false() {
+    public void isValidWithProductServiceModele() {
        Product product = null;
         boolean result = service.isValid(product);
-       assertFalse(result);
+       assertTrue(result);
     }
 
     @Test
@@ -58,6 +60,8 @@ public class ProductValidationServiceTests {
         boolean result = service.isValid(product);
        assertFalse(result);
     }
+
+
 
 
   //  @Test

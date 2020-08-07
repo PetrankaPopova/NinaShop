@@ -59,12 +59,13 @@
                     <li class="nav-item active">
                         <a sec:authorize="!isAuthenticated()" class="nav-link" th:href="@{/order}">Orders</a>
                     </li>
+                <li class="nav-item active">
+                    <a sec:authorize="!isAuthenticated()" class="nav-link" th:href="@{/cart}">Bag</a>
+                </li>
                     <li class="nav-item active">
                         <a sec:authorize="!isAnonymous()" class="nav-link" th:href="@{/size}">Size</a>
                     </li>
-                    <li class="nav-item active">
-                        <a sec:authorize="!isAuthenticated()" class="nav-link" th:href="@{/cart}">Bag</a>
-                    </li>
+
 
                     <li sec:authorize="isAnonymous()" class="nav-item active">
                         <a class="nav-link" th:href="@{/about}">About Nina</a>

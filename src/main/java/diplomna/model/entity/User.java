@@ -2,6 +2,7 @@ package diplomna.model.entity;
 
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.management.relation.Role;
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 import java.util.List;
@@ -19,6 +20,13 @@ import java.util.Set;
     private List<Product> boughtProducts;
 
     public User() {
+    }
+
+    public User(String username, String password, Set<UserRole> authorities) {
+        this.username = username;
+        this.password = password;
+        this.authorities = authorities;
+
     }
 
 
