@@ -3,6 +3,7 @@ package diplomna.web.controllers;
 import diplomna.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +21,7 @@ public class OrderController {
     }
 
     @GetMapping("/order")
+    @PreAuthorize("isAuthenticated()")
     public String userOrder(Model model){
         model.addAttribute("allBoughtProducts"
                 , this.userService.getAllBoughtProducts());

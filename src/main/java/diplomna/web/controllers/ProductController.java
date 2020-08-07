@@ -6,6 +6,7 @@ import diplomna.service.CategoryService;
 import diplomna.service.ProductService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -33,6 +34,7 @@ public class ProductController {
 
 
     @GetMapping("/add")
+    @PreAuthorize("isAuthenticated()")
     public String addProductForm(Model model) {
 
         if (!model.containsAttribute("productAddBindModel")) {
@@ -43,6 +45,7 @@ public class ProductController {
     }
 
     @PostMapping("/add")
+    @PreAuthorize("isAuthenticated()")
     public String addProduct(@Valid @ModelAttribute("productAddBindModel") ProductAddBindingModel bindingModel,
                              BindingResult bindingResult,
                              RedirectAttributes attributes) throws IOException {
@@ -61,6 +64,7 @@ public class ProductController {
 
 
     @RequestMapping("/buy/{id}")
+    @PreAuthorize("isAuthenticated()")
     public String buy(Model model,
                       HttpSession session,
                       @PathVariable("id") String id) {
@@ -76,6 +80,7 @@ public class ProductController {
 
 
     @GetMapping("/buyAll")
+    @PreAuthorize("isAuthenticated()")
     public String buyAll(Model model, HttpSession session) {
 
         //   if(!isAuthorizedUser(session)) {

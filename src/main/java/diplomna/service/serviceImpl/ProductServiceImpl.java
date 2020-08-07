@@ -66,7 +66,7 @@ public class ProductServiceImpl implements ProductService {
     public List<ProductViewModel> findAllProducts() {
        return productRepository.findAll()
                 .stream()
-               // .filter(product -> product.getCategory().getCategoryType() == categoryType)
+
                 .map(product -> modelMapper.map(product, ProductViewModel.class))
                 .collect(Collectors.toCollection(ArrayList::new));
     }

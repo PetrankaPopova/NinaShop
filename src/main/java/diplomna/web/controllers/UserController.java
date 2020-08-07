@@ -227,10 +227,6 @@ public class UserController {
             this.userService.removeOneProductCart(productId, this.tools.getLoggedUser());
         }
         return CART_VIEW;
-
-
-
-
         @ExceptionHandler({UserNotFoundException.class, UserIsNullOrCartIsNullException.class,
                 UserWithThisNameIsNotLogged.class})
         public ModelAndView handleUserException (BaseException e){
@@ -249,11 +245,8 @@ public class UserController {
     }
 
 }
-    /*
-
-
-
-     */
+/*
+ */
 
 
 //    @GetMapping("/all")
@@ -308,5 +301,3 @@ public class UserController {
 //
 //        return super.redirect("/users/all");
 //    }
-
-
