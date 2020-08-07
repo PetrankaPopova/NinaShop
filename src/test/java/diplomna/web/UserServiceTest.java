@@ -2,10 +2,8 @@ package diplomna.web;
 
 import diplomna.model.entity.User;
 import diplomna.model.service.UserServiceModel;
-import diplomna.repository.ProductRepository;
 import diplomna.repository.RoleRepository;
 import diplomna.repository.UserRepository;
-import diplomna.service.RoleService;
 import diplomna.service.UserService;
 import diplomna.service.serviceImpl.UserServiceImp;
 import org.junit.Assert;
@@ -13,64 +11,61 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import javax.management.relation.Role;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 
 public class UserServiceTest {
 
-    private User testUser;
+    private Optional<User> testUser;
     private UserRepository mockedUserRepository;
-    private RoleRepository mockedroleRepository;
-    private RoleService mockedroleService;
-    private ProductRepository mockedProductRepository;
     private ModelMapper mockedModelMapper;
-    private BCryptPasswordEncoder mockedBCryptPasswordEncoder;
-    private Tools mockedTools;
-
+    private RoleRepository roleRepository;
     public UserServiceTest() {
 
     }
 
     @Before()
     public void init() {
-        this.testUser = new User() {{
-            setId("4456d57a-fe5b-4b6a-a675-db29933236ac");
+        this.testUser = Optional.of(new User() {{
+            setId("aaaa");
             setUsername("Pesho");
             setPassword("123");
-        }};
+        }});
 
         this.mockedUserRepository = Mockito.mock(UserRepository.class);
-        this.mockedroleRepository = Mockito.mock(RoleRepository.class);
-        this.mockedroleService = Mockito.mock(RoleService.class);
-        this.mockedProductRepository = Mockito.mock(ProductRepository.class);
         this.mockedModelMapper = Mockito.mock(ModelMapper.class);
-        this.mockedBCryptPasswordEncoder = Mockito.mock(BCryptPasswordEncoder.class);
-        this.mockedUserRepository = Mockito.mock(UserRepository.class);
-        this.mockedTools =  Mockito.mock(Tools.class);
 
     }
 
     @Test
     public void userService_GetUserWithCorrectUsername_shouldReturnCorrect() {
 
-        Mockito.when(this.mockedUserRepository.findByUsername("Pesho"))
-                .thenReturn(Optional.ofNullable(this.testUser));
 
-        UserService userService = new UserServiceImp(this.mockedUserRepository);
-        UserServiceModel model = userService.findById("c61c6d40-893d-4c27-a94c-389d9608f13a");
-        User expected = this.testUser;
+        Mockito.when(this.mockedUserRepository.findUserByUsername("Pesho"))
+                .thenReturn(this.testUser);
 
-        Assert.assertEquals("4456d57a-fe5b-4b6a-a675-db29933236ac", expected.getId(), model.getId());
-        Assert.assertEquals("Pesho", expected.getUsername(), model.getUsername());
-        Assert.assertEquals("123", expected.getPassword(), model.getPassword());
+        Optional<User> mockedUsers = this.mockedUserRepository.findUserByUsername("Pesho");
+        Optional<User> mockedUsers2 = this.mockedUserRepository.findUserByUsername("Pesho");
+        UserServiceModel usm = new UserServiceModel();
+        usm.setUsername("Pesho");
+        Mockito.when(this.mockedModelMapper.map(mockedUsers.get(), UserServiceModel.class))
+                .thenReturn(usm);
+
+        UserService userService = new UserServiceImp(this.mockedUserRepository, roleRepository, null, null, this.mockedModelMapper, null, null);
+        //Optional<User> user = this.mockedUserRepository.findByUsername("Pesho");
+       // UserServiceModel user2 = userService.findUserByUsername("Pesho");
+        Optional<User> expected = this.testUser;
+        UserServiceModel actual = userService.findByUsername("Pesho");
+
+        User findedUser = this.mockedUserRepository.findUserByUsername("Pesho").orElse(null);
+        Optional<User> mockedUsers3 = this.mockedUserRepository.findUserByUsername("Pesho");
+
+
+       // Assert.assertEquals("4456d57a-fe5b-4b6a-a675-db29933236ac", expected.getId(), model.getId());
+        Assert.assertEquals("Pesho", expected.get().getUsername(), actual.getUsername());
+       // Assert.assertEquals("123", expected.getPassword(), model.getPassword());
+       // System.out.println(user2);
     }
 }
 

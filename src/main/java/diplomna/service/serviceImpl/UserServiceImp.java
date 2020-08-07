@@ -27,25 +27,13 @@ import static diplomna.error.constant.GlobalConstants.USER_NAME_EXISTS_MESSAGE;
 
 @Service
 public class UserServiceImp implements UserService {
-    @Autowired
+
     private UserRepository userRepository;
-
-    @Autowired
     private RoleRepository roleRepository;
-
-    @Autowired
     private RoleService roleService;
-
-    @Autowired
     private ProductRepository productRepository;
-
-    @Autowired
     private ModelMapper modelMapper;
-
-    @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
-
-    @Autowired
     private  Tools tools;
 
     @Autowired
@@ -58,20 +46,6 @@ public class UserServiceImp implements UserService {
         this.modelMapper = modelMapper;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.tools = tools;
-    }
-
-    public UserServiceImp(UserRepository mockedUserRepository, UserRepository userRepository, RoleRepository roleRepository, RoleService roleService, ProductRepository productRepository, ModelMapper modelMapper, BCryptPasswordEncoder bCryptPasswordEncoder, Tools tools) {
-        this.userRepository = userRepository;
-        this.roleRepository = roleRepository;
-        this.roleService = roleService;
-        this.productRepository = productRepository;
-        this.modelMapper = modelMapper;
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-        this.tools = tools;
-    }
-
-    public UserServiceImp(UserRepository mockedUserRepository) {
-        this.userRepository = mockedUserRepository;
     }
 
     @Override
@@ -126,7 +100,7 @@ public class UserServiceImp implements UserService {
     @Override
     public UserServiceModel findByUsername(String username) {
         User findedUser = this.userRepository.findUserByUsername(username).orElse(null);
-        return findedUser == null ? null : this.modelMapper.map(findedUser, UserServiceModel.class);
+        return this.modelMapper.map(findedUser, UserServiceModel.class);
     }
 
     @Override
@@ -144,7 +118,7 @@ public class UserServiceImp implements UserService {
         Product p = this.productRepository.findById(productId).orElse(null);
         String userStr = this.tools.getLoggedUser();
         if ("anonymousUser".equals(userStr)) {
-                throw new UserWithThisNameIsNotLogged("User with this name is not logged!");
+            throw new UserWithThisNameIsNotLogged("User with this name is not logged!");
         }
         User u = this.userRepository.findByUsername(userStr).orElse(null);
         if (u == null) {
@@ -153,6 +127,7 @@ public class UserServiceImp implements UserService {
         u.getBoughtProducts().add(p);
         this.userRepository.saveAndFlush(u);
     }
+
 
     @Override
     public UserServiceModel editUserProfile(UserServiceModel userServiceModel, String oldPassword) {

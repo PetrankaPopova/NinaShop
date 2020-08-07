@@ -1,6 +1,7 @@
 package diplomna.repository;
 
 import diplomna.model.entity.User;
+import diplomna.model.service.UserServiceModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
