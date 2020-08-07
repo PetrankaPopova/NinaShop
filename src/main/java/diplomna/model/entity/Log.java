@@ -2,6 +2,7 @@ package diplomna.model.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -10,7 +11,7 @@ public class Log extends BaseEntity {
 
     private String username;
     private String description;
-    private LocalDateTime time;
+    private LocalDate localDate;
 
     public Log() {
     }
@@ -31,11 +32,11 @@ public class Log extends BaseEntity {
         this.description = description;
     }
 
-    public LocalDateTime getTime() {
-        return time;
+    public LocalDate getLocalDate() {
+        return localDate;
     }
 
-    public void setTime(LocalDateTime time) {
-        this.time = time;
+    public void setLocalDate(LocalDate localDate) {
+        this.localDate = localDate;
     }
 }

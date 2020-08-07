@@ -1,11 +1,12 @@
 package diplomna.model.service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class LogServiceModel extends BaseEntityService {
     private String username;
     private String description;
-    private LocalDateTime time;
+    private LocalDate localDate;
 
     public LogServiceModel() {
     }
@@ -26,11 +27,11 @@ public class LogServiceModel extends BaseEntityService {
         this.description = description;
     }
 
-    public LocalDateTime getTime() {
-        return time;
+    public LocalDate getLocalDate() {
+        return localDate;
     }
 
-    public void setTime(LocalDateTime time) {
-        this.time = time;
+    public void setLocalDate(LocalDate localDate) {
+        this.localDate = localDate;
     }
 }

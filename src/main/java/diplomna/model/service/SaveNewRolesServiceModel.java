@@ -2,7 +2,7 @@ package diplomna.model.service;
 
 import javax.validation.constraints.Pattern;
 
-public class SaveNewRolesServiceModel {
+public class SaveNewRolesServiceModel extends BaseEntityService{
 
     private String userId;
     private String newRole;

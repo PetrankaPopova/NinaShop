@@ -9,18 +9,23 @@ import diplomna.service.serviceImpl.UserServiceImp;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Optional;
 
-
+@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 public class UserServiceTest {
 
     private Optional<User> testUser;
     private UserRepository mockedUserRepository;
     private ModelMapper mockedModelMapper;
     private RoleRepository roleRepository;
+
     public UserServiceTest() {
 
     }

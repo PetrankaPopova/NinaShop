@@ -15,7 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.chrono.ChronoLocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,8 +54,8 @@ public class EventServiceImpl implements EventService {
 
         LogServiceModel logServiceModel = new LogServiceModel();
         logServiceModel.setUsername(username);
-        logServiceModel.setDescription(serviceModel.getName() +" - Event created");
-        logServiceModel.setTime(LocalDateTime.now());
+        logServiceModel.setDescription(serviceModel.getName() + " - Event created");
+        logServiceModel.setLocalDate(LocalDate.now());
 
         this.logService.seedLogInDB(logServiceModel);
 
@@ -96,8 +98,8 @@ public class EventServiceImpl implements EventService {
 
         LogServiceModel logServiceModel = new LogServiceModel();
         logServiceModel.setUsername(event.getUser().getUsername());
-        logServiceModel.setDescription(event.getName() +" - Event update");
-        logServiceModel.setTime(LocalDateTime.now());
+        logServiceModel.setDescription(event.getName() + " - Event update");
+        logServiceModel.setLocalDate(LocalDate.now());
 
         this.logService.seedLogInDB(logServiceModel);
 
@@ -113,25 +115,26 @@ public class EventServiceImpl implements EventService {
 
         LogServiceModel logServiceModel = new LogServiceModel();
         logServiceModel.setUsername(event.getUser().getUsername());
-        logServiceModel.setDescription(event.getName() +" - Event delete");
-        logServiceModel.setTime(LocalDateTime.now());
+        logServiceModel.setDescription(event.getName() + " - Event delete");
+        logServiceModel.setLocalDate(LocalDate.now());
 
         this.logService.seedLogInDB(logServiceModel);
 
         this.eventRepository.delete(event);
     }
 
-   // @Scheduled(fixedRate = 5000000)
-  //  private void deleteEventIfDateIsOld() {
-    //    List<Event> events = new ArrayList<>(this.eventRepository.findAll());
-    //    String now = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-    //  LocalDateTime nowDate = LocalDateTime.parse(now);
+    @Scheduled(fixedRate = 5000000)
+    private void deleteEventIfDateIsOld() {
 
-       // for (Event event : events) {
-         //   LocalDateTime eventDate = LocalDateTime.parse(event.getDate());
-          //  if (eventDate.isBefore(nowDate)) {
-          //      this.eventRepository.delete(event);
-           // }
-       // }
-   // }
+        List<Event> events = new ArrayList<>(this.eventRepository.findAll());
+        String now = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        LocalDate nowDate = LocalDate.parse(now);
+
+        for (Event event : events) {
+            LocalDateTime eventDate = LocalDateTime.parse(event.getDate());
+            if (eventDate.isBefore(ChronoLocalDateTime.from(nowDate))) {
+                this.eventRepository.delete(event);
+            }
+        }
+    }
 }

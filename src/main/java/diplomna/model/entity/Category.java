@@ -1,14 +1,14 @@
 package diplomna.model.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name = "categories")
 public class Category extends BaseEntity{
 
-    private CategoryName categoryName;
+    public CategoryName categoryName;
     private String description;
 
     public Category() {
@@ -21,7 +21,8 @@ public class Category extends BaseEntity{
     }
 
 
-    @Column(name = "category_name", nullable = false,unique = true)
+    @Enumerated(EnumType.STRING)
+    //@Column(name = "category_name", nullable = false,unique = true)
     public CategoryName getCategoryName() {
         return categoryName;
     }
