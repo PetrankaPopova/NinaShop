@@ -36,7 +36,7 @@
                                 <th:block th:each="product: ${boughtProducts}">
                                     <tr>
                                         <td><img class="media-object"
-                                                 th:src="${product.getUrl()}" alt="Picture of dress"></td>
+                                                 th:src="${product.getUrl()}" alt="Picture of dress" src=""></td>
                                         <td><span th:class="rowColor" th:text="${product.name}"></span></td>
                                         <td><span th:class="rowColor" th:text="${product.price}"></span></td>
                                         <td>
@@ -55,7 +55,7 @@
                                 <tr>
                                     <td></td>
                                     <td th:class="rowColor">Deliver:</td>
-                                    <td th:class="rowColor"><span>10</span><span>&euro;</span></td>
+                                    <td th:class="rowColor"><span>15</span><span>&euro;</span></td>
                                     <td></td>
                                     <td></td>
                                 </tr>
@@ -63,7 +63,7 @@
                                     <td></td>
                                     <td th:class="rowColor">Total price:</td>
                                     <td><span class="total_price" th:class="rowColor"
-                                              th:text="${totalPrice}+10"></span><span>&euro;</span></td>
+                                              th:text="${totalPrice}+15"></span><span>&euro;</span></td>
                                     <td><a th:href="@{/remove-all-from-cart}" class="">Remove All
                                         Products</a></td>
                                     <td><a th:href="@{/user/finish}" class="">Finish</a></td>

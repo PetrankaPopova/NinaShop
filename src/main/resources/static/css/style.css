@@ -90,9 +90,10 @@ body {
 
 navbar{
     list-style-type: none;
-    margin: 0;
-    padding: 0;
-    width: 50px
+    margin: 20px;
+    padding: 20px;
+    width: 50px;
+    border:40px;
 }
 
 
@@ -113,7 +114,13 @@ navbar{
     display: flex;
     margin: auto;
 }
-.nav-item {
+.nav-item-active {
+    background-image: url('http://scottyzen.com/cp/button.png');
+    background-size: 100% 100%;
+    color: #27262c;
+    animation: spring 300ms ease-out;
+    text-shadow: 0 -1px 0 #ef816c;
+    font-weight: bold;
 
 }
 
@@ -247,6 +254,19 @@ btn-primary{
     text-shadow: 0 -1px 0 #ef816c;
     font-weight: bold;
 }
+
+.tab{
+    color: white;
+}
+
+
+
+
+
+
+
+
+
 
 
 

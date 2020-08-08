@@ -22,27 +22,27 @@
                 <table class="table">
                     <thead>
                     <tr>
-                        <th>User</th>
-                        <th>Role</th>
-                        <th>Actual Role</th>
+                        <th class="tab">User</th>
+                        <th class="tab">Role</th>
+                        <th class="tab">Actual Role</th>
                     </tr>
                     </thead>
                     <tbody>
 
                     <tr>
-                        <td scope="row"><span th:text="${user.getUsername()}"></span></td>
+                        <td class="tab" scope="row"><span th:text="${user.getUsername()}"></span></td>
                         <td>
 
                             <div class="form-group">
                                 <select class="form-control" name="newRole">
-                                    <option>USER</option>
-                                    <option>ADMIN</option>
+                                    <option class="tab">USER</option>
+                                    <option class="tab">ADMIN</option>
                                 </select>
                             </div>
                             
                         </td>
                         <td>
-                            <p th:each="role : ${user.getAuthorities()}" th:text="${role.getAuthority()}"></p>
+                            <p class="tab" th:each="role : ${user.getAuthorities()}" th:text="${role.getAuthority()}"></p>
                         </td>
                     </tr>
 
