@@ -1,7 +1,24 @@
 <th:block xmlns:th="http://www.thymeleaf.org">
     <div class="container-fluid text-center">
-        <div>
-            &copy; Nina's fashion. All rights reserved.
-        </div>
+        <section id="footer">
+            <div class="container-fluid">
+                <div>&copy; Nina's fashion. All rights reserved.</div>
+                <div class="row">
+                        <h5> </h5>
+                        <ul class="footer-sections-ul">
+                            <li class="footer-sections"><a class="footer-sections-a" th:href="@{/home}">Home</a></li>
+                            <li class="footer-sections"><a class="footer-sections-a" th:href="@{/about}">About</a>
+                            <li class="footer-sections"><a class="footer-sections-a" th:href="@{/advice}">  Good Advice  </a>
+                            </li>
+                            <li class="footer-sections"><a class="footer-sections-a"
+                                                              th:href="@{/contact}">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
     </div>
 </th:block>
+</footer>

@@ -1,8 +1,12 @@
 package diplomna.web;
 
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
+
+import javax.annotation.PostConstruct;
 
 @Component
 public class Tools {
@@ -16,4 +20,16 @@ public class Tools {
         }
         return username;
     }
+
+    @PostConstruct
+    @Async("threadPoolTaskExecutor")
+    public void asyncMethodWithConfiguredExecutor() {
+        System.out.println("System is working!");
+    }
+
+   // @Async
+    //@Scheduled(fixedDelay = 10000, initialDelay = 10000)
+  //  public void showTime() {
+//...
+  //  }
 }

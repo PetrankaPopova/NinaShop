@@ -220,6 +220,13 @@ public class UserServiceImp implements UserService {
 
     }
 
+   // @Override
+    //public void removeOneFromCart(String productId) {
+        //Product pr = this.productRepository.findById(productId).orElse(null);
+      //  User u = this.userRepository.findByUsername(this.tools.getLoggedUser()).orElse(null);
+      // u.getBoughtProducts().remove(pr);
+    //}
+
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

@@ -172,6 +172,15 @@ textarea {
     position: static;
     bottom: 0;
     width: 100%;
+
+}
+.footer-sections{
+    background-image: url('http://scottyzen.com/cp/button.png');
+    background-size: 100% 100%;
+    color: #27262c;
+    animation: spring 300ms ease-out;
+    text-shadow: 0 -1px 0 #ef816c;
+    font-weight: bold;
 }
 
 .img-thumb {

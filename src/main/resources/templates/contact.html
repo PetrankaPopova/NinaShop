@@ -1,41 +1,26 @@
-
-<section class="contact-wrap">
-    <form action="" class="contact-form">
-        <div class="col-sm-6">
-            <div class="input-block">
-                <label for="">First Name</label>
-                <input type="text" class="form-control">
-            </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="input-block">
-                <label for="">Last Name</label>
-                <input type="text" class="form-control">
-            </div>
-        </div>
-        <div class="col-sm-12">
-            <div class="input-block">
-                <label for="">Email</label>
-                <input type="text" class="form-control">
-            </div>
-        </div>
-        <div class="col-sm-12">
-            <div class="input-block">
-                <label for="">Message Subject</label>
-                <input type="text" class="form-control">
-            </div>
-        </div>
-        <div class="col-sm-12">
-            <div class="input-block textarea">
-                <label for="">Drop your message here</label>
-                <textarea rows="3" type="text" class="form-control"></textarea>
-            </div>
-        </div>
-        <div class="col-sm-12">
-            <button class="square-button">Send</button>
-        </div>
-    </form>
-</section>
-
-
-
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="~{/fragments/head}"></th:block>
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-expand-lg bg-nav rounded">
+        <th:block th:include="~{/fragments/navbar}"></th:block>
+    </nav>
+</header>
+<main>
+    <body>
+    <!-- ><div style="background-image:  url("/img/NinaPhotos/pic1.jpg")><!-->
+    <label class="advice">
+        <h1>Contact Us</h1>
+        <h2 >Phone: 0877 907 999</h2>
+        <a href="https://www.facebook.com/Fashion-Designer-Nina-Todorova-113586422018060/?eid=ARBIn9HbXmBYNKJ2TN6oMReEAmh93k9PhnQkmSeMm55-_2slW3FuxKkPuRhkW85mqzztMg6Hc3e28vdS&timeline_context_item_type=intro_card_work&timeline_context_item_source=100000172541309&fref=tag">Facebook page</a>
+    </label>
+    </body>
+</main>
+<footer class="footer bg-transparent  py-2">
+    <th:block th:include="~{/fragments/footer}"></th:block>
+</footer>
+</body>
+</html>

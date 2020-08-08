@@ -1,6 +1,6 @@
 package diplomna.service.serviceImpl;
 //import diplomna.model.service.GreetingService;
-import diplomna.repository.GreetingRepository;
+//import diplomna.repository.GreetingRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

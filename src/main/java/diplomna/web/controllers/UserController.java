@@ -89,14 +89,6 @@ public class UserController {
         model.addAttribute("user", user);
         return "profile";
     }
-
-    @GetMapping("/user/buy/{productId}")
-    public String buyProduct(@PathVariable("productId") String productId) {
-        this.userService.buyProduct(productId);
-        return "redirect:/home";
-    }
-
-
     @GetMapping("/edit")
     @PreAuthorize("isAuthenticated()")
     @PageTitle("Edit User")
@@ -130,6 +122,15 @@ public class UserController {
     }
 
 
+    @GetMapping("/user/buy/{productId}")
+    public String buyProduct(@PathVariable("productId") String productId) {
+        this.userService.buyProduct(productId);
+        return "redirect:/home";
+    }
+
+
+
+
 
 
 
@@ -158,6 +159,17 @@ public class UserController {
         }
         return "redirect:/home";
     }
+
+    ///remove-from-cart/73e92efe-971c-45f3-82a4-b5973b6125d2
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
+    @GetMapping("/remove-from-cart/{productId}")
+    public String removeOneFromCart(@PathVariable("productId") String productId) {
+        if (!"anonymousUser".equals(this.tools.getLoggedUser())) {
+            this.userService.removeOneProductCart(productId, this.tools.getLoggedUser());
+        }
+            return "redirect:/cart";
+        }
+
 
 
     @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")

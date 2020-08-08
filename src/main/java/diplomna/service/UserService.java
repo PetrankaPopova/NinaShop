@@ -41,4 +41,6 @@ public interface UserService extends UserDetailsService {
     void removeAllProductCart(String loggedUserStr);
 
     void removeOneProductCart(String productId, String loggedUser) throws ProductIsNotExistException;
+
+
 }
