@@ -69,25 +69,7 @@ public class UserServiceImp implements UserService {
         }
         this.userRepository.saveAndFlush(user);
         return this.modelMapper.map(user, UserServiceModel.class);
-        // user.setAuthorities(new HashSet<>(Set.of(Objects.requireNonNull(this.roleRepository.findByAuthority("USER")
-        //     .orElse(null)))));
 
-
-        //  return this.modelMapper.map(this.userRepository
-        // .saveAndFlush(user),UserServiceModel.class);
-
-        /*User saved = this.userRepository.findByUsername(userServiceModel.getUsername()).orElse(null);
-        if (saved != null)
-            throw new UsernameAlreadyExistException("User with username " + saved.getUsername() + " already exists!");
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        User u = this.userRepository.saveAndFlush(user);
-        return this.modelMapper.map(u, UserServiceModel.class);*/
-        /*User savedUser = null;
-        try {
-            savedUser = this.userRepository.saveAndFlush(user);
-        } catch (Exception ignored) {
-            throw new UserRegistrationException("Cannot register user with username " + user.getUsername());
-        }*/
 
     }
 
@@ -174,9 +156,9 @@ public class UserServiceImp implements UserService {
     @Override
     public UserServiceModel findById(String userId) {
         User u = this.userRepository.findById(userId).orElse(null);
-       // if (u == null){
-        //    throw new IllegalArgumentException(); //my error
-       // }
+        if (u == null){
+            throw new IllegalArgumentException("User can not be null");
+        }
         UserServiceModel userServiceModel = this.modelMapper.map(u, UserServiceModel.class);
         return userServiceModel;
     }
