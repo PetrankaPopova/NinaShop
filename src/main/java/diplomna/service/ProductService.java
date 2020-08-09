@@ -22,5 +22,4 @@ public interface ProductService {
     void createProduct(ProductServiceModel product);
 
 
-    //double getAllPrices();
 }

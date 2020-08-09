@@ -1,18 +1,13 @@
 package diplomna.web;
 
 import diplomna.model.entity.Category;
-import diplomna.model.entity.Order;
 import diplomna.model.entity.Product;
-import diplomna.model.service.CategoryServiceModel;
-import diplomna.model.service.ProductServiceModel;
+import diplomna.service.ProductValidationService;
+import diplomna.service.serviceImpl.ProductionValidationServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.when;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ProductValidationServiceTests {
     private ProductValidationService service;

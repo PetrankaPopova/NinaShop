@@ -31,8 +31,7 @@ public class CategoryController {
     }
 
     @GetMapping("")
-   // @PreAuthorize("isAuthenticated()")
-
+    @PreAuthorize("isAuthenticated()")
     public ModelAndView all(ModelAndView modelAndView){
         List<CategoryServiceModel> categories = this.categoryService.findAllCategories();
 

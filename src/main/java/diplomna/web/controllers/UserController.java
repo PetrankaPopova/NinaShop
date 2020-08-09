@@ -27,7 +27,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Controller
-//@RequestMapping("/users")
 public class UserController {
 
     private final UserService userService;

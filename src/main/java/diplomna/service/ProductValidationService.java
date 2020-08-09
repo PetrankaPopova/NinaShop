@@ -1,4 +1,4 @@
-package diplomna.web;
+package diplomna.service;
 
 import diplomna.model.entity.Product;
 

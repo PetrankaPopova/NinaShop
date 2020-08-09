@@ -69,10 +69,6 @@ public class ProductController {
                       HttpSession session,
                       @PathVariable("id") String id) {
 
-        //  if(!isAuthorizedUser(session)) {
-        //     return "redirect:/";
-        //   }
-
         productService.buyById(id);
 
         return "redirect:/";
@@ -82,10 +78,6 @@ public class ProductController {
     @GetMapping("/buyAll")
     @PreAuthorize("isAuthenticated()")
     public String buyAll(Model model, HttpSession session) {
-
-        //   if(!isAuthorizedUser(session)) {
-        //     return "redirect:/";
-        // }
 
         productService.buyAll();
         return "redirect:/";
