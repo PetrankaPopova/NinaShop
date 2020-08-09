@@ -27,9 +27,9 @@ public class Tools {
         System.out.println("System is working!");
     }
 
-   // @Async
-    //@Scheduled(fixedDelay = 10000, initialDelay = 10000)
-  //  public void showTime() {
-//...
-  //  }
+    @Async
+    @Scheduled(fixedDelay = 10000, initialDelay = 10000)
+    public void showTime() {
+
+    }
 }
