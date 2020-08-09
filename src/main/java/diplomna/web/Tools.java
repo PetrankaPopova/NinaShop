@@ -10,12 +10,12 @@ import javax.annotation.PostConstruct;
 
 @Component
 public class Tools {
-    public String getLoggedUser(){
+    public String getLoggedUser() {
         String username = null;
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (principal instanceof UserDetails){
+        if (principal instanceof UserDetails) {
             username = ((UserDetails) principal).getUsername();
-        }else{
+        } else {
             username = principal.toString();
         }
         return username;
@@ -27,9 +27,4 @@ public class Tools {
         System.out.println("System is working!");
     }
 
-    @Async
-    @Scheduled(fixedDelay = 10000, initialDelay = 10000)
-    public void showTime() {
-
-    }
 }
