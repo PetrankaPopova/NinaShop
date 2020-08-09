@@ -26,7 +26,6 @@ public interface UserService extends UserDetailsService {
 
      UserServiceModel editUserProfile(UserServiceModel userServiceModel, String oldPassword);
 
-    void deleteUser(String username);
 
     List<ProductViewModel> getAllBoughtProducts ();
 
@@ -40,7 +39,7 @@ public interface UserService extends UserDetailsService {
 
     void removeAllProductCart(String loggedUserStr);
 
-    void removeOneProductCart(String productId, String loggedUser) throws ProductIsNotExistException;
+
 
 
 }

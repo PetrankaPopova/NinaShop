@@ -129,12 +129,6 @@ public class UserServiceImp implements UserService {
         return this.modelMapper.map(this.userRepository.saveAndFlush(user), UserServiceModel.class);
     }
 
-    @Override
-    public void deleteUser(String username) {
-        User user = this.userRepository.findByUsername(username).orElseThrow(() -> new UserNotFoundException("User with given id was not found!"));
-
-        this.userRepository.delete(user);
-    }
 
     @Override
     public List<ProductViewModel> getAllBoughtProducts() {
@@ -186,28 +180,6 @@ public class UserServiceImp implements UserService {
         }
     }
 
-    @Override
-    public void removeOneProductCart(String productId, String loggedUser) throws ProductIsNotExistException {
-        User userFromDb = this.userRepository.findByUsername(loggedUser).orElse(null);
-        if (userFromDb == null){
-            throw new UserIsNotExistException("Pser with name " + loggedUser + " is not exist!");
-        }
-        Product product = this.productRepository.findById(productId).orElse(null);
-        if (product == null){
-            throw new ProductIsNotExistException("Product is not exist!");
-        }
-        List<Product> products = userFromDb.getBoughtProducts();
-        products.remove(product);
-        this.userRepository.saveAndFlush(userFromDb);
-
-    }
-
-   // @Override
-    //public void removeOneFromCart(String productId) {
-        //Product pr = this.productRepository.findById(productId).orElse(null);
-      //  User u = this.userRepository.findByUsername(this.tools.getLoggedUser()).orElse(null);
-      // u.getBoughtProducts().remove(pr);
-    //}
 
 
     @Override
