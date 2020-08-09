@@ -1,5 +1,6 @@
 package diplomna.service.serviceImpl;
 
+import diplomna.error.exception.UserIsNotExistException;
 import diplomna.model.bindingmodel.SaveNewRolesBindingModel;
 import diplomna.model.entity.User;
 import diplomna.model.entity.UserRole;
@@ -30,7 +31,9 @@ public class UserRoleServiceImp implements UserRoleService {
     @Override
     public void saveNewRoleToUser(SaveNewRolesServiceModel snrbm) {
         User user = this.userRepository.findById(snrbm.getUserId()).orElse(null);
-        //some error
+        if (user == null) {
+            throw new UserIsNotExistException("User is not Exist!");
+        }
         user.getAuthorities().clear();
         UserRole userRole = this.roleRepository.findByAuthority(snrbm.getNewRole()).orElse(null);
         user.getAuthorities().add(userRole);

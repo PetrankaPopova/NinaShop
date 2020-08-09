@@ -9,10 +9,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class AboutServiceImpl implements AboutService {
 
-    @Autowired
+
     private final AboutRepository aboutRepository;
     private final ModelMapper modelMapper;
 
+    @Autowired
     public AboutServiceImpl(AboutRepository aboutRepository, ModelMapper modelMapper) {
         this.aboutRepository = aboutRepository;
         this.modelMapper = modelMapper;

@@ -1,5 +1,6 @@
 package diplomna.service.serviceImpl;
 
+import diplomna.error.exception.UserIsNotExistException;
 import diplomna.model.entity.Order;
 import diplomna.model.entity.Product;
 import diplomna.model.entity.User;
@@ -36,31 +37,14 @@ public class OrderServiceImpl implements OrderService {
 
 
 
-    /*@Scheduled(fixedRate = 300000)
-    private void generateOffers() {
-        this.offerRepository.deleteAll();
-        List<ProductViewModel> products = this.productService.findAllProducts();
-        if (products.isEmpty()) {
-            return;
-        }
-        Random rnd = new Random();
-        List<Offer> offers = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            Offer offer = new Offer();
-            offer.setProduct(this.modelMapper.map(products.get(rnd.nextInt(products.size())), Product.class));
-            offer.setPrice(offer.getProduct().getPrice().multiply(new BigDecimal(0.8)));
-            if (offers.stream().filter(o -> o.getProduct().getId().equals(offer.getProduct().getId())).count() == 0) {
-                offers.add(offer);
-            }
-        }
-        this.offerRepository.saveAll(offers);
-    }*/
 
     @Override
     public void createOrder() {
         String userStr = this.tools.getLoggedUser();
         User u = this.userRepository.findByUsername(userStr).orElse(null);
-        //error if u == null
+        if (u == null) {
+            throw new UserIsNotExistException("User is not Exist!");
+        }
         if (u != null && u.getBoughtProducts() != null
                 && u.getBoughtProducts().size() > 0) {
             for (Product product : u.getBoughtProducts()) {

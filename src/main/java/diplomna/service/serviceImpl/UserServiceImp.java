@@ -34,7 +34,7 @@ public class UserServiceImp implements UserService {
     private ProductRepository productRepository;
     private ModelMapper modelMapper;
     private BCryptPasswordEncoder bCryptPasswordEncoder;
-    private  Tools tools;
+    private Tools tools;
 
     @Autowired
     public UserServiceImp(UserRepository userRepository, RoleRepository roleRepository,
@@ -150,8 +150,8 @@ public class UserServiceImp implements UserService {
     @Override
     public UserServiceModel findById(String userId) {
         User u = this.userRepository.findById(userId).orElse(null);
-        if (u == null){
-            throw new IllegalArgumentException("User can not be null");
+        if (u == null) {
+            throw new UserIsNotExistException("User is not Exist!");
         }
         UserServiceModel userServiceModel = this.modelMapper.map(u, UserServiceModel.class);
         return userServiceModel;
@@ -179,7 +179,6 @@ public class UserServiceImp implements UserService {
             this.userRepository.saveAndFlush(loggedUser);
         }
     }
-
 
 
     @Override

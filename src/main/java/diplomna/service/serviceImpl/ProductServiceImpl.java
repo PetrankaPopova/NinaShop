@@ -22,7 +22,6 @@ import static diplomna.error.constant.GlobalConstants.PRODUCT_NAME_EXISTS_MESSAG
 @Service
 public class ProductServiceImpl implements ProductService {
 
-    @Autowired
     private final ProductRepository productRepository;
     private final ModelMapper modelMapper;
     private final CloudinaryService cloudinaryService;
