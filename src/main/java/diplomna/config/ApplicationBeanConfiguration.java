@@ -14,7 +14,8 @@ import java.util.concurrent.Executor;
 @Configuration
 @EnableAsync
 @EnableScheduling
-public class ApplicationBeanConfiguration {
+public class
+ApplicationBeanConfiguration {
 
     @Bean
     public ModelMapper modelMapper(){

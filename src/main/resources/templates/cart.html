@@ -29,7 +29,7 @@
                                     <th th:class="rowColor">Product Image</th>
                                     <th th:class="rowColor">Product Name</th>
                                     <th th:class="rowColor">Price</th>
-                                    <th th:class="rowColor">Option</th>
+
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -40,8 +40,7 @@
                                         <td><span th:class="rowColor" th:text="${product.name}"></span></td>
                                         <td><span th:class="rowColor" th:text="${product.price}"></span></td>
                                         <td>
-                                            <a th:href="@{/remove-from-cart/{productId}(productId = ${product.getId()})}"
-                                               class="">Remove</a></td>
+
                                     </tr>
                                 </th:block>
                                 </tbody>

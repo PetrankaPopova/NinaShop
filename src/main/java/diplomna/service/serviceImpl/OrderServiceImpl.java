@@ -35,6 +35,7 @@ public class OrderServiceImpl implements OrderService {
 
 
 
+
     /*@Scheduled(fixedRate = 300000)
     private void generateOffers() {
         this.offerRepository.deleteAll();

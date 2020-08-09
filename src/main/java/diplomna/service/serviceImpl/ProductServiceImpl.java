@@ -41,6 +41,8 @@ public class ProductServiceImpl implements ProductService {
         return this.productRepository.findByName(name)
                 .map(product -> this.modelMapper.map(product,ProductServiceModel.class))
                 .orElse(null);
+
+        
     }
 
     @Override

@@ -67,7 +67,7 @@ public class UserServiceTest {
         Optional<User> mockedUsers3 = this.mockedUserRepository.findUserByUsername("Pesho");
 
 
-       // Assert.assertEquals("4456d57a-fe5b-4b6a-a675-db29933236ac", expected.getId(), model.getId());
+        //Assert.assertEquals("4456d57a-fe5b-4b6a-a675-db29933236ac", expected.getId(), model.getId());
         Assert.assertEquals("Pesho", expected.get().getUsername(), actual.getUsername());
        // Assert.assertEquals("123", expected.getPassword(), model.getPassword());
        // System.out.println(user2);

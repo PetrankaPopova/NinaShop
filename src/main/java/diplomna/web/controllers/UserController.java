@@ -129,11 +129,6 @@ public class UserController {
     }
 
 
-
-
-
-
-
     @PageTitle("User Cart")
     @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
     @GetMapping("/cart")
@@ -160,17 +155,6 @@ public class UserController {
         return "redirect:/home";
     }
 
-    ///remove-from-cart/73e92efe-971c-45f3-82a4-b5973b6125d2
-    @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
-    @GetMapping("/remove-from-cart/{productId}")
-    public String removeOneFromCart(@PathVariable("productId") String productId) {
-        if (!"anonymousUser".equals(this.tools.getLoggedUser())) {
-            this.userService.removeOneProductCart(productId, this.tools.getLoggedUser());
-        }
-            return "redirect:/cart";
-        }
-
-
 
     @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
     @GetMapping("/user/finish")
@@ -178,7 +162,6 @@ public class UserController {
         this.orderService.createOrder();
         return "redirect:/home";
     }
-
 
     private double getTotalPrice(List<ProductViewModel> boughtProducts) {
         double totalPrice = 0.00;
