@@ -4,6 +4,7 @@ public class UserEditServiceModel {
     private String username;
     private String password;
     private String email;
+    private String confirmPassword;
     private String userAddress;
     private String userPhone;
 
@@ -48,5 +49,13 @@ public class UserEditServiceModel {
 
     public void setUserPhone(String userPhone) {
         this.userPhone = userPhone;
+    }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 }

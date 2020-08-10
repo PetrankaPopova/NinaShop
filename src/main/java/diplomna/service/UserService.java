@@ -3,6 +3,9 @@ package diplomna.service;
 
 import diplomna.error.exception.ProductIsNotExistException;
 import diplomna.error.exception.UserCannotSaveException;
+import diplomna.error.exception.UserPasswordsNotMatchException;
+import diplomna.error.exception.UserWithUsernameAlreadyExistException;
+import diplomna.model.service.UserEditServiceModel;
 import diplomna.model.service.UserServiceModel;
 import diplomna.model.view.ProductViewModel;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -24,7 +27,7 @@ public interface UserService extends UserDetailsService {
 
     void buyProduct(String productId);
 
-     UserServiceModel editUserProfile(UserServiceModel userServiceModel, String oldPassword);
+     UserEditServiceModel editUserProfile(UserEditServiceModel userEditServiceModel, String oldPassword) throws UserPasswordsNotMatchException, UserWithUsernameAlreadyExistException;
 
 
     List<ProductViewModel> getAllBoughtProducts ();

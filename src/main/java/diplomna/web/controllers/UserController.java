@@ -1,8 +1,11 @@
 package diplomna.web.controllers;
 
 
+import diplomna.error.exception.UserPasswordsNotMatchException;
+import diplomna.error.exception.UserWithUsernameAlreadyExistException;
 import diplomna.model.bindingmodel.UserEditBindingModel;
 import diplomna.model.bindingmodel.UserRegisterBindingModel;
+import diplomna.model.service.UserEditServiceModel;
 import diplomna.model.service.UserServiceModel;
 import diplomna.model.view.ProductViewModel;
 import diplomna.model.view.UserViewModel;
@@ -106,7 +109,7 @@ public class UserController {
     @PreAuthorize("isAuthenticated()")
     public String editProfileConfirm(@Valid @ModelAttribute(name = "userEditBindingModel") UserEditBindingModel userEditBindingModel,
                                      BindingResult bindingResult, RedirectAttributes redirectAttributes,
-                                     Model model) {
+                                     Model model) throws UserWithUsernameAlreadyExistException, UserPasswordsNotMatchException {
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userEditBindingModel", bindingResult);
             redirectAttributes.addFlashAttribute("userEditBindingModel", userEditBindingModel);
@@ -114,7 +117,7 @@ public class UserController {
         if (!userEditBindingModel.getPassword().equals(userEditBindingModel.getConfirmPassword())) {
             return "edit-profile";
         }
-        this.userService.editUserProfile(this.modelMapper.map(userEditBindingModel, UserServiceModel.class), userEditBindingModel.getOldPassword());
+        this.userService.editUserProfile(this.modelMapper.map(userEditBindingModel, UserEditServiceModel.class), userEditBindingModel.getOldPassword());
 
         return "redirect:/profile";
 

@@ -1,4 +1,4 @@
-let app = angular.module('DreamCompany', [])
+let app = angular.module('Nina shop', [])
     .controller('projectCtrl', function ($scope, $http) {
 
         $scope.formatProject = function (project) {

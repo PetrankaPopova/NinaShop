@@ -1,9 +1,9 @@
 package diplomna.service.serviceImpl;
 
-import diplomna.error.constant.GlobalConstants;
 import diplomna.error.exception.*;
 import diplomna.model.entity.Product;
 import diplomna.model.entity.User;
+import diplomna.model.service.UserEditServiceModel;
 import diplomna.model.service.UserServiceModel;
 import diplomna.model.view.ProductViewModel;
 import diplomna.repository.ProductRepository;
@@ -112,21 +112,27 @@ public class UserServiceImp implements UserService {
 
 
     @Override
-    public UserServiceModel editUserProfile(UserServiceModel userServiceModel, String oldPassword) {
+    public UserEditServiceModel editUserProfile(UserEditServiceModel userEditServiceModel, String oldPassword) throws UserPasswordsNotMatchException, UserWithUsernameAlreadyExistException {
 
-        User user = this.userRepository.findByUsername(userServiceModel.getUsername())
-                .orElseThrow(() -> new UsernameNotFoundException(GlobalConstants.USER_ID_NOT_FOUND));
-
-        if (!this.bCryptPasswordEncoder.matches(oldPassword, user.getPassword())) {
-            throw new IllegalArgumentException("NOT CORRECT");
+        if (!userEditServiceModel.getPassword().equals(userEditServiceModel.getConfirmPassword())) {
+            throw new UserPasswordsNotMatchException("Password not match!");
         }
+        UserEditServiceModel returnUser = null;
+        User u = this.userRepository.findByUsername(this.tools.getLoggedUser()).orElse(null);
+        if (u != null) {
 
-        user.setPassword(!"".equals(userServiceModel.getPassword()) ?
-                this.bCryptPasswordEncoder.encode(userServiceModel.getPassword()) :
-                user.getPassword());
-        user.setEmail(userServiceModel.getEmail());
+            if (userEditServiceModel.getPassword() != null && !"".equals(userEditServiceModel.getPassword()) &&
+                    userEditServiceModel.getConfirmPassword()!=null && !"".equals(userEditServiceModel.getConfirmPassword())){
+                u.setPassword(this.bCryptPasswordEncoder.encode(userEditServiceModel.getPassword()));
+            }
 
-        return this.modelMapper.map(this.userRepository.saveAndFlush(user), UserServiceModel.class);
+
+            this.userRepository.saveAndFlush(u);
+
+        } else {
+            throw new UserWithUsernameAlreadyExistException("User is not Exist (internal error)!");
+        }
+        return returnUser;
     }
 
 
