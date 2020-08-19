@@ -1,77 +1,88 @@
 <th:block xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-
-    <th:block sec:authorize="isAnonymous()">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-            <div class="container">
-                <a class="navbar-brand" th:href="@{/home}">Nina's Shop</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#guestNav"
-                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="guestNav">
-                    <ul class="navbar-nav ml-auto">
-                        <ul id="navb" class="collapse navbar-collapse collapse hide">
-                            <ul class="nav navbar-nav ml-auto">
-                                <li class="nav-item">
-                                    <a class="nav-link" th:href="@{/home}">Home</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link " th:href="@{/login}">Login</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link " th:href="@{/register}">Register</a>
-                                </li>
-                                <li class="nav-item-active">
-                                    <form action="/logout?login" method="post">
-                                        <input type="hidden" name="_csrf" value="80417983-fe8b-45c7-963e-31f6915a1560">
-                                        <a class="nav-link" th:href="@{/logout}">Logout</a>
-                                    </form>
-                                </li>
-                                <li sec:authorize="!isAuthenticated()" class="nav-item active">
-                                    <a class="nav-link" th:href="@{/profile}">Profile</a>
-                                </li>
-                                <li sec:authorize="!isAuthenticated()" class="nav-item active">
-                                    <a class="nav-link" th:href="@{/edit}">Edit Profile</a>
-                                </li>
-
-                                <li sec:authorize="!isAuthenticated()" class="nav-item active">
-                                    <a class="nav-link" th:href="@{/products/add}">Add Product</a>
-                                </li>
-                                <li class="nav-item active">
-                                    <a sec:authorize="!isAnonymous()" class="nav-link"
-                                       th:href="@{/category}">Category</a>
-                                </li>
-                                <li class="nav-item active">
-                                    <a sec:authorize="!isAnonymous()" class="nav-link" th:href="@{/admin/users}">Edit
-                                        Roles</a>
-                                </li>
-                                <li class="nav-item active">
-                                    <a sec:authorize="!isAuthenticated()" class="nav-link"
-                                       th:href="@{/order}">Orders</a>
-                                </li>
-
-                                <li class="nav-item active">
-                                    <a sec:authorize="!isAuthenticated()" class="nav-link" th:href="@{/cart}">Bag</a>
-                                </li>
-                                <li class="nav-item active">
-                                    <a sec:authorize="!isAnonymous()" class="nav-link" th:href="@{/size}">Size</a>
-                                </li>
-                                </li>
-                                <li class="nav-item active">
-                                    <a sec:authorize="!isAnonymous()" class="nav-link" th:href="@{/contact}">Contact</a>
-                                </li>
-
-                                <li sec:authorize="isAnonymous()" class="nav-item active">
-                                    <a class="nav-link" th:href="@{/about}">About Nina</a>
-                                </li>
-
-                                <li sec:authorize="isAuthenticated()" class="nav-item active">
-                                    <a class="nav-link" th:href="@{/advice}"> Good Advice</a>
-                                </li>
+    <th:block>
+        <th:block sec:authorize="isAnonymous()">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+                <div class="container">
+                    <a class="navbar-brand" th:href="@{/home}">Nina's Shop</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#guestNav"
+                            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="guestNav">
+                        <ul class="navbar-nav ml-auto">
+                            <ul id="navb" class="collapse navbar-collapse collapse hide">
+                                <ul class="nav navbar-nav ml-auto">
+                                    <li class="nav-item">
+                                        <a class="nav-link" th:href="@{/home}">Home</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " th:href="@{/login}">Login</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " th:href="@{/register}">Register</a>
+                                    </li>
+                                    <li class="nav-item-active">
+                                        <form action="/logout?login" method="post">
+                                            <input type="hidden" name="_csrf" value="80417983-fe8b-45c7-963e-31f6915a1560">
+                                            <a class="nav-link" th:href="@{/logout}">Logout</a>
+                                        </form>
+                                    </li>
+                                </ul>
                             </ul>
                         </ul>
-                    </ul>
+                    </div>
                 </div>
-            </div>
-        </nav>
-    </th:block>
+            </nav>
+        </th:block>
+
+        <th:block sec:authorize="isAuthenticated()">
+            <nav>nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+                class="navbar navbar-expand-lg navbar-light bg-light"
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/home}">Home</a>
+                    </li>
+                    <li sec:authorize="!isAuthenticated()" class="nav-item active">
+                        <a class="nav-link" th:href="@{/profile}">Profile</a>
+                    </li>
+                    <li sec:authorize="!isAuthenticated()" class="nav-item active">
+                        <a class="nav-link" th:href="@{/edit}">Edit Profile</a>
+                    </li>
+
+                    <li sec:authorize="!isAuthenticated()" class="nav-item active">
+                        <a class="nav-link" th:href="@{/products/add}">Add Product</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a sec:authorize="!isAnonymous()" class="nav-link" th:href="@{/category}">Category</a>
+                    </li>
+                <li class="nav-item active">
+                    <a sec:authorize="!isAnonymous()" class="nav-link" th:href="@{/admin/users}">Edit Roles</a>
+                </li>
+                    <li class="nav-item active">
+                    <a sec:authorize="!isAuthenticated()" class="nav-link" th:href="@{/order}">Orders</a>
+                </li>
+
+                <li class="nav-item active">
+                    <a sec:authorize="!isAuthenticated()" class="nav-link" th:href="@{/cart}">Bag</a>
+                </li>
+                    <li class="nav-item active">
+                        <a sec:authorize="!isAnonymous()" class="nav-link" th:href="@{/size}">Size</a>
+                    </li>
+                </li>
+                <li class="nav-item active">
+                    <a sec:authorize="!isAnonymous()" class="nav-link" th:href="@{/contact}">Contact</a>
+                </li>
+
+
+                    <li sec:authorize="isAnonymous()" class="nav-item active">
+                        <a class="nav-link" th:href="@{/about}">About Nina</a>
+                    </li>
+
+                    <li sec:authorize="isAuthenticated()" class="nav-item active">
+                        <a class="nav-link" th:href="@{/advice}"> Good Advice</a>
+                    </li>
+            </nav>
+        </th:block>
+
+
+
+
