@@ -1,24 +1,40 @@
-<th:block xmlns:th="http://www.thymeleaf.org">
-    <div class="container-fluid text-center">
+<th:block>
+    <footer class="footer-sections">
         <section id="footer">
             <div class="container-fluid">
-                <div>&copy; Nina's fashion. All rights reserved.</div>
                 <div class="row">
-                        <h5> </h5>
+                    <div class="col-md-4">
+                        <h5>BASE INFORMATION</h5>
                         <ul class="footer-sections-ul">
-                            <li class="footer-sections"><a class="footer-sections-a" th:href="@{/home}">Home</a></li>
-                            <li class="footer-sections"><a class="footer-sections-a" th:href="@{/about}">About</a>
-                            <li class="footer-sections"><a class="footer-sections-a" th:href="@{/advice}">  Good Advice  </a>
+                            <li class="footer-sections-li"><a class="footer-sections-a" th:href="@{/home}">Home</a></li>
+                            <li class="footer-sections-li"><a class="footer-sections-a" th:href="@{/about}">About</a>
                             </li>
-                            <li class="footer-sections"><a class="footer-sections-a"
+                            <li class="footer-sections-li"><a class="footer-sections-a"
                                                               th:href="@{/contact}">Contact</a></li>
+                            <li class="footer-sections-li"><a class="footer-sections-a" th:href="@{/faq}">FAQ</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>PRODUCT INFORMATION</h5>
+                        <ul class="footer-sections-ul">
+                            <li class="footer-sections-li"><a class="footer-sections-a"
+                                                              th:href="@{/delivery-information}">Delivery information</a></li>
+                            <li class="footer-sections-li"><a class="footer-sections-a"
+                                                              th:href="@{/return-query}">Return Query For Product</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>USER INFORMATION</h5>
+                        <ul class="footer-sections-ul">
+                            <li class="footer-sections-li"><a class="footer-sections-a"
+                                                              th:href="@{/privacy-policy}">Privacy Policy</a></li>
+                            <li class="footer-sections-li"><a class="footer-sections-a"
+                                                              th:href="@{/term-and-conditions}">Term And Condition</a></li>
                         </ul>
                     </div>
                 </div>
 
             </div>
         </section>
-
-    </div>
+    </footer>
 </th:block>
-</footer>
