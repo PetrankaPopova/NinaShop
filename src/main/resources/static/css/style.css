@@ -170,10 +170,15 @@ textarea {
 
 .footer {
     position: center;
-    bottom: 0;
+    padding: 3px;
+    margin: 3px;
+    left: 50px;
     width: 100%;
-
+    background-color: white;
+    color: white;
+    text-align: center;
 }
+
 .footer-sections{
     color: palevioletred;
 
@@ -270,6 +275,16 @@ btn-primary{
 .user-tag {
     color: white;
 }
+
+.input-group mt-8{
+    padding: 5px;
+}
+
+.nav-item active{
+    margin: 5px;
+    padding: 5px;
+}
+
 
 
 
